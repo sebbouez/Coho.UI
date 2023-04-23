@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Label="Globals">
+        <SccProjectName>SAK</SccProjectName>
+        <SccProvider>SAK</SccProvider>
+        <SccAuxPath>SAK</SccAuxPath>
+        <SccLocalPath>SAK</SccLocalPath>
+        <Title>Coho.UI</Title>
+        <PackageProjectUrl>https://github.com/sebbouez/Coho.UI</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/sebbouez/Coho.UI/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/sebbouez/Coho.UI</RepositoryUrl>
+        <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <Company>Sébastien Bouez</Company>
+        <Copyright>Copyright Sébastien Bouez 2023</Copyright>
+        <Authors>Sébastien Bouez</Authors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Controls\Ribbon\RibbonColorSplitButton.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="obj\Debug\net6.0-windows\Controls\Omnibar\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Themes\Theme_BaseDark.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+</Project>

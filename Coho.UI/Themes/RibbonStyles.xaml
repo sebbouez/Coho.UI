@@ -1,0 +1,1029 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Coho.UI.Controls.Ribbon"
+                    xmlns:common="clr-namespace:Coho.UI.Controls.Common"
+                    xmlns:textResources="clr-namespace:Coho.UI">
+
+    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <ObjectDataProvider ObjectType="{x:Type controls:RibbonKeyboardNavigationUIIndicator}"
+                        x:Key="KeyboardNavigationUIIndicator" />
+
+
+    <Style TargetType="controls:RibbonButtonTooltip">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonButtonTooltip}">
+
+                    <StackPanel Margin="5" MaxWidth="320" MinWidth="250">
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock FontWeight="SemiBold" FontSize="14"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       Foreground="{DynamicResource DefaultForeground}"
+                                       Text="{TemplateBinding Title}" />
+
+                            <Border BorderThickness="1" CornerRadius="4" Margin="10,0,0,0"
+                                    VerticalAlignment="Center" BorderBrush="{DynamicResource DefaultForeground}"
+                                    Padding="3,1,3,2" Visibility="Collapsed">
+                                <TextBlock FontSize="12" Foreground="{DynamicResource DefaultForeground}" />
+                            </Border>
+                        </StackPanel>
+
+                        <TextBlock
+                            Foreground="{DynamicResource DefaultForeground}"
+                            TextWrapping="Wrap"
+                            TextTrimming="WordEllipsis"
+                            Text="{TemplateBinding Description}" />
+
+
+                        <Border BorderBrush="{DynamicResource BorderColor}" SnapsToDevicePixels="True"
+                                UseLayoutRounding="True" BorderThickness="0,0.5,0,0" Margin="-10,10,-10,0"
+                                Padding="10,10,10,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Fill="{DynamicResource IconHelpCircleAccent}" Width="16" Height="16"
+                                           Margin="0,0,6,0" />
+                                <TextBlock Foreground="{DynamicResource AccentColor}"
+                                           Text="{x:Static textResources:GenericText.HelpGenericHint}" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="RibbonFileButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="0" x:Name="main" Height="30" Margin="8,0,0,0" Padding="10,0,10,0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Grid>
+                            <Border Background="Black" Panel.ZIndex="99" HorizontalAlignment="Center" CornerRadius="2"
+                                    Width="16" Height="16" VerticalAlignment="Top"
+                                    Visibility="{Binding Source={StaticResource KeyboardNavigationUIIndicator}, Path=ShowTips, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock Text="0" VerticalAlignment="Center" FontSize="12"
+                                           HorizontalAlignment="Center" Foreground="White" />
+                            </Border>
+
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource DefaultForeground}"
+                                       Text="{Binding FileButtonText, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:RibbonBar}}}" />
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold"
+                                       Visibility="Hidden"
+                                       Text="{Binding FileButtonText, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:RibbonBar}}}" />
+
+                            <Rectangle x:Name="bdrHover" Visibility="Collapsed" Height="2" Opacity="0.2"
+                                       Fill="{DynamicResource DefaultForeground}" VerticalAlignment="Bottom"
+                                       Margin="0,0,0,3" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="TextBlock.FontWeight" Value="SemiBold" TargetName="main" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="bdrHover" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter TargetName="main" Property="Background" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="controls:RibbonBar">
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type controls:RibbonBar}">
+                    <Grid ClipToBounds="True" x:Name="MainGrid">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="32" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Panel.ZIndex="10" Margin="0,0,250,0">
+                            <DockPanel>
+                                <Button DockPanel.Dock="Left" VerticalAlignment="Top" x:Name="fileButton"
+                                        Style="{DynamicResource RibbonFileButton}" />
+                                <!--<TabPanel x:Name="HeaderPanel"
+                                  IsItemsHost="True"
+                                  KeyboardNavigation.TabIndex="1"
+                                  Margin="0,0,0,0"
+                                  Background="Transparent" />-->
+
+                                <controls:RibbonTabPanelToolbar IsTabStop="True"
+                                                                KeyboardNavigation.IsTabStop="True"
+                                                                KeyboardNavigation.TabNavigation="Continue"
+                                                                VerticalAlignment="Top"
+                                                                DockPanel.Dock="Right" x:Name="HeaderPanel" />
+                            </DockPanel>
+                        </Border>
+
+                        <Canvas Panel.ZIndex="11">
+                            <Border Canvas.Left="{Binding ElementName=fileButton, Path=ActualWidth}"
+                                    x:Name="tabIndicatorHolder" HorizontalAlignment="Left" Height="24" Margin="0,2,0,0"
+                                    Background="Transparent" Width="0">
+                                <Border x:Name="tabIndicator" Margin="8,0,8,2" Height="2" VerticalAlignment="Bottom"
+                                        Background="{DynamicResource AccentColor}" CornerRadius="1" />
+                            </Border>
+                        </Canvas>
+
+                        <Border x:Name="Border"
+                                Grid.Row="1"
+                                BorderThickness="0"
+                                Margin="8,0,8,6"
+                                CornerRadius="6"
+                                Background="{DynamicResource RibbonBackground}"
+                                KeyboardNavigation.TabNavigation="Local"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#777" Opacity="0.30" Direction="-90" BlurRadius="4"
+                                                  ShadowDepth="1" />
+                            </Border.Effect>
+
+                            <Border ClipToBounds="True" Padding="2">
+                                <StackPanel>
+                                    <!--<ContentPresenter x:Name="PART_SelectedContentHost"
+                                          ContentSource="SelectedContent" Height="38" />-->
+                                    <controls:RibbonTabItemInnerToolbar x:Name="ribbonTabToolbar" Height="38" />
+
+                                    <StackPanel Visibility="Collapsed" x:Name="stQAT">
+                                        <Border Height="1" BorderThickness="0,0,0,0.55"
+                                                BorderBrush="{DynamicResource BorderColor}" Margin="-2,2,-2,0" />
+                                        <!--<Rectangle Stroke="{DynamicResource BorderColor}" StrokeThickness="0.45" SnapsToDevicePixels="True" UseLayoutRounding="True" Fill="Transparent" Height="1" Margin="-2,2,-2,0"></Rectangle>-->
+                                        <Border x:Name="qatToolbarHolder" CornerRadius="0,0,6,6"
+                                                Background="{DynamicResource Workspace4Background}" Height="34"
+                                                Margin="-2,0,-2,-2" Padding="2,0">
+                                            <controls:RibbonQuickAccessToolbar
+                                                KeyboardNavigation.TabNavigation="Continue" VerticalAlignment="Center" />
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+
+                        <ToggleButton x:Name="RibbonOptionsToggleButton" VerticalAlignment="Top"
+                                      ToolTip="{x:Static textResources:GenericText.MoreOptions}" Grid.Row="1"
+                                      HorizontalAlignment="Right" Style="{DynamicResource QatStdButton}" MinWidth="1"
+                                      Padding="0" MinHeight="1" Margin="2,20,11,0" Panel.ZIndex="105">
+                            <ToggleButton.ContextMenu>
+                                <ContextMenu>
+                                    <!--<MenuItem Header="QAT" Click="MenuShowQAT_Click"/>
+                                    <MenuItem Header="Labels" Click="MenuToggleQATLabels_Click"/>-->
+                                </ContextMenu>
+                            </ToggleButton.ContextMenu>
+                            <Rectangle Fill="{DynamicResource IconChevronDown}" Width="9" Height="9" Margin="4" />
+                        </ToggleButton>
+
+
+                        <StackPanel Grid.Row="0" x:Name="ExtraButtonsStackPanel" Orientation="Horizontal"
+                                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,8,4" />
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="ShowQAT" Value="True">
+                            <Setter TargetName="stQAT" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="controls:RibbonTabItem">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="True" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonTabItem}">
+
+                    <Border BorderThickness="0,0,0,0" Height="30" Padding="10,0,12,0" Background="Transparent"
+                            BorderBrush="Transparent" x:Name="HoverLayer">
+                        <Grid Background="Transparent">
+                            <Border Background="Black" Panel.ZIndex="99" HorizontalAlignment="Center" CornerRadius="2"
+                                    Width="16" Height="16" VerticalAlignment="Top"
+                                    Visibility="{Binding Source={StaticResource KeyboardNavigationUIIndicator}, Path=ShowTips, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock Text="{TemplateBinding Gesture}" VerticalAlignment="Center" FontSize="12"
+                                           HorizontalAlignment="Center" Foreground="White" />
+                            </Border>
+                            <TextBlock x:Name="contentPresenter0" HorizontalAlignment="Center"
+                                       TextBlock.TextAlignment="Center" TextBlock.FontWeight="SemiBold"
+                                       TextBlock.FontSize="{TemplateBinding FontSize}"
+                                       VerticalAlignment="Center" Text="{TemplateBinding Header}" Visibility="Hidden" />
+                            <TextBlock x:Name="contentPresenter" HorizontalAlignment="Center"
+                                       TextBlock.TextAlignment="Center" TextBlock.FontSize="{TemplateBinding FontSize}"
+                                       VerticalAlignment="Center" Text="{TemplateBinding Header}" />
+
+                            <Rectangle x:Name="bdrHover" Visibility="Collapsed" Height="2" Opacity="0.2"
+                                       Fill="{DynamicResource DefaultForeground}" VerticalAlignment="Bottom"
+                                       Margin="0,0,0,3" />
+                        </Grid>
+                    </Border>
+
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsOverflown" Value="True">
+                            <Setter TargetName="HoverLayer" Property="Padding" Value="5" />
+                            <Setter Property="Width" Value="200" />
+                            <Setter TargetName="contentPresenter0" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Left" />
+                        </Trigger>
+
+                        <Trigger SourceName="HoverLayer" Property="IsMouseOver" Value="True">
+                            <Setter Property="TextBlock.FontWeight" TargetName="contentPresenter" Value="SemiBold" />
+                            <Setter Property="Visibility" Value="Visible" TargetName="bdrHover" />
+                        </Trigger>
+
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="HoverLayer" />
+                        </Trigger>
+
+                        <Trigger Property="IsContextual" Value="True">
+                            <Setter TargetName="contentPresenter" Property="TextBlock.Foreground"
+                                    Value="{DynamicResource AccentColor}" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource AccentColor}"
+                                    TargetName="HoverLayer" />
+                            <Setter Property="TextBlock.FontWeight" TargetName="contentPresenter" Value="SemiBold" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ToolBarOverflowButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="Border"
+                            Width="40"
+                            CornerRadius="4"
+                            BorderThickness="0.55"
+                            Background="Transparent"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="true">
+                        <Grid Background="Transparent">
+                            <Rectangle HorizontalAlignment="Center" Fill="{DynamicResource IconDotsH}" Width="16"
+                                       Height="16" />
+                            <ContentPresenter />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource HoverColor}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ActiveColor}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:RibbonOverflowButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonOverflowButton}">
+                    <ToggleButton
+                        x:Name="OverFlowButton"
+                        Style="{StaticResource ToolBarOverflowButtonStyle}"
+                        ToolTip="{x:Static textResources:GenericText.MoreOptions}"
+                        WindowChrome.IsHitTestVisibleInChrome="True">
+
+                        <common:DropDownPopup x:Name="DropDownPopupPart" Placement="Bottom">
+                            <ContentPresenter />
+                        </common:DropDownPopup>
+                    </ToggleButton>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="{x:Type ToolBar}" TargetType="{x:Type ToolBar}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource EmptyFocusVisual}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolBar}">
+                    <Border x:Name="Border"
+                            UseLayoutRounding="True"
+                            Padding="0"
+                            Background="Transparent"
+                            SnapsToDevicePixels="True">
+                        <DockPanel HorizontalAlignment="Left" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                                   Background="Transparent">
+
+                            <ToolBarPanel x:Name="PART_ToolBarPanel"
+                                          IsItemsHost="true"
+                                          Background="{TemplateBinding Background}"
+                                          UseLayoutRounding="True"
+                                          SnapsToDevicePixels="True" KeyboardNavigation.TabIndex="0" />
+
+                            <ToggleButton
+                                x:Name="OverFlowButton"
+                                DockPanel.Dock="Right"
+                                Focusable="True"
+                                KeyboardNavigation.TabIndex="99"
+                                IsEnabled="{TemplateBinding HasOverflowItems}"
+                                Visibility="{TemplateBinding HasOverflowItems, Converter={StaticResource BoolToVisibilityConverter}}"
+                                Style="{DynamicResource ToolBarOverflowButtonStyle}"
+                                ToolTip="{x:Static textResources:GenericText.MoreOptions}"
+                                WindowChrome.IsHitTestVisibleInChrome="True">
+                                <common:DropDownPopup x:Name="DropDownPopupPart" Placement="Bottom">
+                                    <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel"
+                                                          WrapWidth="300"
+                                                          HorizontalAlignment="Left"
+                                                          KeyboardNavigation.TabNavigation="Cycle"
+                                                          KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                </common:DropDownPopup>
+                            </ToggleButton>
+
+
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ToolBar" x:Key="AnimatedToolbarStyle" BasedOn="{StaticResource {x:Type ToolBar}}" />
+
+    <Style TargetType="ToolBar" x:Key="RibbonTabPanelToolbarStyle" BasedOn="{StaticResource {x:Type ToolBar}}" />
+
+    <Style TargetType="ToolBar" x:Key="RibbonQuickActionsToolbar" BasedOn="{StaticResource {x:Type ToolBar}}">
+        <Style.Triggers>
+            <Trigger Property="HasItems" Value="false">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="QatStdButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="13, 0" />
+        <Setter Property="BorderThickness" Value="0.55" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="MinWidth" Value="70" />
+        <Setter Property="FontSize" Value="{DynamicResource AppFontSize}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="Container"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Transparent"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            HorizontalAlignment="Stretch">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container"
+                                    Value="{DynamicResource DefaultForeground}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="controls:RibbonExtraButton">
+        <Setter Property="FontSize" Value="{DynamicResource AppFontSize}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonOuterFocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonExtraButton}">
+                    <Border x:Name="container" CornerRadius="4" Margin="0,0,0,0" BorderThickness="0.55"
+                            SnapsToDevicePixels="True" UseLayoutRounding="True"
+                            BorderBrush="{DynamicResource ButtonBorderColor}"
+                            Padding="10,4,10,4"
+                            Background="{DynamicResource WorkspaceBackground}">
+
+                        <StackPanel x:Name="stack" Orientation="Horizontal">
+                            <Rectangle x:Name="icon"
+                                       RenderOptions.EdgeMode="Aliased"
+                                       RenderOptions.BitmapScalingMode="Linear"
+                                       UseLayoutRounding="True"
+                                       SnapsToDevicePixels="True"
+                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                            <TextBlock x:Name="label" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource DefaultForeground}" FontWeight="SemiBold"
+                                       FontSize="12.5" Margin="4,0,0,0" Text="{TemplateBinding Text}" />
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsPrimary" Value="True">
+                            <Setter TargetName="container" Property="Background" Value="{DynamicResource AccentColor}" />
+                            <Setter TargetName="container" Property="BorderBrush"
+                                    Value="{DynamicResource AccentButtonBorderColor}" />
+                            <Setter TargetName="label" Property="Foreground" Value="white" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimary" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="{DynamicResource AccentColorDark}"
+                                        TargetName="container" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimary" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="{DynamicResource AccentColorDarker}"
+                                        TargetName="container" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimary" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="{DynamicResource HoverColor}"
+                                        TargetName="container" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPrimary" Value="False" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="{DynamicResource ActiveColor}"
+                                        TargetName="container" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type controls:RibbonButton}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonButton}">
+                    <Border x:Name="Container"
+                            Margin="0, 0, 1, 0"
+                            CornerRadius="4"
+                            ToolTipService.ShowOnDisabled="True"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
+                            BorderThickness="0.55"
+                            BorderBrush="Transparent"
+                            Padding="7,0">
+                        <StackPanel x:Name="stack" Orientation="Horizontal">
+                            <Rectangle x:Name="icon"
+                                       RenderOptions.EdgeMode="Aliased"
+                                       RenderOptions.BitmapScalingMode="Linear"
+                                       UseLayoutRounding="True"
+                                       SnapsToDevicePixels="True"
+                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                            <TextBlock x:Name="label" VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{TemplateBinding Text}" />
+                        </StackPanel>
+                        <Border.ToolTip>
+                            <controls:RibbonButtonTooltip Gesture="{TemplateBinding Gesture}"
+                                                          Title="{TemplateBinding Text}"
+                                                          Description="{TemplateBinding Description}" />
+                        </Border.ToolTip>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ToolTipService.IsEnabled" Value="False">
+                            <Setter TargetName="Container" Property="ToolTip" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="TextOnly">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsOverflown" Value="True">
+                            <Setter TargetName="label" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Left" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type controls:RibbonToggleButton}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonToggleButton}">
+                    <Border x:Name="Container"
+                            Margin="0, 0, 1, 0"
+                            CornerRadius="4"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            UseLayoutRounding="True"
+                            ToolTipService.ShowOnDisabled="True"
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
+                            BorderThickness="0.55"
+                            BorderBrush="Transparent"
+                            Padding="7,0">
+                        <StackPanel x:Name="stack" Orientation="Horizontal">
+                            <Rectangle x:Name="icon"
+                                       RenderOptions.EdgeMode="Aliased"
+                                       RenderOptions.BitmapScalingMode="Linear"
+                                       UseLayoutRounding="True"
+                                       SnapsToDevicePixels="True"
+                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                            <TextBlock x:Name="label" VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{TemplateBinding Text}" />
+                        </StackPanel>
+                        <Border.ToolTip>
+                            <controls:RibbonButtonTooltip Gesture="{TemplateBinding Gesture}"
+                                                          Title="{TemplateBinding Text}"
+                                                          Description="{TemplateBinding Description}" />
+                        </Border.ToolTip>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="BorderBrush" TargetName="Container"
+                                        Value="{DynamicResource DefaultForeground}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type controls:RibbonToggleSplitButton}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonToggleSplitButton}">
+
+                    <Border x:Name="Container"
+                            Margin="0, 0, 1, 0"
+                            CornerRadius="4"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            UseLayoutRounding="True"
+                            ToolTipService.ShowOnDisabled="True"
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
+                            BorderThickness="0.55"
+                            BorderBrush="Transparent"
+                            Padding="0">
+                        <Grid x:Name="gridMain">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="1" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="InnerBdrButton" CornerRadius="4,0,0,4">
+                                <StackPanel x:Name="stack" Orientation="Horizontal" Margin="7,0,4,0">
+                                    <Rectangle x:Name="icon"
+                                               RenderOptions.EdgeMode="Aliased"
+                                               RenderOptions.BitmapScalingMode="Linear"
+                                               UseLayoutRounding="True"
+                                               SnapsToDevicePixels="True"
+                                               Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                                    <TextBlock x:Name="label" VerticalAlignment="Center" Margin="4,0,0,0"
+                                               Text="{TemplateBinding Text}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Rectangle Grid.Column="1" Margin="0,8" Opacity="0.3"
+                                       Fill="{DynamicResource DefaultForeground}" Width="0.55"
+                                       SnapsToDevicePixels="True" UseLayoutRounding="True" />
+
+                            <ToggleButton Grid.Column="2" x:Name="toggleButton"
+                                          FocusVisualStyle="{DynamicResource ButtonFocusVisual}"
+                                          Style="{DynamicResource EmptyToggleButton}">
+                                <Rectangle x:Name="iconArrow" Width="8" Height="8" Margin="4,2,4,0"
+                                           Fill="{DynamicResource IconChevronDown}" />
+                            </ToggleButton>
+
+                            <common:DropDownPopup Grid.Column="0" x:Name="DropDownPopupPart" Placement="Bottom">
+                                <ContentPresenter
+                                    Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type controls:RibbonToggleSplitButton}},
+                                                         Path=DropDownContent, UpdateSourceTrigger=Default}" />
+                            </common:DropDownPopup>
+                        </Grid>
+
+                        <Border.ToolTip>
+                            <controls:RibbonButtonTooltip Gesture="{TemplateBinding Gesture}"
+                                                          Title="{TemplateBinding Text}"
+                                                          Description="{TemplateBinding Description}" />
+                        </Border.ToolTip>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="InnerBdrButton" Property="MinWidth" Value="40" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="InnerBdrButton">
+                            <Setter Property="Background" TargetName="InnerBdrButton"
+                                    Value="{DynamicResource HoverColor}" />
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger SourceName="toggleButton" Property="IsChecked" Value="True">
+                            <Setter Property="ToolTip.Placement" TargetName="Container" Value="Right" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="BorderBrush" TargetName="Container"
+                                        Value="{DynamicResource DefaultForeground}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type controls:RibbonDropDownButton}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MaxWidth" Value="480" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonDropDownButton}">
+                    <Grid x:Name="gridMain">
+                        <ToggleButton x:Name="toggleButton" Margin="0,0,1,0"
+                                      Style="{DynamicResource EmptyToggleButton}"
+                                      FocusVisualStyle="{DynamicResource ButtonFocusVisual}">
+
+                            <Border x:Name="Container"
+                                    Margin="0, 0, 0, 0"
+                                    CornerRadius="4"
+                                    MinWidth="{TemplateBinding MinWidth}"
+                                    UseLayoutRounding="True"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    SnapsToDevicePixels="True"
+                                    Background="Transparent"
+                                    BorderThickness="0.55"
+                                    BorderBrush="Transparent"
+                                    Padding="7,0">
+                                <Grid x:Name="stack">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle x:Name="icon"
+                                               Grid.Column="0"
+                                               RenderOptions.EdgeMode="Aliased"
+                                               RenderOptions.BitmapScalingMode="HighQuality"
+                                               UseLayoutRounding="True"
+                                               SnapsToDevicePixels="True"
+                                               Fill="{TemplateBinding Icon}" Width="17" Height="17" />
+                                    <TextBlock x:Name="label" Grid.Column="1"
+                                               Foreground="{DynamicResource DefaultForeground}"
+                                               VerticalAlignment="Center" Margin="4,0,0,0"
+                                               Text="{TemplateBinding Text}" />
+
+                                    <Rectangle Grid.Column="2" x:Name="iconArrow" Width="8" Height="8" Margin="4,2,0,0"
+                                               Fill="{DynamicResource IconChevronDown}" />
+                                </Grid>
+
+                                <Border.ToolTip>
+                                    <controls:RibbonButtonTooltip Title="{TemplateBinding Text}"
+                                                                  Description="{TemplateBinding Description}" />
+                                </Border.ToolTip>
+                            </Border>
+                        </ToggleButton>
+
+                        <common:DropDownPopup Grid.Column="0" x:Name="DropDownPopupPart" Placement="Bottom">
+                            <ContentPresenter />
+                        </common:DropDownPopup>
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOverflown" Value="True">
+                            <Setter TargetName="DropDownPopupPart" Property="Placement" Value="Right" />
+                            <Setter TargetName="iconArrow" Property="Fill" Value="{DynamicResource IconChevronRight}" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="TextOnly">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="IsContextual" Value="True">
+                            <Setter TargetName="label" Property="Foreground" Value="{DynamicResource AccentColor}" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true" SourceName="toggleButton">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:RibbonSplitButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonSplitButton}">
+
+                    <Border x:Name="Container"
+                            Margin="0, 0, 1, 0"
+                            CornerRadius="4"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            UseLayoutRounding="True"
+                            ToolTipService.ShowOnDisabled="True"
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
+                            BorderThickness="0.55"
+                            BorderBrush="Transparent"
+                            Padding="0">
+                        <Grid x:Name="gridMain">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="1" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="InnerBdrButton" Focusable="True"
+                                    FocusVisualStyle="{DynamicResource ButtonFocusVisual}">
+                                <StackPanel x:Name="stack" Orientation="Horizontal" Margin="7,0,4,0">
+                                    <Rectangle x:Name="icon"
+                                               RenderOptions.EdgeMode="Aliased"
+                                               RenderOptions.BitmapScalingMode="Linear"
+                                               UseLayoutRounding="True"
+                                               SnapsToDevicePixels="True"
+                                               Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                                    <TextBlock x:Name="label" VerticalAlignment="Center" Margin="4,0,0,0"
+                                               Text="{TemplateBinding Text}" />
+                                </StackPanel>
+                            </Border>
+
+                            <Rectangle Grid.Column="1" Margin="0,8" Opacity="0.3"
+                                       Fill="{DynamicResource DefaultForeground}" Width="0.55"
+                                       SnapsToDevicePixels="True" UseLayoutRounding="True" />
+
+                            <ToggleButton Grid.Column="2" x:Name="toggleButton"
+                                          FocusVisualStyle="{DynamicResource ButtonFocusVisual}"
+                                          Style="{DynamicResource EmptyToggleButton}">
+                                <Rectangle x:Name="iconArrow" Width="8" Height="8" Margin="4,2,4,0"
+                                           Fill="{DynamicResource IconChevronDown}" />
+                            </ToggleButton>
+
+                            <common:DropDownPopup Grid.Column="0" x:Name="DropDownPopupPart" Placement="Bottom">
+                                <ContentPresenter
+                                    Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType={x:Type controls:RibbonSplitButton}},
+                                                         Path=DropDownContent, UpdateSourceTrigger=Default}" />
+                            </common:DropDownPopup>
+                        </Grid>
+
+                        <Border.ToolTip>
+                            <controls:RibbonButtonTooltip Gesture="{TemplateBinding Gesture}"
+                                                          Title="{TemplateBinding Text}"
+                                                          Description="{TemplateBinding Description}" />
+                        </Border.ToolTip>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                            <Setter TargetName="InnerBdrButton" Property="MinWidth" Value="40" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="InnerBdrButton"
+                                    Value="{DynamicResource HoverColor}" />
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger SourceName="toggleButton" Property="IsChecked" Value="True">
+                            <Setter Property="ToolTip.Placement" TargetName="Container" Value="Right" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="InnerBdrButton"
+                                    Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

@@ -1,0 +1,234 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:menus="clr-namespace:Coho.UI.Controls.Menus"
+    xmlns:common="clr-namespace:Coho.UI.Controls.Common"
+    xmlns:textResources="clr-namespace:Coho.UI">
+
+
+    <menus:AcrylicContextMenu x:Key="TextBoxContextMenu" VerticalOffset="-16" HorizontalOffset="-16">
+        <MenuItem Command="ApplicationCommands.Cut" Header="{x:Static textResources:GenericText.Cut}">
+            <MenuItem.Icon>
+                <Rectangle Fill="{DynamicResource IconCut}" Width="16" Height="16" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="ApplicationCommands.Copy" Header="{x:Static textResources:GenericText.Copy}">
+            <MenuItem.Icon>
+                <Rectangle Fill="{DynamicResource IconCopy}" Width="16" Height="16" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="ApplicationCommands.Paste" Header="{x:Static textResources:GenericText.Paste}">
+            <MenuItem.Icon>
+                <Rectangle Fill="{DynamicResource IconPaste}" Width="16" Height="16" />
+            </MenuItem.Icon>
+        </MenuItem>
+        <Separator Style="{DynamicResource SeparatorStyle}" />
+        <MenuItem Command="ApplicationCommands.SelectAll" Header="{x:Static textResources:GenericText.SelectAll}" />
+    </menus:AcrylicContextMenu>
+
+
+    <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="HasDropShadow" Value="False" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Placement" Value="Bottom" />
+        <Setter Property="VerticalOffset" Value="0" />
+        <Setter Property="HorizontalOffset" Value="-8" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolTip}">
+                    <Border Margin="8" CornerRadius="4" BorderBrush="{DynamicResource WindowBorder}"
+                            BorderThickness="1" Background="{DynamicResource SubMenuBackground}" Padding="8, 6">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000" Opacity="0.2" Direction="-90" BlurRadius="10"
+                                              ShadowDepth="3" />
+                        </Border.Effect>
+
+                        <TextBlock TextWrapping='Wrap' MaxWidth="300" FontWeight="Normal">
+                            <ContentPresenter Content="{TemplateBinding Content}">
+                                <ContentPresenter.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                    </Style>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <ControlTemplate TargetType="common:DropDownPopup" x:Key="DropDownPopupTemplate">
+        <Popup x:Name="InnerPopup"
+               AllowsTransparency="true"
+               Placement="Bottom"
+               StaysOpen="false"
+               VerticalOffset="1"
+               PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+            <Border x:Name="DropDownBorder" Padding="2" Margin="16" CornerRadius="6" BorderThickness="1"
+                    BorderBrush="{DynamicResource WindowBorder}" Background="{DynamicResource SubMenuBackground}">
+                <Border.Effect>
+                    <DropShadowEffect Color="{DynamicResource ShadowColor}" Opacity="0.6" Direction="-90"
+                                      BlurRadius="20" ShadowDepth="4" />
+                </Border.Effect>
+                <Grid x:Name="SubMenu" MinWidth="180" MaxWidth="{TemplateBinding MaxWidth}"
+                      Grid.IsSharedSizeScope="True">
+                    <ContentPresenter />
+                </Grid>
+            </Border>
+        </Popup>
+    </ControlTemplate>
+
+
+    <Style TargetType="{x:Type ListBox}">
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
+        <Setter Property="Background" Value="{DynamicResource SubMenuBackground}" />
+        <Setter Property="BorderThickness" Value="0.55" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Grid>
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="2"
+                                CornerRadius="4"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                Margin="0,0,0,0" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false" />
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true" />
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type ListBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd"
+                            CornerRadius="4"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverColor}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ActiveColor}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ToolbarSeparator" TargetType="{x:Type Separator}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Margin" Value="1,0,2,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Rectangle Width="0.55" SnapsToDevicePixels="True" UseLayoutRounding="True"
+                               Margin="{TemplateBinding Margin}" VerticalAlignment="Center" Height="30"
+                               Fill="{DynamicResource BorderColor}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="2" BorderBrush="{DynamicResource DefaultForeground}" CornerRadius="4">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonOuterFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="2" Margin="-2.5" BorderBrush="{DynamicResource DefaultForeground}"
+                            CornerRadius="4">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="EmptyFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="0">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Buttons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Menus.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/InfoBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Textbox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/RibbonStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Window.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

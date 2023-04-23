@@ -1,0 +1,141 @@
+﻿<ui:ApplicationWindow x:Class="Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test"
+        xmlns:ribbon="clr-namespace:Coho.UI.Controls.Ribbon;assembly=Coho.UI"
+        xmlns:ui="clr-namespace:Coho.UI;assembly=Coho.UI"
+        xmlns:buttons="clr-namespace:Coho.UI.Controls.Buttons;assembly=Coho.UI" xmlns:infobar="clr-namespace:Coho.UI.Controls.InfoBar;assembly=Coho.UI"
+        mc:Ignorable="d" FocusManager.FocusedElement="{Binding ElementName=LocalRibbonControl}"
+        Title="MainWindow" Height="750" Width="980" ShowOmnibar="True" EnableMica="True" ShowMicaShade="True">
+
+    <ui:ApplicationWindow.ChromeTitleButtons>
+        <buttons:ChromeTitleButton x:Name="BtnSave">
+            <Rectangle Margin="7,7" Fill="{DynamicResource IconSaveRefresh}" Width="17" Height="17" />
+        </buttons:ChromeTitleButton>
+        <Separator Margin="6,0" Style="{DynamicResource ToolbarSeparator}"/>
+    </ui:ApplicationWindow.ChromeTitleButtons>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ribbon:RibbonBar ShowQAT="True" ShowQATLabels="True"
+                          FileButtonClicked="localRibbonControl_FileButtonClicked"
+                          FileButtonText="Fichier" EnableAnimations="True" x:Name="LocalRibbonControl">
+            <ribbon:RibbonBar.ExtraButtons>
+                <ribbon:RibbonExtraButton Text="Store" IsPrimary="True" Icon="{DynamicResource IconMagic}" Margin="8,0,0,0"/>
+                <ribbon:RibbonExtraButton Text="Help" IsPrimary="False" Icon="{DynamicResource IconMagic}" Margin="8,0,0,0"/>
+            </ribbon:RibbonBar.ExtraButtons>
+
+            <ribbon:RibbonBar.Items>
+                <ribbon:RibbonTabItem Header="Accueil">
+                    <ribbon:RibbonTabItem.Items>
+                        <ribbon:RibbonButton x:Name="Btn1" Text="Hello" Description="rest" Icon="{DynamicResource IconMagic}" Click="btnaaa22_Click"/>
+                        <ribbon:RibbonDropDownButton x:Name="Btnaaa" Text="test" Display="TextOnly" Icon="{DynamicResource IconMagic}">
+                            <ribbon:RibbonDropDownButton.Content>
+                                <StackPanel>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                </StackPanel>
+                            </ribbon:RibbonDropDownButton.Content>
+                        </ribbon:RibbonDropDownButton>
+                        <ribbon:RibbonSplitButton x:Name="Btnaaa22" Text="test" Display="TextOnly" Icon="{DynamicResource IconMagic}" Click="btnaaa22_Click">
+                            <ribbon:RibbonSplitButton.DropDownContent>
+                                <StackPanel>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                </StackPanel>
+                            </ribbon:RibbonSplitButton.DropDownContent>
+                        </ribbon:RibbonSplitButton>
+
+                        <Separator Style="{DynamicResource ToolbarSeparator}"/>
+
+
+                        <ribbon:RibbonToggleSplitButton x:Name="Btnaaa2Sdf" Text="test" Display="TextOnly" Icon="{DynamicResource IconMagic}">
+                            <ribbon:RibbonToggleSplitButton.DropDownContent>
+                                <StackPanel>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                </StackPanel>
+                            </ribbon:RibbonToggleSplitButton.DropDownContent>
+                        </ribbon:RibbonToggleSplitButton>
+
+                        <ribbon:RibbonOverflowButton>
+                            <StackPanel>
+                                <MenuItem Header="sdsd"/>
+                                <MenuItem Header="sdsd"/>
+                                <MenuItem Header="sdsd"/>
+                            </StackPanel>
+                        </ribbon:RibbonOverflowButton>
+
+                        <ribbon:RibbonButton x:Name="Btn2" Text="Hello 4" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton x:Name="Btn3" Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                        <ribbon:RibbonButton  Text="Hello 3" Icon="{DynamicResource IconMagic}"/>
+                    </ribbon:RibbonTabItem.Items>
+                </ribbon:RibbonTabItem>
+
+                <ribbon:RibbonTabItem Header="Edition">
+                    <ribbon:RibbonTabItem.Items>
+                        <ribbon:RibbonButton x:Name="Dddddddd" Text="ddddd"/>
+                        <ribbon:RibbonButton x:Name="Fffff"  Text="fffffff"/>
+
+                        <ribbon:RibbonSplitButton x:Name="Jjjjjjjjjjjjjjj" Text="jjjjjjjjjjjjjjj" Icon="{DynamicResource IconMagic}">
+                            <ribbon:RibbonSplitButton.DropDownContent>
+                                <StackPanel>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                    <MenuItem Header="sdsd"/>
+                                </StackPanel>
+                            </ribbon:RibbonSplitButton.DropDownContent>
+                        </ribbon:RibbonSplitButton>
+                    </ribbon:RibbonTabItem.Items>
+                </ribbon:RibbonTabItem>
+
+                <ribbon:RibbonTabItem Header="Outils" IsContextual="True" x:Name="TabOutils">
+                    <ribbon:RibbonTabItem.Items>
+                        <ribbon:RibbonButton Text="Hello"/>
+                        <ribbon:RibbonButton Text="Hello"/>
+                        <ribbon:RibbonButton Text="Hello"/>
+                    </ribbon:RibbonTabItem.Items>
+                </ribbon:RibbonTabItem>
+            </ribbon:RibbonBar.Items>
+        </ribbon:RibbonBar>
+
+      
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20" Width="200"></TextBox>
+
+                <Button Style="{DynamicResource PrimaryButton}" VerticalAlignment="Center" Margin="8,0" Click="Button_Click">Primary button</Button>
+                <Button Style="{DynamicResource NormalButton}" VerticalAlignment="Center" Margin="8,0" Click="Button_Click_1">Normal button</Button>
+
+                <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+
+                <buttons:MasterAccentSplitButton Text="Create new" Icon="{DynamicResource IconMagic}" VerticalAlignment="Center" Click="MasterAccentSplitButton_Click">
+                    <buttons:MasterAccentSplitButton.DropDownContent>
+                        <StackPanel>
+                            <MenuItem Header="ddd"/>
+                            <MenuItem Header="ddd"/>
+                        </StackPanel>
+                    </buttons:MasterAccentSplitButton.DropDownContent>
+                </buttons:MasterAccentSplitButton>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</ui:ApplicationWindow>
