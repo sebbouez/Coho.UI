@@ -122,6 +122,21 @@
             </DrawingGroup>
         </DrawingBrush.Drawing>
     </DrawingBrush>
+    
+    <DrawingBrush x:Key="IconTickWhite" Stretch="Uniform" RenderOptions.EdgeMode="Aliased">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="White"
+                                     Geometry="F1 M 39.115,3.11501L 14.0575,28.1875L 1,15.115L 3.115,13L 14.0575,23.9275L 37,1.00002L 39.115,3.11501 Z ">
+                        <GeometryDrawing.Pen>
+                            <Pen Thickness="2" LineJoin="Round" Brush="White" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 
     <DrawingBrush x:Key="IconChevronDown" Stretch="Uniform" RenderOptions.EdgeMode="Aliased">
         <DrawingBrush.Drawing>

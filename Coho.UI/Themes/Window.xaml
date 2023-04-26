@@ -113,7 +113,7 @@
                 <ControlTemplate TargetType="ui:ApplicationWindow">
                     <AdornerDecorator>
 
-                        <Border x:Name="bdrChrome" ClipToBounds="True" Background="{TemplateBinding Background}">
+                        <Border x:Name="BdrChrome" ClipToBounds="True" Background="{TemplateBinding Background}">
 
                             <Grid x:Name="MainContainerGrid">
                                 <Grid.RowDefinitions>

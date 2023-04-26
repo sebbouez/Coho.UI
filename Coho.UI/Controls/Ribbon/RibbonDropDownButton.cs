@@ -163,7 +163,7 @@ public sealed class RibbonDropDownButton : ContentControl, IRibbonCommandWithChi
         }
     }
 
-    public IRibbonCommand? OriginalCommand
+    IRibbonCommand? IRibbonCommand.OriginalCommand
     {
         get;
         set;
@@ -196,7 +196,7 @@ public sealed class RibbonDropDownButton : ContentControl, IRibbonCommandWithChi
         return Content;
     }
 
-    public List<IRibbonCommand> GetSubCommands()
+    List<IRibbonCommand> IRibbonCommandWithChildren.GetSubCommands()
     {
         List<IRibbonCommand> result = new();
         result.AddRange(RibbonButtonWithContentHelper.GetChildrenItems(this, (StackPanel) Content));
@@ -217,9 +217,9 @@ public sealed class RibbonDropDownButton : ContentControl, IRibbonCommandWithChi
         {
             hash = Name.GetStaticHashCode();
         }
-        else if (OriginalCommand != null)
+        else if (((IRibbonCommand) this).OriginalCommand != null)
         {
-            hash = OriginalCommand.Name.GetStaticHashCode();
+            hash = ((IRibbonCommand) this).OriginalCommand.Name.GetStaticHashCode();
         }
 
         DropDownPopup? p = RibbonBar.GetRibbonCommandPopup2(hash);

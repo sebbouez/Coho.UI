@@ -43,6 +43,9 @@ public class MasterAccentSplitButton : Button
         Click += MasterAccentSplitButton_Click;
     }
 
+    /// <summary>
+    /// Gets or sets the content of the dropdown popup
+    /// </summary>
     public object DropDownContent
     {
         get
@@ -55,6 +58,9 @@ public class MasterAccentSplitButton : Button
         }
     }
 
+    /// <summary>
+    /// Gets or sets the icon displayed in the button
+    /// </summary>
     public Brush Icon
     {
         get
@@ -67,6 +73,9 @@ public class MasterAccentSplitButton : Button
         }
     }
 
+    /// <summary>
+    /// Gets or sets the text displayed in the button
+    /// </summary>
     public string Text
     {
         get
@@ -103,10 +112,10 @@ public class MasterAccentSplitButton : Button
         _buttonPart = (Button) Template.FindName("BtnLeftPart", this);
         _toggleButtonPart = (ToggleButton) Template.FindName("BtnDropDownPart", this);
         _dropDownPopup = (DropDownPopup) Template.FindName("DropDownPopupPart", this);
-        _dropDownPopup.PopupVisibilityChanged += _dropDownPopup_PopupVisibilityChanged;
+        _dropDownPopup.PopupVisibilityChanged += DropDownPopup_PopupVisibilityChanged;
     }
 
-    private void _dropDownPopup_PopupVisibilityChanged(object? sender, bool e)
+    private void DropDownPopup_PopupVisibilityChanged(object? sender, bool e)
     {
         if (!e)
         {

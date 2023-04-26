@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace Coho.UI.Controls.Ribbon;
 
-public interface IRibbonCommand
+internal interface IRibbonCommand
 {
     string Description
     {
@@ -53,7 +53,7 @@ public interface IRibbonCommand
         set;
     }
 
-    IRibbonCommand? OriginalCommand
+   internal IRibbonCommand? OriginalCommand
     {
         get;
         set;
@@ -65,7 +65,7 @@ public interface IRibbonCommand
         set;
     }
 
-    event RoutedEventHandler OnClick;
+    internal event RoutedEventHandler OnClick;
 
-    void RaiseClick();
+    internal void RaiseClick();
 }

@@ -150,7 +150,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
         }
     }
 
-    public IRibbonCommand? OriginalCommand
+    IRibbonCommand? IRibbonCommand.OriginalCommand
     {
         get;
         set;
@@ -178,7 +178,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
         return DropDownContent;
     }
 
-    public List<IRibbonCommand> GetSubCommands()
+    List<IRibbonCommand> IRibbonCommandWithChildren.GetSubCommands()
     {
         List<IRibbonCommand> result = new();
         result.AddRange(RibbonButtonWithContentHelper.GetChildrenItems(this, DropDownContent as StackPanel));
@@ -213,9 +213,9 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
         {
             hash = Name.GetStaticHashCode();
         }
-        else if (OriginalCommand != null)
+        else if (((IRibbonCommand) this).OriginalCommand != null)
         {
-            hash = OriginalCommand.Name.GetStaticHashCode();
+            hash = ((IRibbonCommand) this).OriginalCommand.Name.GetStaticHashCode();
         }
 
         DropDownPopup? p = RibbonBar.GetRibbonCommandPopup2(hash);

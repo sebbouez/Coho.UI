@@ -1,7 +1,17 @@
-/*
- * PageFabric.
- * Copyright Sébastien Bouez. All Rights Reserved.
-*/
+// *********************************************************
+// 
+// Coho.UI
+// RibbonBar.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
 
 using System;
 using System.Collections.Generic;
@@ -43,6 +53,8 @@ public sealed class RibbonBar : ContentControl
     public static readonly DependencyProperty ShowQATProperty =
         DependencyProperty.RegisterAttached("ShowQAT", typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    private readonly DropDownPopup _ribbonOptionsDropDown = new();
+
     private StackPanel? _extraButtonsStackPanel;
     private bool _focusFirstChild;
     private RibbonTabPanelToolbar? _headersPanelToolbar;
@@ -52,7 +64,6 @@ public sealed class RibbonBar : ContentControl
     private ContextMenu? _qatButtonsContextMenu;
     private RibbonQuickAccessToolbar? _qatToolbar;
     private ToggleButton? _ribbonOptionsButton;
-    private readonly DropDownPopup _ribbonOptionsDropDown = new();
     private RibbonTabItemInnerToolbar? _ribbonTabToolbar;
     private ContextMenu? _standardButtonsContextMenu;
     private Border? _tabIndicator;
@@ -63,7 +74,6 @@ public sealed class RibbonBar : ContentControl
         Focusable = false;
 
         Loaded += RibbonBar_Loaded;
-        //SelectionChanged += RibbonBar_SelectionChanged;
         PreviewMouseMove += RibbonBar_PreviewMouseMove;
         MouseLeave += RibbonBar_MouseLeave;
         SizeChanged += RibbonBar_SizeChanged;

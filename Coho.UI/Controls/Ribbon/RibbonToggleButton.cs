@@ -136,7 +136,7 @@ public sealed class RibbonToggleButton : ToggleButton, IRibbonCommand
         }
     }
 
-    public IRibbonCommand? OriginalCommand
+    IRibbonCommand? IRibbonCommand.OriginalCommand
     {
         get;
         set;

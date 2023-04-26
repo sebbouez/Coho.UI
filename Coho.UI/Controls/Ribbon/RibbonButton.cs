@@ -140,12 +140,15 @@ public sealed class RibbonButton : Button, IRibbonCommand
         }
     }
 
-    public IRibbonCommand? OriginalCommand
+    IRibbonCommand? IRibbonCommand.OriginalCommand
     {
         get;
         set;
     }
 
+    /// <summary>
+    /// Gets or sets the text displayed in the button
+    /// </summary>
     public string Text
     {
         get

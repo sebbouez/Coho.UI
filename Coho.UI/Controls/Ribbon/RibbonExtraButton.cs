@@ -15,6 +15,9 @@ public class RibbonExtraButton : Button
     public static readonly DependencyProperty IconProperty =
         DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(RibbonExtraButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    /// <summary>
+    /// Gets or sets the text of the button
+    /// </summary>
     public string Text
     {
         get
@@ -27,6 +30,9 @@ public class RibbonExtraButton : Button
         }
     }
 
+    /// <summary>
+    /// Gets or sets the icon of the button
+    /// </summary>
     public Brush Icon
     {
         get
@@ -39,6 +45,9 @@ public class RibbonExtraButton : Button
         }
     }
 
+    /// <summary>
+    /// Gets or sets if the button should be displayed as primary choice
+    /// </summary>
     public bool IsPrimary
     {
         get

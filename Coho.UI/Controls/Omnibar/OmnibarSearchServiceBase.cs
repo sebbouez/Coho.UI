@@ -22,11 +22,17 @@ namespace Coho.UI.Controls.Omnibar;
 
 public abstract class OmnibarSearchServiceBase
 {
+    /// <summary>
+    /// Gets the name of the search service, will be displayed
+    /// </summary>
     public abstract string DisplayName
     {
         get;
     }
 
+    /// <summary>
+    /// Gets the description of the search service, will be displayed
+    /// </summary>
     public virtual string Description
     {
         get
@@ -35,6 +41,9 @@ public abstract class OmnibarSearchServiceBase
         }
     }
 
+    /// <summary>
+    /// Indicates if the search service is the default one in the Omnibar
+    /// </summary>
     public virtual bool IsDefault
     {
         get
@@ -43,6 +52,9 @@ public abstract class OmnibarSearchServiceBase
         }
     }
 
+    /// <summary>
+    /// Gets the icon to represent the search service, will be displayed
+    /// </summary>
     public virtual Brush Icon
     {
         get

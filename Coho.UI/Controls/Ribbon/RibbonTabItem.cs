@@ -43,6 +43,9 @@ public sealed class RibbonTabItem : ContentControl
         set;
     }
 
+    /// <summary>
+    /// Gets if the tab is selected
+    /// </summary>
     public bool IsSelected
     {
         get
@@ -55,6 +58,9 @@ public sealed class RibbonTabItem : ContentControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets if the tab is contextual
+    /// </summary>
     public bool IsContextual
     {
         get
@@ -67,19 +73,22 @@ public sealed class RibbonTabItem : ContentControl
         }
     }
 
+    /// <summary>
+    /// Gets if the tab is removed due to the limited place
+    /// </summary>
     public bool IsOverflown
     {
         get
         {
             return (bool) GetValue(IsOverflownProperty);
         }
-        set
+        internal set
         {
             SetValue(IsOverflownProperty, value);
         }
     }
 
-    public string Gesture
+    internal string Gesture
     {
         get
         {
@@ -91,6 +100,9 @@ public sealed class RibbonTabItem : ContentControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the title of the tab
+    /// </summary>
     public string Header
     {
         get
@@ -116,14 +128,6 @@ public sealed class RibbonTabItem : ContentControl
     private void RibbonTabItem_Loaded(object sender, RoutedEventArgs e)
     {
         ApplyTemplate();
-        //RibbonTabItemInnerToolbar t = new();
-        //foreach (UIElement item in Items)
-        //{
-        //    _ = t.Items.Add(item);
-        //}
-        //Items.Clear();
-        //Content = t;
-
         CommandManager.AddCommandsToCache(this);
     }
 }

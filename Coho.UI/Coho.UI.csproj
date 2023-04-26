@@ -10,6 +10,8 @@
         <PackageLicenseUrl>https://github.com/sebbouez/Coho.UI/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/sebbouez/Coho.UI</RepositoryUrl>
         <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageTags>Sun Valley; Fluent Design; UI; Business</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -21,20 +23,12 @@
         <Authors>Sébastien Bouez</Authors>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Compile Remove="Controls\Ribbon\RibbonColorSplitButton.cs" />
-    </ItemGroup>
+    <PropertyGroup>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="obj\Debug\net6.0-windows\Controls\Omnibar\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="Themes\Theme_BaseDark.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <None Include="docs\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>

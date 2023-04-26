@@ -127,10 +127,13 @@ public class ApplicationWindow : Window
     #region Properties
 
     public static readonly DependencyProperty ApplyAccentToChromeProperty =
-        DependencyProperty.RegisterAttached("ApplyAccentToChrome", typeof(bool), typeof(ApplicationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(ApplyAccentToChrome), typeof(bool), typeof(ApplicationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    public static readonly DependencyProperty ShowOmnibarProperty =
+        DependencyProperty.RegisterAttached(nameof(ShowOmnibar), typeof(bool), typeof(ApplicationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+    
     /// <summary>
-    ///     Obtient ou définit si la barre de titre de l'application doit être remplie avec la couleur d'accentuation
+    ///     Gets or sets if the chrome title bar should use the application accent color
     /// </summary>
     public bool ApplyAccentToChrome
     {
@@ -144,6 +147,9 @@ public class ApplicationWindow : Window
         }
     }
 
+    /// <summary>
+    /// Gets or sets the list of buttons that appear next to the application title
+    /// </summary>
     public List<UIElement> ChromeTitleButtons
     {
         get;
@@ -151,7 +157,7 @@ public class ApplicationWindow : Window
     } = new();
 
     /// <summary>
-    ///     Obtient ou définit l'utilisation de la texture Mica sur la fenêtre
+    /// Gets or sets if the window should use the Mica effect (only Windows 11)
     /// </summary>
     public bool EnableMica
     {
@@ -160,7 +166,7 @@ public class ApplicationWindow : Window
     }
 
     /// <summary>
-    ///     Obtient ou définit s'il faut appliquer un masque pour atténuer la texture Mica
+    /// Gets or sets the visibility of a subtle shade over the Mica effect
     /// </summary>
     public bool ShowMicaShade
     {
@@ -169,12 +175,18 @@ public class ApplicationWindow : Window
     }
 
     /// <summary>
-    ///     Obtient ou définit si la barre de recherche doit être affichée dans le chrome de l'application
+    /// Gets or sets the visibility of the omnibar search box
     /// </summary>
     public bool ShowOmnibar
     {
-        get;
-        set;
+        get
+        {
+            return (bool) GetValue(ShowOmnibarProperty);
+        }
+        set
+        {
+            SetValue(ShowOmnibarProperty, value);
+        }
     }
 
     #endregion Properties
@@ -231,7 +243,7 @@ public class ApplicationWindow : Window
         _isLoaded = true;
 
         ApplyTemplate();
-        _bdrChrome = (Border?) Template.FindName("bdrChrome", this);
+        _bdrChrome = (Border?) Template.FindName("BdrChrome", this);
         _mainGrid = (Grid?) Template.FindName("MainContainerGrid", this);
         _chromeHeaderGrid = (Grid?) Template.FindName("ChromeHeaderGrid", this);
         _chromeTitleButtonsStackPanel = (StackPanel?) Template.FindName("ChromeTitleButtonsStackPanel", this);

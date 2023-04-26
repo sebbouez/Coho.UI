@@ -23,6 +23,7 @@ public partial class MainWindow : ApplicationWindow
 
         OmnibarSearchService.RegisterOmnibarSearchService(new CustomOmnibarSearchService());
         OmnibarSearchService.SearchResultClicked += OmnibarSearchServiceOnSearchResultClicked;
+        
     }
 
     private void OmnibarSearchServiceOnSearchResultClicked(object? sender, OmnibarSearchResult e)

@@ -21,7 +21,7 @@ namespace Coho.UI.Controls.Ribbon;
 
 internal class OrphanRibbonCommand : IRibbonCommand
 {
-    public FrameworkElement? Button
+    internal FrameworkElement? Button
     {
         get;
         set;
