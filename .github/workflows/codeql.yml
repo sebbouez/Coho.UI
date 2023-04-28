@@ -1,0 +1,41 @@
+name: CodeQL Analysis
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  analyze:
+    name: codeql-analysis
+    runs-on: windows-latest
+
+    env:
+        Solution_Name: Coho.UI.sln   
+
+    steps:
+ 	- name: Install .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+        	dotnet-version: 6.0.x
+
+      - name: Checkout repository
+        id: checkout_repo
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        id: init_codeql
+        uses: github/codeql-action/init@v1
+        with:
+          queries: security-and-quality
+        
+      - name: Build
+        id: dotnet_build
+        shell: pwsh
+        run: msbuild $env:Solution_Name /t:Restore 
+
+      - name: Perform CodeQL Analysis
+        id: analyze_codeql
+        uses: github/codeql-action/analyze@v1
