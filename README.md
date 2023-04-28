@@ -17,3 +17,4 @@ The Nuget Package is not available yet. It will be published soon.
 * Radio button
 * Info bar
 * Textbox
+* [Menus](https://github.com/sebbouez/Coho.UI/wiki/Menus)
