@@ -11,7 +11,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Width" Value="45" />
-        <!--<Setter Property="Height" Value="45" />-->
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
@@ -19,9 +18,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid Background="{TemplateBinding Background}" TextBlock.Foreground="{TemplateBinding Foreground}">
-                        <Rectangle x:Name="rectOver" Visibility="Collapsed" Fill="{DynamicResource DefaultForeground}"
+                        <Rectangle x:Name="RectOver" Visibility="Collapsed" Fill="{DynamicResource DefaultForeground}"
                                    Opacity="0.15" />
-                        <ContentPresenter x:Name="contentPresenter"
+                        <ContentPresenter x:Name="ContentPresenter"
                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -30,18 +29,18 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="rectOver" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="RectOver" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <DataTrigger
                             Binding="{Binding RelativeSource={ RelativeSource Self}, Path=(controls:WindowDependencyProperties.IsFakeHover)}"
                             Value="True">
-                            <Setter TargetName="rectOver" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="RectOver" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="rectOver" Property="Opacity" Value="0.25" />
+                            <Setter TargetName="RectOver" Property="Opacity" Value="0.25" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value=".5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -55,7 +54,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="Width" Value="45" />
-        <!--<Setter Property="Height" Value="45" />-->
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
@@ -65,7 +63,7 @@
                     <Border Background="{TemplateBinding Background}" CornerRadius="0,3,0,0">
                         <Grid TextBlock.Foreground="{TemplateBinding Foreground}">
                             <Border Background="#E81123" Opacity="1" x:Name="HoverLayer" Visibility="Collapsed" />
-                            <Rectangle x:Name="chromeIconClose"
+                            <Rectangle x:Name="ChromeIconClose"
                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -77,7 +75,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" Value="Visible" TargetName="HoverLayer" />
                             <Setter Property="Foreground" Value="White" />
-                            <Setter TargetName="chromeIconClose" Property="Fill"
+                            <Setter TargetName="ChromeIconClose" Property="Fill"
                                     Value="{DynamicResource IconChromeCloseWhite}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
@@ -85,12 +83,12 @@
                             <Setter Property="Opacity" Value="0.5" TargetName="HoverLayer" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="chromeIconClose" Property="Opacity" Value=".5" />
+                            <Setter TargetName="ChromeIconClose" Property="Opacity" Value=".5" />
                         </Trigger>
                         <DataTrigger
                             Binding="{Binding ApplyAccentToChrome, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:ApplicationWindow}}"
                             Value="True">
-                            <Setter TargetName="chromeIconClose" Property="Fill"
+                            <Setter TargetName="ChromeIconClose" Property="Fill"
                                     Value="{DynamicResource IconChromeCloseWhite}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -135,18 +133,18 @@
                                         <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
                                     <Grid Focusable="True" FocusVisualStyle="{DynamicResource EmptyFocusVisual}"
-                                          x:Name="stControlButtons" Grid.Column="0" Margin="0,0,0,0"
+                                          x:Name="StControlButtons" Grid.Column="0" Margin="0,0,0,0"
                                           HorizontalAlignment="Left">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Image Source="/Resources/Square71x71Logo.png" Width="24" Margin="16,1,10,0" />
+                                        <Image x:Name="ImageIcon" Source="" Width="24" Margin="16,1,10,0" />
                                         <Rectangle Grid.Column="0" Fill="gray" Width="18" Height="18"
                                                    Margin="16,1,10,0" />
                                         <TextBlock Grid.Column="1" FontSize="12.5" Text="{TemplateBinding Title}"
-                                                   x:Name="tbChromeTitle" TextTrimming="CharacterEllipsis"
+                                                   x:Name="TbChromeTitle" TextTrimming="CharacterEllipsis"
                                                    Margin="0,-1,0,0" VerticalAlignment="Center" />
                                         <StackPanel Grid.Column="2" x:Name="ChromeTitleButtonsStackPanel" Margin="6,0"
                                                     Orientation="Horizontal" VerticalAlignment="Center" />
@@ -165,19 +163,19 @@
                                     <Button TabIndex="0"
                                             Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                             Style="{DynamicResource WindowButtonStyle}">
-                                        <Rectangle x:Name="chromeIconReduce" Fill="{DynamicResource IconChromeReduce}"
+                                        <Rectangle x:Name="ChromeIconReduce" Fill="{DynamicResource IconChromeReduce}"
                                                    Width="11" Height="5" />
                                     </Button>
                                     <Button TabIndex="0" x:Name="ChromeRestoreButton" IsHitTestVisible="True"
                                             Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
                                             Visibility="Collapsed" Style="{DynamicResource WindowButtonStyle}">
-                                        <Rectangle x:Name="chromeIconNormal" IsHitTestVisible="True"
+                                        <Rectangle x:Name="ChromeIconNormal" IsHitTestVisible="True"
                                                    Fill="{DynamicResource IconChromeNormal}" Width="10" Height="10" />
                                     </Button>
                                     <Button TabIndex="0" x:Name="ChromeMaximizeButton" IsHitTestVisible="True"
                                             Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                             Style="{DynamicResource WindowButtonStyle}">
-                                        <Rectangle x:Name="chromeIconLarge" IsHitTestVisible="True"
+                                        <Rectangle x:Name="ChromeIconLarge" IsHitTestVisible="True"
                                                    Fill="{DynamicResource IconChromeLarge}" Width="10" Height="10" />
                                     </Button>
                                     <Button TabIndex="0" x:Name="ChromeCloseButton"
@@ -201,11 +199,11 @@
                             Value="True">
                             <Setter TargetName="ChromeDecorationRectangle" Property="Fill"
                                     Value="{DynamicResource AccentColor}" />
-                            <Setter TargetName="chromeIconReduce" Property="Fill"
+                            <Setter TargetName="ChromeIconReduce" Property="Fill"
                                     Value="{DynamicResource IconChromeReduceWhite}" />
-                            <Setter TargetName="chromeIconNormal" Property="Fill"
+                            <Setter TargetName="ChromeIconNormal" Property="Fill"
                                     Value="{DynamicResource IconChromeNormalWhite}" />
-                            <Setter TargetName="chromeIconLarge" Property="Fill"
+                            <Setter TargetName="ChromeIconLarge" Property="Fill"
                                     Value="{DynamicResource IconChromeLargeWhite}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>

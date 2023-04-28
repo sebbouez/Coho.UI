@@ -8,6 +8,7 @@
                       xmlns:ui="clr-namespace:Coho.UI;assembly=Coho.UI"
                       xmlns:buttons="clr-namespace:Coho.UI.Controls.Buttons;assembly=Coho.UI"
                       xmlns:infobar="clr-namespace:Coho.UI.Controls.InfoBar;assembly=Coho.UI"
+                      xmlns:menus="clr-namespace:Coho.UI.Controls.Menus;assembly=Coho.UI"
                       mc:Ignorable="d" FocusManager.FocusedElement="{Binding ElementName=LocalRibbonControl}"
                       Title="MainWindow" Height="750" Width="980" ShowOmnibar="True" EnableMica="True"
                       ShowMicaShade="True">
@@ -135,12 +136,13 @@
                             Click="Button_Click">
                         Primary button
                     </Button>
+                    
                     <Button Style="{DynamicResource NormalButton}" VerticalAlignment="Center" Margin="8,0"
                             Click="Button_Click_1">
                         Normal button
                     </Button>
 
-                    <buttons:MasterAccentSplitButton Text="Create new" Icon="{DynamicResource IconMagic}"
+                    <buttons:MasterAccentSplitButton Text="Create new" Icon="{DynamicResource IconTickWhite}"
                                                      VerticalAlignment="Center" Click="MasterAccentSplitButton_Click">
                         <buttons:MasterAccentSplitButton.DropDownContent>
                             <StackPanel>
@@ -151,10 +153,20 @@
                     </buttons:MasterAccentSplitButton>
 
 
+                    <Border Width="150" Height="150" Background="Silver">
+                        <Border.ContextMenu>
+                            <menus:AcrylicContextMenu>
+                                <MenuItem Header="Test 1"/>
+                                <MenuItem Header="Test 2"/>
+                                <MenuItem Header="Test 3"/>
+                            </menus:AcrylicContextMenu>
+                        </Border.ContextMenu>
+                    </Border>
+                    
                 </StackPanel>
 
-                <CheckBox Style="{DynamicResource CheckSwitch}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked">Apply accent to chrome title bar</CheckBox>
-                <CheckBox>Simple checkbox</CheckBox>
+                <CheckBox Style="{DynamicResource CheckSwitch}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" Margin="10">Apply accent to chrome title bar</CheckBox>
+                <CheckBox Margin="10">Simple checkbox</CheckBox>
 
                 <RadioButton GroupName="radiogroup">test</RadioButton>
                 <RadioButton GroupName="radiogroup">test2</RadioButton>

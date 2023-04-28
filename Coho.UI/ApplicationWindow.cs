@@ -46,6 +46,7 @@ public class ApplicationWindow : Window
     private bool _isLoaded;
     private ContentPresenter? _mainContentPresenter;
     private Grid? _mainGrid;
+    private Image? _iconImage;
     private Button? _maximizeButton;
     private Rectangle? _micaShadeRectangle;
     private Button? _restoreButton;
@@ -245,6 +246,7 @@ public class ApplicationWindow : Window
         ApplyTemplate();
         _bdrChrome = (Border?) Template.FindName("BdrChrome", this);
         _mainGrid = (Grid?) Template.FindName("MainContainerGrid", this);
+        _iconImage = (Image?) Template.FindName("ImageIcon", this);
         _chromeHeaderGrid = (Grid?) Template.FindName("ChromeHeaderGrid", this);
         _chromeTitleButtonsStackPanel = (StackPanel?) Template.FindName("ChromeTitleButtonsStackPanel", this);
         _restoreButton = (Button?) Template.FindName("ChromeRestoreButton", this);
@@ -274,6 +276,8 @@ public class ApplicationWindow : Window
             _chromeTitleButtonsStackPanel!.Children.Add(item);
         }
 
+        _iconImage!.Source = this.Icon;
+        
         UpdateGlowBorder(true, WindowState == WindowState.Maximized);
     }
 
@@ -320,7 +324,6 @@ public class ApplicationWindow : Window
 
         if (WindowState == WindowState.Maximized)
         {
-            // todo
             _maximizeButton.Visibility = Visibility.Collapsed;
             _maximizeButton.IsHitTestVisible = false;
             _maximizeButton.SetValue(Panel.ZIndexProperty, 0);
@@ -331,13 +334,6 @@ public class ApplicationWindow : Window
         }
         else
         {
-            // todo
-
-            //if (_fullScreenChrome != null)
-            //{
-            //    StopFullScreen();
-            //}
-
             _maximizeButton.Visibility = Visibility.Visible;
             _maximizeButton.IsHitTestVisible = true;
             _maximizeButton.SetValue(Panel.ZIndexProperty, 2);

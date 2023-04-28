@@ -29,28 +29,28 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonToggleSplitButton : ToggleButton, IRibbonCommandWithChildren, IRibbonCommand
 {
     public static readonly DependencyProperty DescriptionProperty =
-        DependencyProperty.RegisterAttached("Description", typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Description), typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DisplayProperty =
-        DependencyProperty.RegisterAttached("Display", typeof(RibbonButtonDisplay), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Display), typeof(RibbonButtonDisplay), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DropDownContentProperty =
-        DependencyProperty.Register("DropDownContent", typeof(object), typeof(RibbonToggleSplitButton), null);
+        DependencyProperty.Register(nameof(DropDownContent), typeof(object), typeof(RibbonToggleSplitButton), null);
 
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IconProperty =
-        DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsInQATProperty =
-        DependencyProperty.RegisterAttached("IsInQAT", typeof(bool), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsInQAT), typeof(bool), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty LockEnabledStateProperty =
-        DependencyProperty.RegisterAttached("LockEnabledState", typeof(bool), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(LockEnabledState), typeof(bool), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.RegisterAttached("Text", typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Text), typeof(string), typeof(RibbonToggleSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private DropDownPopup? _dropDownPopup;
     private Grid? _grid;
@@ -167,7 +167,7 @@ public sealed class RibbonToggleSplitButton : ToggleButton, IRibbonCommandWithCh
         set;
     }
 
-    public void RaiseClick()
+    void IRibbonCommand.RaiseClick()
     {
         IsChecked = !IsChecked;
         RaiseEvent(new RoutedEventArgs(ClickEvent));

@@ -11,24 +11,24 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="container" CornerRadius="4"
+                    <Border x:Name="Container" CornerRadius="4"
                             Margin="{TemplateBinding Margin}"
                             Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
-                        <ContentPresenter x:Name="contentPresenter" />
+                        <ContentPresenter x:Name="ContentPresenter" />
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource HoverColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource HoverColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value=".5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -43,19 +43,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="container" Padding="{TemplateBinding Padding}"
+                    <Border x:Name="Container" Padding="{TemplateBinding Padding}"
                             CornerRadius="4" Background="{TemplateBinding Background}">
-                        <ContentPresenter x:Name="contentPresenter" />
+                        <ContentPresenter x:Name="ContentPresenter" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource HoverColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource HoverColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value=".5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -72,23 +72,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type buttons:ChromeTitleButton}">
-                    <Border x:Name="container" Background="Transparent" BorderThickness="0.55"
+                    <Border x:Name="Container" Background="Transparent" BorderThickness="0.55"
                             SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="Transparent"
                             CornerRadius="4" MinWidth="{TemplateBinding MinWidth}">
-                        <ContentPresenter x:Name="contentPresenter" />
+                        <ContentPresenter x:Name="ContentPresenter" />
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource WorkspaceBackground}"
-                                    TargetName="container" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource WorkspaceBackground}" TargetName="Container" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value=".5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -1,7 +1,17 @@
-/*
- * PageFabric.
- * Copyright Sébastien Bouez. All Rights Reserved.
-*/
+// *********************************************************
+// 
+// Coho.UI
+// RibbonOverflowButton.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
 
 using System;
 using System.Linq;
@@ -21,14 +31,6 @@ public sealed class RibbonOverflowButton : ContentControl
     public RibbonOverflowButton()
     {
         Loaded += RibbonOverflowButton_Loaded;
-    }
-
-    private void Popup_Opened(object sender, EventArgs e)
-    {
-        if (Content is StackPanel st)
-        {
-            st.Children.OfType<UIElement>().FirstOrDefault()?.Focus();
-        }
     }
 
     private void RibbonDropDownButton_PreviewKeyDown(object sender, KeyEventArgs e)

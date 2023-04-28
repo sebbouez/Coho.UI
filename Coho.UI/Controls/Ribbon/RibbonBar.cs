@@ -39,19 +39,19 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonBar : ContentControl
 {
     public static readonly DependencyProperty EnableAnimationsProperty =
-        DependencyProperty.RegisterAttached("EnableAnimations", typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(EnableAnimations), typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty ExtraButtonsProperty =
-        DependencyProperty.RegisterAttached("ExtraButtons", typeof(List<UIElement>), typeof(RibbonBar), new FrameworkPropertyMetadata(new List<UIElement>(), FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(ExtraButtons), typeof(List<UIElement>), typeof(RibbonBar), new FrameworkPropertyMetadata(new List<UIElement>(), FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty FileButtonTextProperty =
-        DependencyProperty.RegisterAttached("FileButtonText", typeof(string), typeof(RibbonBar), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(FileButtonText), typeof(string), typeof(RibbonBar), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty ItemsProperty =
-        DependencyProperty.RegisterAttached("Items", typeof(ObservableCollection<RibbonTabItem>), typeof(RibbonBar), new FrameworkPropertyMetadata(new ObservableCollection<RibbonTabItem>(), FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Items), typeof(ObservableCollection<RibbonTabItem>), typeof(RibbonBar), new FrameworkPropertyMetadata(new ObservableCollection<RibbonTabItem>(), FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty ShowQATProperty =
-        DependencyProperty.RegisterAttached("ShowQAT", typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(ShowQAT), typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private readonly DropDownPopup _ribbonOptionsDropDown = new();
 

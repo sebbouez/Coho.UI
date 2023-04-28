@@ -43,10 +43,7 @@ public partial class OmnibarControl : UserControl
 
     private void BdrOmniBar_MouseLeave(object sender, MouseEventArgs e)
     {
-        if (TbOmniBar.IsFocused || TbOmniBar.IsKeyboardFocused)
-        {
-        }
-        else
+        if (!TbOmniBar.IsFocused && !TbOmniBar.IsKeyboardFocused)
         {
             BdrOmniBar.Opacity = 0.7;
         }

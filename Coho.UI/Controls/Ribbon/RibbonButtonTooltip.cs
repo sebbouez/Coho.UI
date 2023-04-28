@@ -1,3 +1,18 @@
+// *********************************************************
+// 
+// Coho.UI
+// RibbonButtonTooltip.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,13 +23,13 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonButtonTooltip : ContentControl
 {
     public static readonly DependencyProperty DescriptionProperty =
-        DependencyProperty.RegisterAttached("Description", typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Description), typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TitleProperty =
-        DependencyProperty.RegisterAttached("Title", typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Title), typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonButtonTooltip), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public RibbonButtonTooltip()
     {

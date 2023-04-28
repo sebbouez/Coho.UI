@@ -1,7 +1,17 @@
-/*
- * PageFabric.
- * Copyright Sébastien Bouez. All Rights Reserved.
-*/
+// *********************************************************
+// 
+// Coho.UI
+// RibbonSplitButton.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
 
 using System;
 using System.Collections.Generic;
@@ -19,33 +29,33 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRibbonCommand
 {
     public static readonly DependencyProperty DescriptionProperty =
-        DependencyProperty.RegisterAttached("Description", typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Description), typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DisplayProperty =
-        DependencyProperty.RegisterAttached("Display", typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Display), typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DropDownContentProperty =
-        DependencyProperty.Register("DropDownContent", typeof(object), typeof(RibbonSplitButton), null);
+        DependencyProperty.Register(nameof(DropDownContent), typeof(object), typeof(RibbonSplitButton), null);
 
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IconProperty =
-        DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsInQATProperty =
-        DependencyProperty.RegisterAttached("IsInQAT", typeof(bool), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsInQAT), typeof(bool), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty LockEnabledStateProperty =
-        DependencyProperty.RegisterAttached("LockEnabledState", typeof(bool), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(LockEnabledState), typeof(bool), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.RegisterAttached("Text", typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Text), typeof(string), typeof(RibbonSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private DropDownPopup? _dropDownPopup;
     private Grid? _grid;
-    private ToggleButton? _toggleButton;
     private RoutedEventHandler? _onClick;
+    private ToggleButton? _toggleButton;
 
     public RibbonSplitButton()
     {
@@ -156,7 +166,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
         set;
     }
 
-    public void RaiseClick()
+    void IRibbonCommand.RaiseClick()
     {
         RaiseEvent(new RoutedEventArgs(ClickEvent));
     }
@@ -221,7 +231,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
         DropDownPopup? p = RibbonBar.GetRibbonCommandPopup2(hash);
         if (p != null)
         {
-            ((Grid)p.Parent).Children.Remove(p);
+            ((Grid) p.Parent).Children.Remove(p);
             _grid!.Children.Add(p);
 
             p.PopupVisibilityChanged -= DropDownPopup_PopupVisibilityChanged;
@@ -267,7 +277,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
             if (e.OriginalSource is Border bdr && string.Equals(bdr.Name, "InnerBdrButton",
                     StringComparison.InvariantCultureIgnoreCase))
             {
-                RaiseClick();
+                ((IRibbonCommand) this).RaiseClick();
             }
         }
 

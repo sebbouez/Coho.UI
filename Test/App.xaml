@@ -31,7 +31,6 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Theme_BaseLight.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Icons.xaml" />
 

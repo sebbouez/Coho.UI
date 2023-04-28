@@ -1,7 +1,17 @@
-/*
- * PageFabric.
- * Copyright Sébastien Bouez. All Rights Reserved.
-*/
+// *********************************************************
+// 
+// Coho.UI
+// RibbonButton.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
 
 using System.Windows;
 using System.Windows.Controls;
@@ -12,28 +22,28 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonButton : Button, IRibbonCommand
 {
     public static readonly DependencyProperty DescriptionProperty =
-        DependencyProperty.RegisterAttached("Description", typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Description), typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DisplayProperty =
-        DependencyProperty.RegisterAttached("Display", typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Display), typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IconProperty =
-        DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(RibbonButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(RibbonButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsInQATProperty =
-        DependencyProperty.RegisterAttached("IsInQAT", typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsInQAT), typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsOverflownProperty =
-        DependencyProperty.RegisterAttached("IsOverflown", typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsOverflown), typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty LockEnabledStateProperty =
-        DependencyProperty.RegisterAttached("LockEnabledState", typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(LockEnabledState), typeof(bool), typeof(RibbonButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.RegisterAttached("Text", typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Text), typeof(string), typeof(RibbonButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private RoutedEventHandler? _onClick;
 
@@ -147,7 +157,7 @@ public sealed class RibbonButton : Button, IRibbonCommand
     }
 
     /// <summary>
-    /// Gets or sets the text displayed in the button
+    ///     Gets or sets the text displayed in the button
     /// </summary>
     public string Text
     {
@@ -161,7 +171,7 @@ public sealed class RibbonButton : Button, IRibbonCommand
         }
     }
 
-    public void RaiseClick()
+    void IRibbonCommand.RaiseClick()
     {
         RaiseEvent(new RoutedEventArgs(ClickEvent));
     }

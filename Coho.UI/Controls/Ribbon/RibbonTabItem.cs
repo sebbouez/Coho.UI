@@ -10,19 +10,19 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonTabItem : ContentControl
 {
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonTabItem), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonTabItem), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty HeaderProperty =
-        DependencyProperty.RegisterAttached("Header", typeof(string), typeof(RibbonTabItem), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Header), typeof(string), typeof(RibbonTabItem), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsContextualProperty =
-        DependencyProperty.RegisterAttached("IsContextual", typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsContextual), typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsOverflownProperty =
-        DependencyProperty.RegisterAttached("IsOverflown", typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsOverflown), typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsSelectedProperty =
-        DependencyProperty.RegisterAttached("IsSelected", typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsSelected), typeof(bool), typeof(RibbonTabItem), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public RibbonTabItem()
     {

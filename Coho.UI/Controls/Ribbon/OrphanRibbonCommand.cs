@@ -95,7 +95,7 @@ internal class OrphanRibbonCommand : IRibbonCommand
         set;
     } = string.Empty;
 
-    public void RaiseClick()
+    void IRibbonCommand.RaiseClick()
     {
         Clicked?.Invoke(this, EventArgs.Empty);
     }

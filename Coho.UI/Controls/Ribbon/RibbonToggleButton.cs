@@ -23,25 +23,25 @@ namespace Coho.UI.Controls.Ribbon;
 public sealed class RibbonToggleButton : ToggleButton, IRibbonCommand
 {
     public static readonly DependencyProperty DescriptionProperty =
-        DependencyProperty.RegisterAttached("Description", typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Description), typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty DisplayProperty =
-        DependencyProperty.RegisterAttached("Display", typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Display), typeof(RibbonEnums.RibbonButtonDisplay), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(RibbonEnums.RibbonButtonDisplay.IconAndText, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty GestureProperty =
-        DependencyProperty.RegisterAttached("Gesture", typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Gesture), typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IconProperty =
-        DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsInQATProperty =
-        DependencyProperty.RegisterAttached("IsInQAT", typeof(bool), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(IsInQAT), typeof(bool), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty LockEnabledStateProperty =
-        DependencyProperty.RegisterAttached("LockEnabledState", typeof(bool), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(LockEnabledState), typeof(bool), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.RegisterAttached("Text", typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Text), typeof(string), typeof(RibbonToggleButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private RoutedEventHandler? _onClick;
 
@@ -154,7 +154,7 @@ public sealed class RibbonToggleButton : ToggleButton, IRibbonCommand
         }
     }
 
-    public void RaiseClick()
+    void IRibbonCommand.RaiseClick()
     {
         IsChecked = !IsChecked;
         RaiseEvent(new RoutedEventArgs(ClickEvent));

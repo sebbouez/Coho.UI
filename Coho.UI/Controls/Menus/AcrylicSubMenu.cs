@@ -1,7 +1,7 @@
-// *********************************************************
+﻿// *********************************************************
 // 
 // Coho.UI
-// AcrylicContextMenu.cs
+// AcrylicSubMenu.cs
 // Copyright (c) Sébastien Bouez. All rights reserved.
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -13,32 +13,28 @@
 // 
 // *********************************************************
 
+using System;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
 using Coho.UI.Controls.Ribbon;
 
 namespace Coho.UI.Controls.Menus;
 
-public class AcrylicContextMenu : ContextMenu
+public class AcrylicSubMenu : Popup
 {
-    protected override void OnOpened(RoutedEventArgs e)
+    protected override void OnOpened(EventArgs e)
     {
         base.OnOpened(e);
-
         if (InternalRibbonSettings.IsWindows11)
         {
-            HwndSource? hwnd = (HwndSource?) PresentationSource.FromVisual(this);
+            HwndSource? hwnd = (HwndSource?) PresentationSource.FromVisual(Child);
             if (hwnd != null)
             {
-                AcrylicHelper.SetBorder(hwnd.Handle);
                 AcrylicHelper.SetBlur(hwnd.Handle);
+                AcrylicHelper.SetBorder(hwnd.Handle);
                 AcrylicHelper.SetBorderColor(hwnd.Handle);
             }
-        }
-        else
-        {
-            Style = (Style) FindResource("LegacyContextMenuStyle");
         }
     }
 }

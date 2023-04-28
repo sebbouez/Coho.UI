@@ -104,7 +104,7 @@ internal static class CommandManager
     }
 
     /// <summary>
-    ///     Réinitialise le cache complet des commandes du ruban
+    /// Réinitialise le cache complet des commandes du ruban
     /// </summary>
     /// <param name="ribbon"></param>
     internal static void RebuildCommandsCache(RibbonBar ribbon)
