@@ -1,5 +1,8 @@
 # Coho.UI
 
+[![Coho.UI](https://img.shields.io/nuget/v/Coho.UI.svg?style=flat&label=Coho.UI)](https://www.nuget.org/packages/Coho.UI/)
+[![Coho.UI](http://img.shields.io/nuget/vpre/Coho.UI.svg?style=flat&label=Coho.UI)](http://www.nuget.org/packages/Coho.UI/)
+
 Coho.UI is the WPF open source version of PageFabric UI (https://www.pagefabric-app.com).  
 It contains the shell to create a Windows desktop app using the Sun Valley design plus various other components to create an immersive UI on Windows 10 and 11.
 
