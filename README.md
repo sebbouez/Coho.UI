@@ -9,12 +9,13 @@ It contains the shell to create a Windows desktop app using the Sun Valley desig
 <img width="991" alt="image" src="https://user-images.githubusercontent.com/39953434/233845360-3b3b8789-613b-4b4e-b6f1-7e805d980df9.png">
 
 # Nuget Package
-The Nuget Package is not available yet. It will be published soon.
+You can import Coho.UI in your project using your IDE Nuget Package manager.  
+Coho.UI is available at [Nuget.org](https://www.nuget.org/packages/Coho.UI/). 
 
-
-# Visual styles and components
+# Online documentation
+You can read the [Wiki](https://github.com/sebbouez/Coho.UI/wiki) section to find more about how to use Coho.UI in your projects.  
 * Application window
-* Ribbon
+* [Ribbon](https://github.com/sebbouez/Coho.UI/wiki/Ribbon)
 * [Button](https://github.com/sebbouez/Coho.UI/wiki/Button-styles)
 * [Checkbox](https://github.com/sebbouez/Coho.UI/wiki/Checkbox-styles)
 * Radio button
