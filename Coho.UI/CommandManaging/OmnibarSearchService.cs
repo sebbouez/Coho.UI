@@ -24,16 +24,22 @@ public static class OmnibarSearchService
     internal static List<OmnibarSearchServiceBase> OmnibarSearchServices = new();
 
     /// <summary>
-    ///     Occurs when the user clicks a result in the omnibar list
+    ///     Occurs when the user clicks a result in the omnibar list.
     /// </summary>
     public static event EventHandler<OmnibarSearchResult>? SearchResultClicked;
 
     /// <summary>
-    ///     Used to register a custom search service in the Omnibar
+    ///     Used to register a custom search service in the Omnibar.
     /// </summary>
-    /// <param name="service"></param>
+    /// <param name="service">Your custom search service provider, of base type <see cref="OmnibarSearchServiceBase" /></param>
+    /// <exception cref="ArgumentNullException"></exception>
     public static void RegisterOmnibarSearchService(OmnibarSearchServiceBase service)
     {
+        if (service == null)
+        {
+            throw new ArgumentNullException(nameof(service));
+        }
+
         OmnibarSearchServices.Add(service);
     }
 

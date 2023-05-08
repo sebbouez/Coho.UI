@@ -14,11 +14,13 @@
 // *********************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 
 namespace Coho.UI;
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 internal static class NativeMethods
 {
     internal const int GWL_STYLE = -16;

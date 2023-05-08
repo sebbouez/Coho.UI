@@ -30,11 +30,15 @@ using Coho.UI.CommandManaging;
 using Coho.UI.Controls.Common;
 using Coho.UI.Controls.Menus;
 using Coho.UI.Controls.Omnibar;
+using Coho.UI.Tools;
 using Button = System.Windows.Controls.Button;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace Coho.UI.Controls.Ribbon;
 
+/// <summary>
+/// Represents a RibbonBar control that mimics the Microsoft Sun Valley design.
+/// </summary>
 [ContentProperty("Items")]
 public sealed class RibbonBar : ContentControl
 {
@@ -109,6 +113,9 @@ public sealed class RibbonBar : ContentControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the text of the File button
+    /// </summary>
     public string FileButtonText
     {
         get
@@ -142,17 +149,30 @@ public sealed class RibbonBar : ContentControl
         private set;
     }
 
+    /// <summary>
+    /// Gets the list of commands that are available in the Quick Actions Toolbar area.
+    /// </summary>
+    /// <remarks>
+    /// You should set all the commands in the <see cref="Window.Loaded"/> event.
+    /// You should save all the commands in the <see cref="Window.Closing"/> event.
+    /// </remarks>
     public List<string> QatCommands
     {
         get;
     } = new();
 
+    /// <summary>
+    /// Gets the current activated <see cref="RibbonTabItem"/>.
+    /// </summary>
     public RibbonTabItem? SelectedItem
     {
         get;
-        set;
+        private set;
     }
 
+    /// <summary>
+    /// Gets or sets the visibility state of the Quick Access Toolbar.
+    /// </summary>
     public bool ShowQAT
     {
         get
@@ -165,12 +185,21 @@ public sealed class RibbonBar : ContentControl
         }
     }
 
+    /// <summary>
+    /// Gets or sets the visibility state of the commands labels in the Quick Access Toolbar.
+    /// </summary>
+    /// <remarks>
+    /// This property should only be used in the Xaml. To change the visibility of the commands labels by code, you should call the 
+    /// </remarks>
     public bool ShowQATLabels
     {
         get;
         set;
     }
 
+    /// <summary>
+    /// Occurs when the user clicks the FileButton.
+    /// </summary>
     public event RoutedEventHandler? FileButtonClicked;
 
     private void _ribbonOptionsButton_Click(object sender, RoutedEventArgs e)
@@ -187,7 +216,7 @@ public sealed class RibbonBar : ContentControl
         }
     }
 
-    private void _ribbonOptionsDropDown_PopupVisibilityChanged(object? sender, bool e)
+    private void RibbonOptionsDropDown_PopupVisibilityChanged(object? sender, bool e)
     {
         _ribbonOptionsButton!.IsChecked = e;
     }
@@ -340,7 +369,7 @@ public sealed class RibbonBar : ContentControl
         st.Children.Add(mi2);
 
         _ribbonOptionsDropDown.Content = st;
-        _ribbonOptionsDropDown.PopupVisibilityChanged += _ribbonOptionsDropDown_PopupVisibilityChanged;
+        _ribbonOptionsDropDown.PopupVisibilityChanged += RibbonOptionsDropDown_PopupVisibilityChanged;
         _mainGrid!.Children.Add(_ribbonOptionsDropDown);
     }
 
@@ -560,7 +589,6 @@ public sealed class RibbonBar : ContentControl
 
     internal void RefreshIndicatorPosition()
     {
-        AnimIndicatorPosition();
     }
 
     internal void RemoveCommandFromQat(IRibbonCommand cmd)
@@ -611,11 +639,9 @@ public sealed class RibbonBar : ContentControl
         }
     }
 
-    internal void ToggleQATLabels()
-    {
-        _qatToolbar!.ToggleLabels();
-    }
-
+    /// <summary>
+    /// Hides all the contextual <see cref="RibbonTabItem"/> and activates the first <see cref="RibbonTabItem"/>.
+    /// </summary>
     public void HideAllContextualTabs()
     {
         foreach (RibbonTabItem item in Items)
@@ -633,16 +659,20 @@ public sealed class RibbonBar : ContentControl
         ReorderTabsShortcuts();
     }
 
-    public void HideContextualTab(RibbonTabItem tab)
+    /// <summary>
+    /// Hides the given <see cref="RibbonTabItem"/> and activates the last selected <see cref="RibbonTabItem"/>.
+    /// </summary>
+    /// <param name="ribbonTab">The <see cref="RibbonTabItem"/> to hide.</param>
+    public void HideContextualTab(RibbonTabItem ribbonTab)
     {
-        bool mustChange = tab.IsSelected;
-        tab.Visibility = Visibility.Collapsed;
+        bool mustChange = ribbonTab.IsSelected;
+        ribbonTab.Visibility = Visibility.Collapsed;
         if (mustChange)
         {
             RestoreLastTab();
         }
 
-        RefreshIndicatorPosition();
+        AnimIndicatorPosition();
         ReorderTabsShortcuts();
     }
 
@@ -658,18 +688,41 @@ public sealed class RibbonBar : ContentControl
         }
     }
 
+    /// <summary>
+    /// Returns the identifier of the provided <paramref name="cmd"/>. It is used to memorize the QAT commands for example. 
+    /// </summary>
+    /// <param name="cmd">A <see cref="FrameworkElement"/> that belongs to the ribbon children.</param>
+    /// <returns>A <see cref="string"/> that is produced using the <see cref="FrameworkElement.Name"/> property.</returns>
+    /// <exception cref="NullReferenceException">Occurs when the provided <paramref name="cmd"/> has no <see cref="FrameworkElement.Name"/> property.</exception>
+    public string GetCommandIdentifier(FrameworkElement cmd)
+    {
+        if (string.IsNullOrEmpty(cmd.Name))
+        {
+            throw new NullReferenceException("The provided component has no 'Name' property.");
+        }
+
+        return cmd.Name.GetStaticHashCode().ToString();
+    }
+
+    /// <summary>
+    /// Activates the first <see cref="RibbonTabItem"/> of <see cref="Items"/> and hides all contextual tabs.
+    /// </summary>
     public void SelectFirstTab()
     {
         HideAllContextualTabs();
         SelectTab(Items.First());
     }
 
-    public void ShowContextualTab(RibbonTabItem tab)
+    /// <summary>
+    /// Shows and activates a contextual tab.
+    /// </summary>
+    /// <param name="ribbonTab">The <see cref="RibbonTabItem"/> to activate.</param>
+    public void ShowContextualTab(RibbonTabItem ribbonTab)
     {
-        if (tab.Visibility != Visibility.Visible)
+        if (ribbonTab.Visibility != Visibility.Visible)
         {
-            tab.Visibility = Visibility.Visible;
-            SelectTab(tab);
+            ribbonTab.Visibility = Visibility.Visible;
+            SelectTab(ribbonTab);
         }
 
         ReorderTabsShortcuts();

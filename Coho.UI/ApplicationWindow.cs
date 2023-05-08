@@ -43,10 +43,10 @@ public class ApplicationWindow : Window
     private Grid? _chromeHeaderGrid;
     private OmnibarControl? _chromeOmnibar;
     private StackPanel? _chromeTitleButtonsStackPanel;
+    private Image? _iconImage;
     private bool _isLoaded;
     private ContentPresenter? _mainContentPresenter;
     private Grid? _mainGrid;
-    private Image? _iconImage;
     private Button? _maximizeButton;
     private Rectangle? _micaShadeRectangle;
     private Button? _restoreButton;
@@ -132,7 +132,7 @@ public class ApplicationWindow : Window
 
     public static readonly DependencyProperty ShowOmnibarProperty =
         DependencyProperty.RegisterAttached(nameof(ShowOmnibar), typeof(bool), typeof(ApplicationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
-    
+
     /// <summary>
     ///     Gets or sets if the chrome title bar should use the application accent color
     /// </summary>
@@ -149,7 +149,7 @@ public class ApplicationWindow : Window
     }
 
     /// <summary>
-    /// Gets or sets the list of buttons that appear next to the application title
+    ///     Gets or sets the list of buttons that appear next to the application title
     /// </summary>
     public List<UIElement> ChromeTitleButtons
     {
@@ -158,7 +158,7 @@ public class ApplicationWindow : Window
     } = new();
 
     /// <summary>
-    /// Gets or sets if the window should use the Mica effect (only Windows 11)
+    ///     Gets or sets if the window should use the Mica effect (only Windows 11)
     /// </summary>
     public bool EnableMica
     {
@@ -167,7 +167,7 @@ public class ApplicationWindow : Window
     }
 
     /// <summary>
-    /// Gets or sets the visibility of a subtle shade over the Mica effect
+    ///     Gets or sets the visibility of a subtle shade over the Mica effect
     /// </summary>
     public bool ShowMicaShade
     {
@@ -176,7 +176,7 @@ public class ApplicationWindow : Window
     }
 
     /// <summary>
-    /// Gets or sets the visibility of the omnibar search box
+    ///     Gets or sets the visibility of the omnibar search box
     /// </summary>
     public bool ShowOmnibar
     {
@@ -276,8 +276,8 @@ public class ApplicationWindow : Window
             _chromeTitleButtonsStackPanel!.Children.Add(item);
         }
 
-        _iconImage!.Source = this.Icon;
-        
+        _iconImage!.Source = Icon;
+
         UpdateGlowBorder(true, WindowState == WindowState.Maximized);
     }
 
@@ -351,13 +351,16 @@ public class ApplicationWindow : Window
     #region Public methods
 
     /// <summary>
-    ///     Permet de mettre le focus dans la barre globale
+    /// Sets the keyboard focus to the Omnibar search box.
     /// </summary>
     public void FocusOmnibar()
     {
         _chromeOmnibar?.Focus();
     }
 
+    /// <summary>
+    /// Removes the Backstage control and displays the content of the window.
+    /// </summary>
     public void HideBackstageView()
     {
         _mainGrid!.Children.Remove(_backstageView);
@@ -366,8 +369,19 @@ public class ApplicationWindow : Window
         _mainContentPresenter!.Visibility = Visibility.Visible;
     }
 
+    /// <summary>
+    ///     Hides all the visible controls and displays the provided <paramref name="control" /> using all the available space
+    ///     of the current window.
+    /// </summary>
+    /// <param name="control">The <see cref="Control" /> to display in the whole window.</param>
+    /// <exception cref="ArgumentException"></exception>
     public void ShowBackstageView(Control control)
     {
+        if (control == null)
+        {
+            throw new ArgumentNullException(nameof(control));
+        }
+
         _backstageView = control;
         _mainContentPresenter!.Visibility = Visibility.Collapsed;
         _chromeHeaderGrid!.Visibility = Visibility.Collapsed;

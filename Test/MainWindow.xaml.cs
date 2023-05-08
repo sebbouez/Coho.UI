@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Coho.UI;
 using Coho.UI.CommandManaging;
+using Coho.UI.Tools;
 
 namespace Test;
 
@@ -24,6 +25,9 @@ public partial class MainWindow : ApplicationWindow
         OmnibarSearchService.RegisterOmnibarSearchService(new CustomOmnibarSearchService());
         OmnibarSearchService.SearchResultClicked += OmnibarSearchServiceOnSearchResultClicked;
         
+        
+        LocalRibbonControl.QatCommands.Add(LocalRibbonControl.GetCommandIdentifier(Btn1));
+        LocalRibbonControl.QatCommands.Add(LocalRibbonControl.GetCommandIdentifier(Btn2));
     }
 
     private void OmnibarSearchServiceOnSearchResultClicked(object? sender, OmnibarSearchResult e)

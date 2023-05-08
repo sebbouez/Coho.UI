@@ -326,10 +326,7 @@
                                                   IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Placement="Right" x:Name="SubMenuPopup" Focusable="false">
                                 <Border Padding="4" Background="#01ffffff">
-                                    <!--<Border Padding="2" CornerRadius="4" BorderThickness="1" BorderBrush="{DynamicResource WindowBorder}" x:Name="SubMenu" MinWidth="180" Background="{DynamicResource MenuBackground}">-->
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
-                                    <!--</Border>-->
-                                    <!--</Border>-->
                                 </Border>
                             </menus:AcrylicSubMenu>
                         </Grid>

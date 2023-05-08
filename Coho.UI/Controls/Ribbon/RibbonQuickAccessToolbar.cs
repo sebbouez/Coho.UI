@@ -1,7 +1,17 @@
-/*
- * PageFabric.
- * Copyright Sébastien Bouez. All Rights Reserved.
-*/
+// *********************************************************
+// 
+// Coho.UI
+// RibbonQuickAccessToolbar.cs
+// Copyright (c) Sébastien Bouez. All rights reserved.
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// 
+// *********************************************************
 
 using System;
 using System.ComponentModel;
@@ -63,7 +73,7 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
         };
         mi2.Click += Mi2_Click;
         st.Children.Add(mi2);
-        
+
         MenuItem mi3 = new()
         {
             Header = RibbonText.CustomizeQATCommands
@@ -80,7 +90,7 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
     private void Mi2_Click(object sender, RoutedEventArgs e)
     {
         _ribbonOptionsDropDown!.ClosePopup();
-        _parentRibbon!.ShowQATLabels = !_parentRibbon.ShowQATLabels;
+        ToggleLabels();
     }
 
     private void Mi1_Click(object sender, RoutedEventArgs e)
@@ -88,7 +98,6 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
         _ribbonOptionsDropDown!.ClosePopup();
         _parentRibbon!.ShowQAT = !_parentRibbon.ShowQAT;
     }
-
 
     private void Mi3_Click(object sender, RoutedEventArgs e)
     {
@@ -129,7 +138,7 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
         //    Refresh();
         //}
     }
-    
+
     private void RibbonOptionsDropDown_PopupVisibilityChanged(object? sender, bool e)
     {
         _optionsButton!.IsChecked = e;
@@ -263,8 +272,6 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
         newBtn.OnClick += NewBtn_OnClick;
         _ = Items.Add(newBtn);
     }
-
-
 
     private void NewBtn_OnClick(object sender, RoutedEventArgs e)
     {

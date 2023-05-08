@@ -7,11 +7,15 @@
         <SccLocalPath>SAK</SccLocalPath>
         <Title>Coho.UI</Title>
         <PackageProjectUrl>https://github.com/sebbouez/Coho.UI</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/sebbouez/Coho.UI/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageLicense>https://github.com/sebbouez/Coho.UI/blob/main/LICENSE</PackageLicense>
         <RepositoryUrl>https://github.com/sebbouez/Coho.UI</RepositoryUrl>
         <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>Sun Valley; Fluent Design; UI; Business</PackageTags>
+        <Version>1.0.1-alpha</Version>
+        <Description>Sun valley UI components for WPF.
+Includes Ribbon and other controls used in PageFabric application.</Description>
+        <PackageReleaseNotes>First alpha release.</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup>
