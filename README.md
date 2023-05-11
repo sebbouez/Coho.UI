@@ -22,3 +22,4 @@ You can read the [Wiki](https://github.com/sebbouez/Coho.UI/wiki) section to fin
 * Info bar
 * Textbox
 * [Menus](https://github.com/sebbouez/Coho.UI/wiki/Menus)
+* [Sliders](https://github.com/sebbouez/Coho.UI/wiki/Slider)
