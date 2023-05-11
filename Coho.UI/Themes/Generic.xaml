@@ -229,6 +229,7 @@
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Menus.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/InfoBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Textbox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Slider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/RibbonStyles.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Window.xaml" />
     </ResourceDictionary.MergedDictionaries>

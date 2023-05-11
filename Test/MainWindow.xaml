@@ -172,6 +172,8 @@
                 <RadioButton GroupName="radiogroup">test2</RadioButton>
                 <RadioButton GroupName="radiogroup">test3</RadioButton>
                 
+                
+                <Slider Width="260" Margin="15" HorizontalAlignment="Left"></Slider>
             </StackPanel>
 
         </Grid>
