@@ -52,6 +52,30 @@ public static class GenericText
         get;
         set;
     } = "Select all";
+
+    public static string Ok
+    {
+        get;
+        set;
+    } = "Ok";
+
+    public static string Cancel
+    {
+        get;
+        set;
+    } = "Cancel";
+
+    public static string Yes
+    {
+        get;
+        set;
+    } = "Yes";
+
+    public static string No
+    {
+        get;
+        set;
+    } = "No";
 }
 
 public static class OmnibarTexts

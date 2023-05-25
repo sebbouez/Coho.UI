@@ -212,4 +212,102 @@
         </Setter>
     </Style>
 
+    
+    <Style TargetType="ui:SecondaryWindow" x:Key="SecondaryWindowStyle">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource AppFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="{DynamicResource Workspace2Background}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ui:SecondaryWindow">
+                    <AdornerDecorator>
+                        <Border x:Name="BdrChrome" BorderBrush="{DynamicResource AccentColor}" BorderThickness="1"
+                                ClipToBounds="True">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0" x:Name="BdrHeader" Background="{TemplateBinding Background}"
+                                        Height="35" />
+
+                                <TextBlock Grid.Row="0" x:Name="TbWindowTitle" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource DefaultForeground}"
+                                           Text="{TemplateBinding Title}" Padding="15,0" VerticalAlignment="Center" />
+
+                                <Border Grid.Row="1" x:Name="BdrContent" Background="{TemplateBinding Background}">
+                                    <ContentPresenter />
+                                </Border>
+
+
+                                <StackPanel x:Name="ChromeButtons" VerticalAlignment="Top" Grid.Row="0"
+                                            HorizontalAlignment="Right" Margin="0" Orientation="Horizontal"
+                                            WindowChrome.IsHitTestVisibleInChrome="True">
+
+                                    <Button x:Name="BtnReduceWindow" Visibility="Collapsed"
+                                            Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                            Style="{DynamicResource WindowButtonStyle}">
+                                        <Rectangle Fill="{DynamicResource IconChromeReduce}" Width="11" Height="5" />
+                                    </Button>
+
+                                    <Button x:Name="BtnChromeRestore"
+                                            Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                            Visibility="Collapsed" Style="{DynamicResource WindowButtonStyle}">
+                                        <Rectangle Fill="{DynamicResource IconChromeNormal}" Width="10" Height="10" />
+                                    </Button>
+
+                                    <Button x:Name="BtnChromeMaximize" Visibility="Collapsed"
+                                            Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                            Style="{DynamicResource WindowButtonStyle}">
+                                        <Rectangle Fill="{DynamicResource IconChromeLarge}" Width="10" Height="10" />
+                                    </Button>
+
+                                    <Button Height="35" x:Name="BtnCloseWindow"
+                                            Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                            Style="{DynamicResource WindowButtonCloseStyle}">
+                                        <Rectangle Fill="{DynamicResource IconChromeClose}" Width="10" Height="10" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </AdornerDecorator>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="HideWindowTitle" Value="True">
+                            <Setter TargetName="TbWindowTitle" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="ExtendContentArea" Value="True">
+                            <Setter TargetName="BdrContent" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="BdrContent" Property="Grid.RowSpan" Value="2" />
+                        </Trigger>
+
+                        <Trigger Property="ResizeMode" Value="CanResize">
+                            <Setter TargetName="BtnChromeMaximize" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="BtnReduceWindow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+
+                        <!--<DataTrigger Binding="{Binding RelativeSource={ RelativeSource Self}, Path=(controls:CustomProperties.HideChrome)}" Value="True">
+                            <Setter TargetName="ChromeButtons" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="tbWindowTitle" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="bdrHeader" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>-->
+
+                        <Trigger Property="HideCloseButton" Value="True">
+                            <Setter TargetName="BtnCloseWindow" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

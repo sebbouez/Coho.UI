@@ -358,13 +358,17 @@ public sealed class RibbonBar : ContentControl
     private void BuildOptionsMenu()
     {
         StackPanel st = new();
-        MenuItem mi1 = new();
-        mi1.Header = RibbonText.ToggleQAT;
+        MenuItem mi1 = new()
+        {
+            Header = RibbonText.ToggleQAT
+        };
         mi1.Click += Mi1_Click;
         st.Children.Add(mi1);
 
-        MenuItem mi2 = new();
-        mi2.Header = RibbonText.ToggleQATLabels;
+        MenuItem mi2 = new()
+        {
+            Header = RibbonText.ToggleQATLabels
+        };
         mi2.Click += Mi2_Click;
         st.Children.Add(mi2);
 

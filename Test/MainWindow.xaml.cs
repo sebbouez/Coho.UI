@@ -24,8 +24,8 @@ public partial class MainWindow : ApplicationWindow
 
         OmnibarSearchService.RegisterOmnibarSearchService(new CustomOmnibarSearchService());
         OmnibarSearchService.SearchResultClicked += OmnibarSearchServiceOnSearchResultClicked;
-        
-        
+
+
         LocalRibbonControl.QatCommands.Add(LocalRibbonControl.GetCommandIdentifier(Btn1));
         LocalRibbonControl.QatCommands.Add(LocalRibbonControl.GetCommandIdentifier(Btn2));
     }
@@ -42,7 +42,7 @@ public partial class MainWindow : ApplicationWindow
 
     private void MasterAccentSplitButton_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("ok");
+        var t = ThemedMessageBox.Show("Message", "title", MessageBoxButton.YesNo);
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
