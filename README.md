@@ -23,3 +23,4 @@ You can read the [Wiki](https://github.com/sebbouez/Coho.UI/wiki) section to fin
 * Textbox
 * [Menus](https://github.com/sebbouez/Coho.UI/wiki/Menus)
 * [Sliders](https://github.com/sebbouez/Coho.UI/wiki/Slider)
+* [ThemedMessageBox](https://github.com/sebbouez/Coho.UI/wiki/ThemedMessageBox)
