@@ -132,11 +132,19 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                     <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"></TextBox>
 
+                    <ComboBox VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">Item 1</ComboBoxItem>
+                        <ComboBoxItem>Item 2</ComboBoxItem>
+                        <ComboBoxItem>Item 3</ComboBoxItem>
+                        <ComboBoxItem>Item 4</ComboBoxItem>
+                        <ComboBoxItem>Item 5</ComboBoxItem>
+                    </ComboBox>
+
                     <Button Style="{DynamicResource PrimaryButton}" VerticalAlignment="Center" Margin="8,0"
                             Click="Button_Click">
                         Primary button
                     </Button>
-                    
+
                     <Button Style="{DynamicResource NormalButton}" VerticalAlignment="Center" Margin="8,0"
                             Click="Button_Click_1">
                         Normal button
@@ -156,23 +164,26 @@
                     <Border Width="150" Height="150" Background="Silver">
                         <Border.ContextMenu>
                             <menus:AcrylicContextMenu>
-                                <MenuItem Header="Test 1"/>
-                                <MenuItem Header="Test 2"/>
-                                <MenuItem Header="Test 3"/>
+                                <MenuItem Header="Test 1" />
+                                <MenuItem Header="Test 2" />
+                                <MenuItem Header="Test 3" />
                             </menus:AcrylicContextMenu>
                         </Border.ContextMenu>
                     </Border>
-                    
+
                 </StackPanel>
 
-                <CheckBox Style="{DynamicResource CheckSwitch}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" Margin="10">Apply accent to chrome title bar</CheckBox>
+                <CheckBox Style="{DynamicResource CheckSwitch}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"
+                          Margin="10">
+                    Apply accent to chrome title bar
+                </CheckBox>
                 <CheckBox Margin="10">Simple checkbox</CheckBox>
 
                 <RadioButton GroupName="radiogroup">test</RadioButton>
                 <RadioButton GroupName="radiogroup">test2</RadioButton>
                 <RadioButton GroupName="radiogroup">test3</RadioButton>
-                
-                
+
+
                 <Slider Width="260" Margin="15" HorizontalAlignment="Left"></Slider>
             </StackPanel>
 

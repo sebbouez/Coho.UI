@@ -15,7 +15,7 @@
         <Version>1.0.3-alpha</Version>
         <Description>Sun valley UI components for WPF.
 Includes Ribbon and other controls used in PageFabric application.</Description>
-        <PackageReleaseNotes>Added slider theme + fixed various things.</PackageReleaseNotes>
+        <PackageReleaseNotes>Added combobox styles</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup>

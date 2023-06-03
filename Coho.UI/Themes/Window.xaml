@@ -140,9 +140,8 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Image x:Name="ImageIcon" Source="" Width="24" Margin="16,1,10,0" />
-                                        <Rectangle Grid.Column="0" Fill="gray" Width="18" Height="18"
-                                                   Margin="16,1,10,0" />
+                                        <Rectangle x:Name="ImageIcon" Fill="{TemplateBinding Icon}" Width="24" Height="24" Margin="16,1,10,0" />
+                                        
                                         <TextBlock Grid.Column="1" FontSize="12.5" Text="{TemplateBinding Title}"
                                                    x:Name="TbChromeTitle" TextTrimming="CharacterEllipsis"
                                                    Margin="0,-1,0,0" VerticalAlignment="Center" />

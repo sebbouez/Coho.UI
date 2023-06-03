@@ -42,7 +42,20 @@ public partial class MainWindow : ApplicationWindow
 
     private void MasterAccentSplitButton_Click(object sender, RoutedEventArgs e)
     {
-        var t = ThemedMessageBox.Show("Message", "title", MessageBoxButton.YesNo);
+        MessageBoxResult quest = ThemedMessageBox.Show("Do you want to save changes?", "Save changes", MessageBoxButton.YesNoCancel);
+
+        switch (quest)
+        {
+            case MessageBoxResult.Yes:
+                // Yes button was clicked
+            break;
+            case MessageBoxResult.No:
+                // No button was clicked
+            break;
+            case MessageBoxResult.Cancel:
+                // Cancel button was clicked
+                break;
+        }
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)

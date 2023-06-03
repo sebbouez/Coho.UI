@@ -43,7 +43,7 @@ public class ApplicationWindow : Window
     private Grid? _chromeHeaderGrid;
     private OmnibarControl? _chromeOmnibar;
     private StackPanel? _chromeTitleButtonsStackPanel;
-    private Image? _iconImage;
+    private Rectangle? _iconImage;
     private bool _isLoaded;
     private ContentPresenter? _mainContentPresenter;
     private Grid? _mainGrid;
@@ -132,6 +132,9 @@ public class ApplicationWindow : Window
 
     public static readonly DependencyProperty ShowOmnibarProperty =
         DependencyProperty.RegisterAttached(nameof(ShowOmnibar), typeof(bool), typeof(ApplicationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+    
+    public new static readonly DependencyProperty IconProperty =
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(ApplicationWindow), new FrameworkPropertyMetadata(Brushes.Silver, FrameworkPropertyMetadataOptions.AffectsRender));
 
     /// <summary>
     ///     Gets or sets if the chrome title bar should use the application accent color
@@ -187,6 +190,18 @@ public class ApplicationWindow : Window
         set
         {
             SetValue(ShowOmnibarProperty, value);
+        }
+    }
+
+    public new Brush Icon
+    {
+        get
+        {
+            return (Brush) GetValue(IconProperty);
+        }
+        set
+        {
+            SetValue(IconProperty, value);
         }
     }
 
@@ -246,7 +261,7 @@ public class ApplicationWindow : Window
         ApplyTemplate();
         _bdrChrome = (Border?) Template.FindName("BdrChrome", this);
         _mainGrid = (Grid?) Template.FindName("MainContainerGrid", this);
-        _iconImage = (Image?) Template.FindName("ImageIcon", this);
+        _iconImage = (Rectangle?) Template.FindName("ImageIcon", this);
         _chromeHeaderGrid = (Grid?) Template.FindName("ChromeHeaderGrid", this);
         _chromeTitleButtonsStackPanel = (StackPanel?) Template.FindName("ChromeTitleButtonsStackPanel", this);
         _restoreButton = (Button?) Template.FindName("ChromeRestoreButton", this);
@@ -275,8 +290,6 @@ public class ApplicationWindow : Window
         {
             _chromeTitleButtonsStackPanel!.Children.Add(item);
         }
-
-        _iconImage!.Source = Icon;
 
         UpdateGlowBorder(true, WindowState == WindowState.Maximized);
     }

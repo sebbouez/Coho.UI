@@ -223,6 +223,7 @@
 
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Combobox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/RadioButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Checkbox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Buttons.xaml" />
