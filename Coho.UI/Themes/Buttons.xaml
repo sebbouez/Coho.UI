@@ -191,6 +191,34 @@
         </Setter>
     </Style>
 
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource AccentColor}" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock x:Name="linkText" TextWrapping="Wrap" HorizontalAlignment="Left">
+                        <ContentPresenter />
+                    </TextBlock>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <!--<Setter Property="Foreground" Value="{DynamicResource AccentColorDark}" />-->
+                            <Setter TargetName="linkText" Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Foreground" Value="{DynamicResource AccentColorDark}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type buttons:MasterAccentSplitButton}">
         <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonOuterFocusVisual}" />
