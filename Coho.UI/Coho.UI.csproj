@@ -12,10 +12,10 @@
         <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>Sun Valley; Fluent Design; UI; Business</PackageTags>
-        <Version>1.0.3-alpha</Version>
+        <Version>1.0.5-alpha</Version>
         <Description>Sun valley UI components for WPF.
 Includes Ribbon and other controls used in PageFabric application.</Description>
-        <PackageReleaseNotes>Added combobox styles</PackageReleaseNotes>
+        <PackageReleaseNotes>Added InputBoxDialog</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup>

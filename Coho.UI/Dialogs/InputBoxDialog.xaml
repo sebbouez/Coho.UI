@@ -1,11 +1,7 @@
-﻿<ui:SecondaryWindow x:Class="Coho.UI.Dialogs.MessageBoxDialog"
+﻿<ui:SecondaryWindow x:Class="Coho.UI.Dialogs.InputBoxDialog"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:textResources="clr-namespace:Coho.UI"
                     xmlns:ui="clr-namespace:Coho.UI"
-                    mc:Ignorable="d"
                     WindowStartupLocation="CenterOwner"
                     ShowInTaskbar="False"
                     ResizeMode="NoResize"
@@ -23,7 +19,6 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0" />
@@ -33,8 +28,8 @@
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock Text="placeholder" x:Name="TbTitle" FontSize="16" FontWeight="SemiBold"
                            VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,15" />
-                <TextBlock Text="placeholder" x:Name="TbMessage" VerticalAlignment="Center" TextWrapping="Wrap"
-                           Margin="0,0,0,15" />
+                <TextBlock Text="placeholder" x:Name="TbMessage" TextWrapping="Wrap" />
+                <TextBox x:Name="TbInput" Margin="0,10" KeyDown="TbInput_KeyDown" />
             </StackPanel>
         </Grid>
 
@@ -42,19 +37,14 @@
                 BorderThickness="0,0.55,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True"
                 BorderBrush="{DynamicResource BorderColor}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{DynamicResource NormalButton}" x:Name="BtnYes" Focusable="True"
-                        KeyboardNavigation.IsTabStop="True" Click="BtnYes_Click" MinWidth="75" Margin="8,0,0,0"
-                        Content="{x:Static textResources:GenericText.Yes}" />
-                <Button Style="{DynamicResource NormalButton}" x:Name="BtnNo" Focusable="True"
-                        KeyboardNavigation.IsTabStop="True" Click="BtnNo_Click" MinWidth="75" Margin="8,0,0,0"
-                        Content="{x:Static textResources:GenericText.No}" />
                 <Button Style="{DynamicResource PrimaryButton}" x:Name="BtnOk" Focusable="True"
                         KeyboardNavigation.IsTabStop="True" Click="BtnOk_Click" MinWidth="75" Margin="8,0,0,0"
-                        Content="{x:Static textResources:GenericText.Ok}" />
+                        Content="{x:Static ui:GenericText.Ok}" />
                 <Button Style="{DynamicResource NormalButton}" x:Name="BtnCancel" Focusable="True"
                         KeyboardNavigation.IsTabStop="True" Click="BtnCancel_Click" MinWidth="75" Margin="8,0,0,0"
-                        Content="{x:Static textResources:GenericText.Cancel}" />
+                        Content="{x:Static ui:GenericText.Cancel}" />
             </StackPanel>
         </Border>
     </Grid>
+
 </ui:SecondaryWindow>

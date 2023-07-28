@@ -90,9 +90,9 @@
 
             </Setter.Value>
         </Setter>
-    </Style> 
-    
-    
+    </Style>
+
+
     <Style TargetType="{x:Type textboxes:FolderPickerTextbox}">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontFamily" Value="Segoe UI" />
@@ -109,21 +109,88 @@
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Grid Height="{TemplateBinding Height}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <Border Background="{TemplateBinding Background}" UseLayoutRounding="True" Grid.ColumnSpan="2"
                                 SnapsToDevicePixels="True" CornerRadius="4" x:Name="Container"
                                 BorderBrush="{DynamicResource ButtonBorderColor}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                         </Border>
-                        
-                        <ScrollViewer Grid.Column="0" Margin="10,0,8,0" CanContentScroll="True" x:Name="PART_ContentHost"
+
+                        <ScrollViewer Grid.Column="0" Margin="10,0,8,0" CanContentScroll="True"
+                                      x:Name="PART_ContentHost"
                                       VerticalAlignment="Center" Style="{DynamicResource TextboxScrollViewer}" />
-                        
-                        <Button Grid.Column="1" x:Name="BtnBrowse" Style="{DynamicResource NormalButton}" Margin="4" MinWidth="0">...</Button>
-                        
-                        <Border Grid.Column="0" CornerRadius="0,0,4,4" Margin="1,0" x:Name="Indicator" Height="2" Grid.ColumnSpan="2"
+
+                        <Button Grid.Column="1" x:Name="BtnBrowse" Style="{DynamicResource NormalButton}" Margin="2" Padding="8,4,8,3"
+                                MinWidth="0">
+                            ...
+                        </Button>
+
+                        <Border Grid.Column="0" CornerRadius="0,0,4,4" Margin="1,0" x:Name="Indicator" Height="2"
+                                Grid.ColumnSpan="2"
+                                Background="Transparent" VerticalAlignment="Bottom" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="Background" TargetName="Indicator" Value="{DynamicResource AccentColor}" />
+                        </Trigger>
+                        <Trigger Property="AcceptsReturn" Value="True">
+                            <Setter TargetName="Container" Property="Padding" Value="10" />
+                            <Setter TargetName="PART_ContentHost" Property="VerticalAlignment" Value="Top" />
+                        </Trigger>
+                        <Trigger Property="BorderThickness" Value="0">
+                            <Setter Property="BorderBrush" TargetName="Container" Value="Transparent" />
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type textboxes:GenericPickerTextbox}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="BorderThickness" Value="0.55" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="SelectionBrush" Value="#888" />
+        <Setter Property="ContextMenu" Value="{DynamicResource TextBoxContextMenu}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="{DynamicResource SubMenuBackground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Grid Height="{TemplateBinding Height}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Background="{TemplateBinding Background}" UseLayoutRounding="True" Grid.ColumnSpan="2"
+                                SnapsToDevicePixels="True" CornerRadius="4" x:Name="Container"
+                                BorderBrush="{DynamicResource ButtonBorderColor}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                        </Border>
+
+                        <ScrollViewer Grid.Column="0" Margin="10,0,8,0" CanContentScroll="True"
+                                      x:Name="PART_ContentHost"
+                                      VerticalAlignment="Center" Style="{DynamicResource TextboxScrollViewer}" />
+
+                        <Button Grid.Column="1" x:Name="BtnBrowse" Style="{DynamicResource NormalButton}" Margin="2" Padding="8,4,8,3"
+                                MinWidth="0">
+                            ...
+                        </Button>
+
+                        <Border Grid.Column="0" CornerRadius="0,0,4,4" Margin="1,0" x:Name="Indicator" Height="2"
+                                Grid.ColumnSpan="2"
                                 Background="Transparent" VerticalAlignment="Bottom" />
                     </Grid>
 
