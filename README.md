@@ -14,13 +14,3 @@ Coho.UI is available at [Nuget.org](https://www.nuget.org/packages/Coho.UI/).
 
 # Online documentation
 You can read the [Wiki](https://github.com/sebbouez/Coho.UI/wiki) section to find more about how to use Coho.UI in your projects.  
-* Application window
-* [Ribbon](https://github.com/sebbouez/Coho.UI/wiki/Ribbon)
-* [Button](https://github.com/sebbouez/Coho.UI/wiki/Button-styles)
-* [Checkbox](https://github.com/sebbouez/Coho.UI/wiki/Checkbox-styles)
-* Radio button
-* Info bar
-* Textbox
-* [Menus](https://github.com/sebbouez/Coho.UI/wiki/Menus)
-* [Sliders](https://github.com/sebbouez/Coho.UI/wiki/Slider)
-* [ThemedMessageBox](https://github.com/sebbouez/Coho.UI/wiki/ThemedMessageBox)
