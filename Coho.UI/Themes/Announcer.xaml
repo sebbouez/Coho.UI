@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:loadingRing="clr-namespace:Coho.UI.Controls.LoadingRing"
+                    xmlns:announcer="clr-namespace:Coho.UI.Controls.Announcer">
+
+    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    
+    <Style TargetType="announcer:Announcer">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type announcer:Announcer}">
+                    <Grid x:Name="MainGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" FontSize="14" VerticalAlignment="Center"
+                                       Text="{TemplateBinding Label}">
+                            </TextBlock>
+
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="BtnPrev" Style="{DynamicResource EmptyButton}">
+                                    <Rectangle Margin="6" Width="14" Height="14"
+                                               Fill="{DynamicResource IconChevronLeft}" />
+                                </Button>
+                                <Button x:Name="BtnNext" Style="{DynamicResource EmptyButton}">
+                                    <Rectangle Margin="6" Width="14" Height="14"
+                                               Fill="{DynamicResource IconChevronRight}" />
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+
+
+                        <Border Grid.Row="1" Margin="{TemplateBinding AnnouncesAreaMargin}">
+                            <ItemsControl x:Name="ItemsControl">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid
+                                            Columns="{Binding ItemsPerView, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type announcer:Announcer}} }" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Border>
+
+                        <loadingRing:LoadingRing Grid.Row="1" Height="26" Width="26"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 Visibility="{TemplateBinding IsLoadingContent, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                 Foreground="{DynamicResource AccentColor}"
+                                                 IsEnabled="{TemplateBinding IsLoadingContent}"
+                                                 IsIndeterminate="{TemplateBinding IsLoadingContent}" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

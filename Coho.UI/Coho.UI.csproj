@@ -15,7 +15,7 @@
         <Version>1.0.5-alpha</Version>
         <Description>Sun valley UI components for WPF.
 Includes Ribbon and other controls used in PageFabric application.</Description>
-        <PackageReleaseNotes>Added InputBoxDialog</PackageReleaseNotes>
+        <PackageReleaseNotes>Added the Announcer slider</PackageReleaseNotes>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -34,6 +34,7 @@ Includes Ribbon and other controls used in PageFabric application.</Description>
     <ItemGroup>
         <None Include="docs\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
+
 
 
 
