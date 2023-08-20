@@ -1,0 +1,10 @@
+import{_ as e,o as t,c as n,e as a}from"./app-e0605d3e.js";const o={},r=a(`<h1 id="the-acryliccontextmenu-control" tabindex="-1"><a class="header-anchor" href="#the-acryliccontextmenu-control" aria-hidden="true">#</a> The AcrylicContextMenu control</h1><p>Namespace: <code>Coho.UI.Controls.Menus</code>, inherits from <code>ContextMenu</code></p><p>The <code>AcrylicContextMenu</code> uses the Acrylic texture on Windows 11. It will automatically fallback to a legacy style when it is not available.</p><h2 id="properties" tabindex="-1"><a class="header-anchor" href="#properties" aria-hidden="true">#</a> Properties</h2><p>None.</p><h2 id="methods" tabindex="-1"><a class="header-anchor" href="#methods" aria-hidden="true">#</a> Methods</h2><p>None.</p><h2 id="events" tabindex="-1"><a class="header-anchor" href="#events" aria-hidden="true">#</a> Events</h2><p>None.</p><h2 id="examples" tabindex="-1"><a class="header-anchor" href="#examples" aria-hidden="true">#</a> Examples</h2><p>This example shows how to attach an <code>AcrylicContextMenu</code> on a <code>Border</code>.</p><div class="language-xaml line-numbers-mode" data-ext="xaml"><pre class="language-xaml"><code>&lt;Border Width=&quot;150&quot; Height=&quot;150&quot; Background=&quot;Silver&quot;&gt;
+	&lt;Border.ContextMenu&gt;
+		&lt;menus:AcrylicContextMenu&gt;
+			&lt;MenuItem Header=&quot;Test 1&quot;/&gt;
+			&lt;MenuItem Header=&quot;Test 2&quot;/&gt;
+			&lt;MenuItem Header=&quot;Test 3&quot;/&gt;
+		&lt;/menus:AcrylicContextMenu&gt;
+	&lt;/Border.ContextMenu&gt;
+&lt;/Border&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,12),i=[r];function c(d,l){return t(),n("div",null,i)}const u=e(o,[["render",c],["__file","acryliccontextmenu.html.vue"]]);export{u as default};
