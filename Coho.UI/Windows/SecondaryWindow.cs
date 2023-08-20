@@ -1,7 +1,6 @@
 ﻿// *********************************************************
 // 
-// Coho.UI
-// SecondaryWindow.cs
+// Coho.UI SecondaryWindow.cs
 // Copyright (c) Sébastien Bouez. All rights reserved.
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -17,14 +16,11 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Shell;
-using Coho.UI.Controls.Ribbon;
 
-namespace Coho.UI;
+namespace Coho.UI.Windows;
 
-public class SecondaryWindow: Window
+public class SecondaryWindow : FluentWindow
 {
     public static readonly DependencyProperty HideCloseButtonProperty =
         DependencyProperty.RegisterAttached(nameof(HideCloseButton), typeof(bool), typeof(SecondaryWindow),
@@ -38,11 +34,9 @@ public class SecondaryWindow: Window
         DependencyProperty.RegisterAttached(nameof(HideWindowTitle), typeof(bool), typeof(SecondaryWindow),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    private Border? _bdrChrome;
-    private bool _isLoaded;
+    private bool _isDialog;
     private Button? _maximizeButton;
     private Button? _restoreButton;
-    private bool _isDialog;
 
     public SecondaryWindow()
     {
@@ -67,51 +61,11 @@ public class SecondaryWindow: Window
         Loaded += SecondaryWindow_Loaded;
         StateChanged += SecondaryWindow_StateChanged;
         PreviewKeyUp += OnPreviewKeyUp;
-        Activated+= OnActivated;
-        Deactivated+= OnDeactivated;
+        SourceInitialized += Window_SourceInitialized;
 
         Style = (Style) FindResource("SecondaryWindowStyle");
     }
 
-    private void OnDeactivated(object? sender, EventArgs e)
-    {
-        UpdateGlowBorder(false);
-    }
-
-    private void OnActivated(object? sender, EventArgs e)
-    {
-        UpdateGlowBorder(true);
-    }
-
-    private void UpdateGlowBorder(bool activate, bool maximized=false)
-    {
-        if (!InternalRibbonSettings.IsWindows11)
-        {
-            if (_bdrChrome != null)
-            {
-                Color color = activate
-                    ? (Color)FindResource("ChromeBorderActiveColor")
-                    : (Color)FindResource("ChromeBorderDefaultColor");
-                _bdrChrome.BorderThickness = new Thickness(1);
-                _bdrChrome.BorderBrush = new SolidColorBrush(color);
-                return;
-            }
-        }
-
-        IntPtr handle = new WindowInteropHelper(this).Handle;
-
-        if (handle != IntPtr.Zero && _isLoaded)
-        {
-            Color color = activate
-                ? (Color)FindResource("ChromeBorderActiveColor")
-                : (Color)FindResource("ChromeBorderDefaultColor");
-            NativeMethods.COLORREF colorRef = new(color);
-            int attrValue = maximized ? -2 : (int)colorRef.dwColor;
-            _ = NativeMethods.DwmSetWindowAttribute(handle, NativeMethods.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR,
-                ref attrValue, 4);
-        }
-    }
-    
     public bool CloseOnEscapeKeyPress
     {
         get;
@@ -154,6 +108,11 @@ public class SecondaryWindow: Window
         }
     }
 
+    private void Window_SourceInitialized(object? sender, EventArgs e)
+    {
+        OnSourceInitializedBase(this);
+    }
+
     public new bool? ShowDialog()
     {
         _isDialog = true;
@@ -175,7 +134,7 @@ public class SecondaryWindow: Window
 
     private void SecondaryWindow_StateChanged(object? sender, EventArgs e)
     {
-        if (!_isLoaded || _maximizeButton == null || _restoreButton == null || _bdrChrome == null)
+        if (!IsWindowLoaded || _maximizeButton == null || _restoreButton == null || ChromeBorder == null)
         {
             return;
         }
@@ -188,7 +147,7 @@ public class SecondaryWindow: Window
             _restoreButton.Visibility = Visibility.Visible;
             _restoreButton.IsHitTestVisible = true;
             _restoreButton.SetValue(Panel.ZIndexProperty, 2);
-            _bdrChrome.Padding = new Thickness(6);
+            ChromeBorder.Padding = new Thickness(6);
         }
         else
         {
@@ -198,19 +157,28 @@ public class SecondaryWindow: Window
             _restoreButton.Visibility = Visibility.Collapsed;
             _restoreButton.IsHitTestVisible = false;
             _restoreButton.SetValue(Panel.ZIndexProperty, 0);
-            _bdrChrome.Padding = new Thickness(0);
+            ChromeBorder.Padding = new Thickness(0);
         }
     }
 
     private void SecondaryWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        IsWindowLoaded = true;
+
         ApplyTemplate();
 
         _maximizeButton = (Button) Template.FindName("BtnChromeMaximize", this);
         _restoreButton = (Button) Template.FindName("BtnChromeRestore", this);
-        _bdrChrome = (Border) Template.FindName("BdrChrome", this);
+        ChromeBorder = (Border) Template.FindName("BdrChrome", this);
 
-        _isLoaded = true;
+        if (_restoreButton != null && _maximizeButton != null)
+        {
+            ChromeVirtualButtons.Add(_restoreButton);
+            ChromeVirtualButtons.Add(_maximizeButton);
+
+            _restoreButton.IsHitTestVisible = true;
+            _maximizeButton.IsHitTestVisible = true;
+        }
     }
 
     #region WindowChrome

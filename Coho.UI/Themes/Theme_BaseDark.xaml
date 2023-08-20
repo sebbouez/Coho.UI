@@ -4,12 +4,14 @@
     <Color x:Key="ChromeBorderDefaultColor">#aaa</Color>
 
     <SolidColorBrush x:Key="SubMenuBackground" Color="#333333"/>
-    <SolidColorBrush x:Key="InfoBackground" Color="#E6F2FA"/>
+    <SolidColorBrush x:Key="InfoBackground" Color="#18181A"/>
     <SolidColorBrush x:Key="MenuBackground" Color="#252423"/>
     <Color x:Key="ShadowColor">#ddd</Color>
     
     <SolidColorBrush x:Key="WindowBorder" Color="#555555"/>
     <SolidColorBrush x:Key="WorkspaceBackground" Color="#201F1E"/>
+    <SolidColorBrush x:Key="WorkspaceBackgroundTransparent" Color="#9918181A" />
+
     <SolidColorBrush x:Key="Workspace2Background" Color="#18181A"/>
     <SolidColorBrush x:Key="Workspace3Background" Color="#323130"/>
     <SolidColorBrush x:Key="Workspace4Background" Color="#18181A"/>

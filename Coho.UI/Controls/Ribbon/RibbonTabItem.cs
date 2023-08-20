@@ -31,6 +31,7 @@ public sealed class RibbonTabItem : ContentControl
         MouseDown += RibbonTabItem_MouseDown;
     }
 
+    // ReSharper disable once CollectionNeverUpdated.Global => Used in Xaml
     public ObservableCollection<UIElement> Items
     {
         get;
@@ -128,6 +129,6 @@ public sealed class RibbonTabItem : ContentControl
     private void RibbonTabItem_Loaded(object sender, RoutedEventArgs e)
     {
         ApplyTemplate();
-        CommandManager.AddCommandsToCache(this);
+        CommandManager.AddRibbonCommandsToCache(this);
     }
 }

@@ -1,0 +1,39 @@
+﻿<windows:SecondaryWindow x:Class="Test.StartupWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:windows="clr-namespace:Coho.UI.Windows;assembly=Coho.UI"
+                         mc:Ignorable="d"
+                         EnableMica="True"
+                         Background="Transparent"
+                         ResizeMode="NoResize"
+                         WindowStartupLocation="CenterScreen"
+                         Title="StartupWindow" Height="450" Width="650">
+
+    <Grid Margin="25">
+        <StackPanel>
+
+            <TextBlock FontSize="26">Welcome to Coho.UI demo app!</TextBlock>
+
+            <Button Style="{DynamicResource NormalButton}"
+                    HorizontalAlignment="Left"
+                    Click="BtnRibbonWindow_OnClick">
+                Open window with RibbonBar
+            </Button>
+
+            <Button Style="{DynamicResource NormalButton}"
+                    HorizontalAlignment="Left"
+                    Click="BtnMenuWindow_OnClick">
+                Open window with MenuBar
+            </Button> 
+            
+            <Button Style="{DynamicResource NormalButton}"
+                    HorizontalAlignment="Left"
+                    Click="BtnTabbedWindow_OnClick">
+                Open window with Tabs
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</windows:SecondaryWindow>

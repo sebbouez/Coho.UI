@@ -32,11 +32,11 @@ internal static class AcrylicHelper
         // on utilise le paramètre de window au lieu de popup, car il donne un meilleur effet blurry
         accent.AccentFlags = 2;
 
-        //if (UserState.UserSettings.DarkTheme)
-        //{
-        //    accent.GradientColor = 0x99161616;  
-        //}
-        //else
+        if (UIController.Theme == ThemeScheme.Dark)
+        {
+            accent.GradientColor = 0x99161616;  
+        }
+        else
         {
             accent.GradientColor = 0x00FFFFFF;
         }

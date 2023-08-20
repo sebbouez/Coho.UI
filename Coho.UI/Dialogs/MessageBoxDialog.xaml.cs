@@ -15,12 +15,13 @@
 
 using System;
 using System.Windows;
+using Coho.UI.Windows;
 
 namespace Coho.UI.Dialogs;
 
-public partial class MessageBoxDialog : SecondaryWindow
+internal partial class MessageBoxDialog : SecondaryWindow
 {
-    public MessageBoxDialog()
+    internal MessageBoxDialog()
     {
         InitializeComponent();
         ContentRendered += MessageboxDialog_ContentRendered;

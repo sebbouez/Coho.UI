@@ -2,16 +2,18 @@
 using System.Windows.Controls;
 using Coho.UI;
 using Coho.UI.CommandManaging;
+using Coho.UI.Dialogs;
 using Coho.UI.Tools;
+using Coho.UI.Windows;
 
 namespace Test;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : ApplicationWindow
+public partial class RibbonWindow : ApplicationWindow
 {
-    public MainWindow()
+    public RibbonWindow()
     {
         InitializeComponent();
         Loaded += MainWindow_Loaded;
@@ -76,5 +78,12 @@ public partial class MainWindow : ApplicationWindow
     private void CheckBox_Checked(object sender, RoutedEventArgs e)
     {
         ApplyAccentToChrome = (sender as CheckBox).IsChecked.Value;
+    }
+
+
+
+    private void CheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        IsSpecialState = ((CheckBox)sender).IsChecked.Value;
     }
 }

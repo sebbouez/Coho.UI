@@ -14,12 +14,14 @@
 // *********************************************************
 
 using System;
+using Coho.UI.Controls.Ribbon;
+using Coho.UI.Interfaces;
 
-namespace Coho.UI.Controls.Ribbon;
+namespace Coho.UI;
 
-internal static class InternalRibbonSettings
+internal static class InternalFrameworkSettings
 {
-    internal static RibbonBar? CurrentRibbon
+    internal static IApplicationMainBarControl? CurrentMainBarControl
     {
         get;
         set;
@@ -30,7 +32,7 @@ internal static class InternalRibbonSettings
         get;
         set;
     }
-
+    
     internal static bool IsWindows11
     {
         get

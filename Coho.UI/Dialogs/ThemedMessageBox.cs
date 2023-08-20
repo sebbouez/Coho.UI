@@ -14,12 +14,22 @@
 // *********************************************************
 
 using System.Windows;
-using Coho.UI.Dialogs;
 
-namespace Coho.UI;
+namespace Coho.UI.Dialogs;
 
 public static class ThemedMessageBox
 {
+    
+    /// <summary>
+    /// Shows a messagebox that supports the themed UI
+    /// </summary>
+    /// <param name="message">Message to display in the center area</param>
+    /// <param name="title">Title of the dialog</param>
+    /// <returns></returns>
+    public static MessageBoxResult Show(string message, string title)
+    {
+        return Show(message, title, Application.Current.MainWindow!, MessageBoxButton.OK);
+    } 
     
     /// <summary>
     /// Shows a messagebox that supports the themed UI

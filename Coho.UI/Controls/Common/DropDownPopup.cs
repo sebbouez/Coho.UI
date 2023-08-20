@@ -23,7 +23,7 @@ namespace Coho.UI.Controls.Common;
 public class DropDownPopup : ContentControl
 {
     public static readonly DependencyProperty PlacementProperty =
-        DependencyProperty.Register("Placement", typeof(PlacementMode), typeof(DropDownPopup), new PropertyMetadata(PlacementMode.Bottom));
+        DependencyProperty.Register(nameof(Placement), typeof(PlacementMode), typeof(DropDownPopup), new PropertyMetadata(PlacementMode.Bottom));
 
     private Popup? _popup;
 
@@ -31,7 +31,15 @@ public class DropDownPopup : ContentControl
     {
         Focusable = false;
 
-        Template = (ControlTemplate) FindResource("DropDownPopupTemplate");
+        if (InternalFrameworkSettings.IsWindows11)
+        {
+            Template = (ControlTemplate)FindResource("DropDownPopupTemplateAcrylic");
+        }
+        else
+        {
+            Template = (ControlTemplate)FindResource("DropDownPopupTemplate");
+        }
+
         Loaded += DropDownPopup_Loaded;
     }
 

@@ -57,7 +57,7 @@ public static class GenericText
     {
         get;
         set;
-    } = "Ok";
+    } = "OK";
 
     public static string Cancel
     {
@@ -76,6 +76,9 @@ public static class GenericText
         get;
         set;
     } = "No";
+    
+
+
 }
 
 public static class OmnibarTexts
@@ -154,4 +157,25 @@ public static class RibbonText
         get;
         set;
     } = "Toggle quick access toolbar labels";
+}
+
+public static class DialogsText
+{
+    public static string Open
+    {
+        get;
+        set;
+    } = "Open"; 
+    
+    public static string FileName
+    {
+        get;
+        set;
+    } = "File name";
+    
+    public static string FileType
+    {
+        get;
+        set;
+    } = "File type";
 }

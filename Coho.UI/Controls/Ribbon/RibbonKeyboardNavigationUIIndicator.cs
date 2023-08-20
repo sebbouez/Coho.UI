@@ -23,7 +23,7 @@ internal class RibbonKeyboardNavigationUIIndicator : INotifyPropertyChanged
 
     public RibbonKeyboardNavigationUIIndicator()
     {
-        InternalRibbonSettings.KeyboardNavigationUIIndicator = this;
+        InternalFrameworkSettings.KeyboardNavigationUIIndicator = this;
     }
 
     public bool ShowTips

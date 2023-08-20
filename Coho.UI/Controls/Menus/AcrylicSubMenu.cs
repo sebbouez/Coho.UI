@@ -17,7 +17,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Interop;
-using Coho.UI.Controls.Ribbon;
 
 namespace Coho.UI.Controls.Menus;
 
@@ -26,7 +25,7 @@ public class AcrylicSubMenu : Popup
     protected override void OnOpened(EventArgs e)
     {
         base.OnOpened(e);
-        if (InternalRibbonSettings.IsWindows11)
+        if (InternalFrameworkSettings.IsWindows11)
         {
             HwndSource? hwnd = (HwndSource?) PresentationSource.FromVisual(Child);
             if (hwnd != null)

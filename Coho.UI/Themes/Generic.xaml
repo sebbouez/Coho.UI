@@ -82,6 +82,22 @@
             </Border>
         </Popup>
     </ControlTemplate>
+    
+    <ControlTemplate TargetType="common:DropDownPopup" x:Key="DropDownPopupTemplateAcrylic">
+        <menus:AcrylicSubMenu x:Name="InnerPopup"
+                              AllowsTransparency="true"
+                              Placement="Bottom"
+                              StaysOpen="false"
+                              VerticalOffset="1"
+                              PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+            <Border Padding="4" Background="#01ffffff">
+                <Grid x:Name="SubMenu" MinWidth="180" MaxWidth="{TemplateBinding MaxWidth}" Grid.IsSharedSizeScope="True">
+                    <ContentPresenter />
+                </Grid>
+            </Border>
+
+        </menus:AcrylicSubMenu>
+    </ControlTemplate>
 
 
     <Style TargetType="{x:Type ListBox}">
@@ -227,13 +243,16 @@
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Combobox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/RadioButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Checkbox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/SettingsTabControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Buttons.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Menus.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/LoadingRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/InfoBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Textbox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Slider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/TreeView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/RibbonStyles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/StatusBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Coho.UI;component/Themes/Window.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

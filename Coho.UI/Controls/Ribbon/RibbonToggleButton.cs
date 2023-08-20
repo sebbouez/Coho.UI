@@ -162,7 +162,7 @@ public sealed class RibbonToggleButton : ToggleButton, IRibbonCommand
 
     private void RibbonToggleButton_Loaded(object sender, RoutedEventArgs e)
     {
-        ContextMenu = InternalRibbonSettings.CurrentRibbon!.GetItemContextMenu(this);
+        ContextMenu = InternalFrameworkSettings.CurrentMainBarControl!.GetItemContextMenu(this);
     }
 
     private void RibbonToggleButton_Click(object sender, RoutedEventArgs e)

@@ -115,11 +115,6 @@
                             <DockPanel>
                                 <Button DockPanel.Dock="Left" VerticalAlignment="Top" x:Name="fileButton"
                                         Style="{DynamicResource RibbonFileButton}" />
-                                <!--<TabPanel x:Name="HeaderPanel"
-                                  IsItemsHost="True"
-                                  KeyboardNavigation.TabIndex="1"
-                                  Margin="0,0,0,0"
-                                  Background="Transparent" />-->
 
                                 <controls:RibbonTabPanelToolbar IsTabStop="True"
                                                                 KeyboardNavigation.IsTabStop="True"
@@ -140,17 +135,14 @@
 
                         <Border x:Name="Border"
                                 Grid.Row="1"
-                                BorderThickness="0"
+                                BorderThickness="0.55"
                                 Margin="8,0,8,6"
                                 CornerRadius="6"
+                                BorderBrush="{DynamicResource BorderColor}"
                                 Background="{DynamicResource RibbonBackground}"
                                 KeyboardNavigation.TabNavigation="Local"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#777" Opacity="0.30" Direction="-90" BlurRadius="4"
-                                                  ShadowDepth="1" />
-                            </Border.Effect>
 
                             <Border ClipToBounds="True" Padding="2">
                                 <StackPanel>
@@ -162,7 +154,7 @@
                                         <Border Height="1" BorderThickness="0,0,0,0.55"
                                                 BorderBrush="{DynamicResource BorderColor}" Margin="-2,2,-2,0" />
                                         <!--<Rectangle Stroke="{DynamicResource BorderColor}" StrokeThickness="0.45" SnapsToDevicePixels="True" UseLayoutRounding="True" Fill="Transparent" Height="1" Margin="-2,2,-2,0"></Rectangle>-->
-                                        <Border x:Name="qatToolbarHolder" CornerRadius="0,0,6,6"
+                                        <Border x:Name="QatToolbarHolder" CornerRadius="0,0,6,6"
                                                 Background="{DynamicResource Workspace4Background}" Height="34"
                                                 Margin="-2,0,-2,-2" Padding="2,0">
                                             <controls:RibbonQuickAccessToolbar
@@ -467,15 +459,15 @@
                             Background="{DynamicResource WorkspaceBackground}">
 
                         <StackPanel x:Name="stack" Orientation="Horizontal">
-                            <Rectangle x:Name="icon"
+                            <Rectangle x:Name="IconRect"
                                        RenderOptions.EdgeMode="Aliased"
                                        RenderOptions.BitmapScalingMode="Linear"
                                        UseLayoutRounding="True"
                                        SnapsToDevicePixels="True"
-                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" Margin="0,0,4,0" />
                             <TextBlock x:Name="label" VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}" FontWeight="SemiBold"
-                                       FontSize="12.5" Margin="4,0,0,0" Text="{TemplateBinding Text}" />
+                                       FontSize="12.5"  Text="{TemplateBinding Text}" />
                         </StackPanel>
                     </Border>
 
@@ -486,6 +478,14 @@
                             <Setter TargetName="container" Property="BorderBrush"
                                     Value="{DynamicResource AccentButtonBorderColor}" />
                             <Setter TargetName="label" Property="Foreground" Value="white" />
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
+                        </Trigger>
+
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconRect" Property="Visibility" Value="Collapsed" />
                         </Trigger>
 
                         <MultiTrigger>
@@ -533,9 +533,6 @@
                         </MultiTrigger>
 
 
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="container" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value=".5" />
                         </Trigger>
@@ -821,6 +818,124 @@
         </Setter>
     </Style>
 
+
+    <Style TargetType="{x:Type controls:RibbonSwitchButton}">
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource ButtonFocusVisual}" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RibbonSwitchButton}">
+                    <Border x:Name="Container"
+                            Margin="0, 0, 1, 0"
+                            CornerRadius="4"
+                            ToolTipService.ShowOnDisabled="True"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            UseLayoutRounding="True"
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
+                            BorderThickness="0.55"
+                            BorderBrush="Transparent"
+                            Padding="7,0">
+                        <StackPanel x:Name="stack" Orientation="Horizontal">
+                            <Rectangle x:Name="icon"
+                                       RenderOptions.EdgeMode="Aliased"
+                                       RenderOptions.BitmapScalingMode="Linear"
+                                       UseLayoutRounding="True"
+                                       SnapsToDevicePixels="True"
+                                       Fill="{TemplateBinding Icon}" Width="16" Height="16" />
+                            <TextBlock x:Name="label" VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{TemplateBinding Text}" />
+                        </StackPanel>
+                        <Border.ToolTip>
+                            <controls:RibbonButtonTooltip Gesture="{TemplateBinding Gesture}"
+                                                          Title="{TemplateBinding Text}"
+                                                          Description="{TemplateBinding Description}" />
+                        </Border.ToolTip>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ToolTipService.IsEnabled" Value="False">
+                            <Setter TargetName="Container" Property="ToolTip" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="IconOnly">
+                            <Setter TargetName="label" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" />
+                        </Trigger>
+                        <Trigger Property="Display" Value="TextOnly">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsOverflown" Value="True">
+                            <Setter TargetName="label" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="stack" Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="MinWidth"
+                                    Value="{Binding ActualWidth, Mode=OneTime, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToolBarOverflowPanel}}}" />
+                        </Trigger>
+                        <Trigger Property="IsSwitched" Value="True">
+                            <Setter TargetName="icon" Property="Fill"
+                                    Value="{Binding SwitchedIcon, RelativeSource={RelativeSource AncestorType=controls:RibbonSwitchButton}}" />
+                        </Trigger>
+                        <Trigger Property="IsInQAT" Value="True">
+                            <Setter Property="Height" Value="28" />
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="ContextMenu" Value="{DynamicResource cmQatCommand}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
+                            <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource BorderColor}" />
+                        </Trigger>
+                        <Trigger Property="Button.IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
+                        </Trigger>
+                        <!-- -->
+                        <!-- <Trigger Property="ItemDisplayMode" Value="ClassicalBig"> -->
+                        <!--     <Setter TargetName="label" Property="Visibility" Value="Visible" /> -->
+                        <!--     <Setter TargetName="label" Property="Margin" Value="0" /> -->
+                        <!-- -->
+                        <!--     <Setter TargetName="icon" Property="HorizontalAlignment" Value="Center" /> -->
+                        <!--     <Setter TargetName="label" Property="HorizontalAlignment" Value="Center" /> -->
+                        <!--     <Setter TargetName="icon" Property="Height" Value="26" /> -->
+                        <!--     <Setter TargetName="icon" Property="Width" Value="26" /> -->
+                        <!--     <Setter TargetName="icon" Property="Visibility" Value="Visible" /> -->
+                        <!--     <Setter TargetName="stack" Property="Orientation" Value="Vertical" /> -->
+                        <!--     <Setter TargetName="stack" Property="HorizontalAlignment" Value="Center" /> -->
+                        <!--     <Setter TargetName="stack" Property="VerticalAlignment" Value="Top" /> -->
+                        <!--     <Setter TargetName="stack" Property="Margin" Value="4" /> -->
+                        <!--     <Setter Property="FontSize" Value="12" /> -->
+                        <!--     <Setter Property="Height" Value="auto" /> -->
+                        <!-- -->
+                        <!--     <Setter Property="MaxWidth" Value="120" /> -->
+                        <!--     <Setter TargetName="label" Property="Margin" Value="0,6,0,0" /> -->
+                        <!--     <Setter TargetName="label" Property="TextBlock.TextWrapping" Value="Wrap" /> -->
+                        <!--     <Setter TargetName="label" Property="TextBlock.TextTrimming" Value="WordEllipsis" /> -->
+                        <!--     <Setter TargetName="label" Property="TextBlock.TextAlignment" Value="Center" /> -->
+                        <!--     <Setter TargetName="label" Property="TextBlock.LineHeight" Value="13" /> -->
+                        <!--     <Setter TargetName="label" Property="TextBlock.LineStackingStrategy" -->
+                        <!--             Value="BlockLineHeight" /> -->
+                        <!--     <Setter TargetName="label" Property="MaxHeight" Value="34" /> -->
+                        <!-- -->
+                        <!--     <Setter TargetName="Container" Property="Padding" Value="0,2" /> -->
+                        <!-- </Trigger> -->
+                        <!-- <Trigger Property="ItemDisplayMode" Value="ClassicalSmall"> -->
+                        <!--     <Setter Property="FontSize" Value="12" /> -->
+                        <!--     <Setter TargetName="Container" Property="Padding" Value="7,4" /> -->
+                        <!--     <Setter Property="Height" Value="26" /> -->
+                        <!--     <Setter Property="MinWidth" Value="26" /> -->
+                        <!-- </Trigger> -->
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type controls:RibbonDropDownButton}">
         <Setter Property="OverridesDefaultStyle" Value="True" />

@@ -249,7 +249,7 @@ public sealed class RibbonDropDownButton : ContentControl, IRibbonCommandWithChi
     {
         ApplyTemplate();
 
-        ContextMenu = InternalRibbonSettings.CurrentRibbon!.GetItemContextMenu(this);
+        ContextMenu = InternalFrameworkSettings.CurrentMainBarControl!.GetItemContextMenu(this);
 
         _dropDownPopup = (DropDownPopup?) Template.FindName("DropDownPopupPart", this);
 

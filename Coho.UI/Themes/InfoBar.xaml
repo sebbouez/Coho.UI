@@ -3,44 +3,60 @@
                     xmlns:infobar="clr-namespace:Coho.UI.Controls.InfoBar">
 
 
-    <Style TargetType="infobar:InfoBar">
+   <Style TargetType="infobar:InfoBar">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Margin" Value="1,0,2,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="infobar:InfoBar">
-                    <Border x:Name="BorderMain" CornerRadius="4" BorderThickness="0.55" SnapsToDevicePixels="True"
-                            UseLayoutRounding="True">
-                        <Grid Margin="8,2">
+                    <Border x:Name="BorderMain" CornerRadius="4" BorderThickness="0.55" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                        <Grid Margin="8,2,2,2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Rectangle Grid.Column="0" Width="16" Height="16" Fill="{TemplateBinding Icon}" />
-                            <TextBlock Grid.Column="1" Margin="8,0" FontSize="12" VerticalAlignment="Center"
-                                       Foreground="{DynamicResource DefaultForeground}" Text="{TemplateBinding Text}" />
-
-                            <Button Grid.Column="2" x:Name="ButtonCloseBar">
-                                <Rectangle Width="16" Height="16" />
+                            <Rectangle Grid.Column="0" x:Name="IconRect" Width="16" Height="16" Fill="{TemplateBinding Icon}"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,4">
+                                <TextBlock x:Name="TbTitle" Margin="8,0,4,0" FontSize="12" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#333" Text="{TemplateBinding Title}"/>
+                                <TextBlock x:Name="TbMessage" Margin="8,0" FontSize="12" VerticalAlignment="Center" Foreground="#333" Text="{TemplateBinding Text}"/>
+                            </StackPanel>
+                            <Button Grid.Column="2" x:Name="ButtonCloseBar" Style="{DynamicResource EmptyButton}" Width="26">
+                                <Rectangle Width="10" Height="10" Fill="{DynamicResource IconChromeCloseBlack}"/>
                             </Button>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="HasClickEventAttached" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="TbTitle" Property="TextBlock.TextDecorations" Value="Underline"/>
+                                <Setter TargetName="TbMessage" Property="TextBlock.TextDecorations" Value="Underline"/>    
+                                <Setter Property="Cursor" Value="Hand"/>    
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconRect" Property="Visibility" Value="Collapsed"/>
+                        </Trigger> 
+                        
                         <Trigger Property="Mode" Value="Info">
-                            <Setter TargetName="BorderMain" Property="Background" Value="WhiteSmoke" />
-                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="silver" />
+                            <Setter TargetName="BorderMain" Property="Background" Value="#FCF7B6"/>
+                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="#D2CD96"/>
                         </Trigger>
 
                         <Trigger Property="Mode" Value="Warning">
-                            <Setter TargetName="BorderMain" Property="Background" Value="#FFEDC8" />
-                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="#F5CC84" />
+                            <Setter TargetName="BorderMain" Property="Background" Value="#FFEDC8"/>
+                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="#F5CC84"/>
                         </Trigger>
 
                         <Trigger Property="Mode" Value="Error">
-                            <Setter TargetName="BorderMain" Property="Background" Value="WhiteSmoke" />
-                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="silver" />
+                            <Setter TargetName="BorderMain" Property="Background" Value="#FCC9C9"/>
+                            <Setter TargetName="BorderMain" Property="BorderBrush" Value="#F27D7D"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -178,7 +178,7 @@ public sealed class RibbonButton : Button, IRibbonCommand
 
     private void RibbonButton_Loaded(object sender, RoutedEventArgs e)
     {
-        ContextMenu = InternalRibbonSettings.CurrentRibbon!.GetItemContextMenu(this);
+        ContextMenu = InternalFrameworkSettings.CurrentMainBarControl!.GetItemContextMenu(this);
     }
 
     private void RibbonButton_Click(object sender, RoutedEventArgs e)

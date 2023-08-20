@@ -25,7 +25,7 @@ public class FolderPickerTextbox : TextBox
     private Button? _btnBrowse;
     private bool _isLoaded;
 
-    public event EventHandler<string>? SelectionChanged;
+    public new event EventHandler<string>? SelectionChanged;
 
     public FolderPickerTextbox()
     {

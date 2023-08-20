@@ -1,0 +1,131 @@
+﻿<windows:ApplicationWindow x:Class="Test.MenuWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:windows="clr-namespace:Coho.UI.Windows;assembly=Coho.UI"
+                           xmlns:menus="clr-namespace:Coho.UI.Controls.Menus;assembly=Coho.UI"
+                           xmlns:ribbon="clr-namespace:Coho.UI.Controls.Ribbon;assembly=Coho.UI"
+                           xmlns:infoBar="clr-namespace:Coho.UI.Controls.InfoBar;assembly=Coho.UI"
+                           mc:Ignorable="d"
+                           TextOptions.TextRenderingMode="ClearType"
+                           TextOptions.TextFormattingMode="Ideal"
+                           SnapsToDevicePixels="True"
+                           UseLayoutRounding="True"
+                           FontFamily="{DynamicResource AppFont}"
+                           FontSize="{DynamicResource AppFontSize}"
+                           ShowOmnibar="false"
+                           EnableMica="True"
+                           ShowMicaShade="true"
+                           Background="Transparent"
+                           MasterMessage="Pre-Release software - Do not use for production"
+                           WindowStartupLocation="CenterScreen"
+                           Title="MenuWindow" Height="450" Width="800">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+
+            <menus:MenuBar Panel.ZIndex="100" ShowQAT="True" ShowQATLabels="True"
+                           Visibility="Visible"
+                           x:Name="MainMenuBar"
+                           Background="Transparent">
+
+                <menus:MenuBar.ExtraButtons>
+                    <ribbon:RibbonExtraButton Text="Publish"
+                                              IsPrimary="true" Icon="{x:Null}"
+                                              Padding="6,4"
+                                              Margin="8,0,0,0" />
+
+                </menus:MenuBar.ExtraButtons>
+
+
+                <MenuItem Header="File">
+                    <MenuItem x:Name="MenuFileNew" Header="New" />
+                    <MenuItem x:Name="MenuFileOpen" Header="Open" />
+                    <Separator />
+                    <MenuItem x:Name="MenuFileSave" Header="Save" />
+                    <MenuItem x:Name="MenuFileSaveAs" Header="Save as" />
+                    <MenuItem x:Name="MenuFileSaveAll" Header="Save all" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+
+                <MenuItem Header="Edit">
+                    <MenuItem x:Name="MenuEditUndo" Header="Undo" />
+                    <MenuItem x:Name="MenuEditRedo" Header="Redo" />
+                    <Separator />
+                    <MenuItem x:Name="MenuEditCut" Header="Cut" />
+                    <MenuItem x:Name="MenuEditCopy" Header="Copy" />
+                    <MenuItem x:Name="MenuEditPaste" Header="Paste" />
+                    <MenuItem x:Name="MenuEditSelectAll" Header="Select all" />
+                </MenuItem>
+
+                <MenuItem Header="Format">
+                    <MenuItem Header="New" />
+                    <MenuItem Header="Open" />
+                    <Separator />
+                    <MenuItem Header="Save" />
+                    <MenuItem Header="Save as" />
+                    <MenuItem Header="Save all" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+            </menus:MenuBar>
+
+        </Border>
+
+        <infoBar:InfoBarManager Grid.Row="1" x:Name="InfoBarManager" />
+
+
+        <StatusBar Grid.Row="3">
+
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem Grid.Column="0">
+                <TextBlock x:Name="TbStatusMessage"
+                           VerticalAlignment="Center"
+                           Text="Ready" />
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Stretch" Grid.Column="1"
+                           HorizontalContentAlignment="Stretch" />
+
+            <StatusBarItem HorizontalAlignment="Right" Grid.Column="2">
+                <TextBlock HorizontalAlignment="Right" x:Name="TbTextStats" VerticalAlignment="Center" />
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right" Grid.Column="3" />
+
+            <StatusBarItem HorizontalAlignment="Right" Grid.Column="4">
+                <Button Style="{DynamicResource StatusButton}">
+                    <TextBlock>English</TextBlock>
+                </Button>
+
+            </StatusBarItem>
+
+
+        </StatusBar>
+    </Grid>
+
+
+</windows:ApplicationWindow>

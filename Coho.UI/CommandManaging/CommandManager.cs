@@ -1,7 +1,6 @@
 // *********************************************************
 // 
-// Coho.UI
-// CommandManager.cs
+// Coho.UI CommandManager.cs
 // Copyright (c) Sébastien Bouez. All rights reserved.
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -18,6 +17,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Coho.UI.Controls.Menus;
 using Coho.UI.Controls.Ribbon;
 using Coho.UI.Tools;
 
@@ -46,11 +48,13 @@ internal static class CommandManager
             ).Take(limit).ToList();
     }
 
+    #region RibbonBar commands management
+
     /// <summary>
     ///     Permet d'ajouter des commandes d'un onglet de ruban au cache
     /// </summary>
     /// <param name="tabItem"></param>
-    internal static void AddCommandsToCache(RibbonTabItem tabItem)
+    internal static void AddRibbonCommandsToCache(RibbonTabItem tabItem)
     {
         foreach (UIElement cmdBtn in tabItem.Items)
         {
@@ -104,7 +108,7 @@ internal static class CommandManager
     }
 
     /// <summary>
-    /// Réinitialise le cache complet des commandes du ruban
+    ///     Réinitialise le cache complet des commandes du ruban
     /// </summary>
     /// <param name="ribbon"></param>
     internal static void RebuildCommandsCache(RibbonBar ribbon)
@@ -113,7 +117,55 @@ internal static class CommandManager
 
         foreach (RibbonTabItem tab in ribbon.Items.OfType<RibbonTabItem>())
         {
-            AddCommandsToCache(tab);
+            AddRibbonCommandsToCache(tab);
         }
     }
+
+    #endregion
+
+    #region MenuBar commands management
+
+    internal static void RebuildCommandsCache(MenuBar menu)
+    {
+        CommandsCache.Clear();
+
+        foreach (MenuItem tab in menu.CachedItems)
+        {
+            AddMenuCommandsToCache(tab);
+        }
+    }
+
+    /// <summary>
+    ///     Permet d'ajouter des commandes d'un onglet de ruban au cache
+    /// </summary>
+    /// <param name="tabItem"></param>
+    internal static void AddMenuCommandsToCache(MenuItem tabItem)
+    {
+        foreach (MenuItem cmdBtn in tabItem.Items.OfType<MenuItem>().Where(x=> !string.IsNullOrEmpty(x.Name)))
+        {
+            if (cmdBtn.Visibility != Visibility.Visible)
+            {
+                continue;
+            }
+            
+            
+            OmnibarSearchResult cmd = new()
+            {
+                DisplayName = cmdBtn.Header?.ToString(),
+                CommandTabName = tabItem.Header?.ToString(),
+                CommandDescription = string.Empty,
+                LinkedOriginalObject = cmdBtn,
+                // CommandRibbonTab = tabItem,
+                Icon = cmdBtn.Icon != null ? (Brush) cmdBtn.Icon : Brushes.Transparent,
+                CommandFullName = string.Format(CultureInfo.InvariantCulture, "{0} : {1}", tabItem.Header, cmdBtn.Header),
+                CommandHash = cmdBtn.Name.GetStaticHashCode(),
+                CommandType = OmnibarSearchResult.EOmnibarCommandType.RibbonCommand,
+                GroupName = OmnibarTexts.ResultsCommandsGroupName
+            };
+
+            CommandsCache.Add(cmd);
+        }
+    }
+
+    #endregion
 }

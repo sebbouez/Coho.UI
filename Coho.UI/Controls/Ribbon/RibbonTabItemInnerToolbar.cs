@@ -64,7 +64,7 @@ public sealed class RibbonTabItemInnerToolbar : ToolBar
 
     internal void Animate()
     {
-        if (InternalRibbonSettings.CurrentRibbon!.EnableAnimations)
+        if (InternalFrameworkSettings.CurrentMainBarControl!.EnableAnimations)
         {
             Storyboard sb = new();
             DoubleAnimation opacityAnimation = new()

@@ -244,7 +244,7 @@ public sealed class RibbonSplitButton : Button, IRibbonCommandWithChildren, IRib
     private void RibbonSplitButton_Loaded(object sender, RoutedEventArgs e)
     {
         ApplyTemplate();
-        ContextMenu = InternalRibbonSettings.CurrentRibbon!.GetItemContextMenu(this);
+        ContextMenu = InternalFrameworkSettings.CurrentMainBarControl!.GetItemContextMenu(this);
 
         _dropDownPopup = (DropDownPopup?) Template.FindName("DropDownPopupPart", this);
         _toggleButton = (ToggleButton?) Template.FindName("toggleButton", this);

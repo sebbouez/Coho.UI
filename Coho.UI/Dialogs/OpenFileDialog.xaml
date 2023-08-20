@@ -1,0 +1,75 @@
+﻿<windows:SecondaryWindow x:Class="Coho.UI.Dialogs.OpenFileDialog"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:common="clr-namespace:Coho.UI.Controls.Common"
+                         xmlns:ui="clr-namespace:Coho.UI"
+                         xmlns:windows="clr-namespace:Coho.UI.Windows"
+                         mc:Ignorable="d"
+                         WindowStartupLocation="CenterOwner"
+                         Background="Transparent"
+                         ShowInTaskbar="False"
+                         EnableMica="True"
+                         Focusable="True"
+                         Title="Open file dialog" Height="650" Width="920" x:ClassModifier="internal">
+
+    <Grid Margin="15,0,15,15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <common:FolderExplorer Grid.Row="0" x:Name="Explorer" Margin="-7,0,-7,8"
+                               FileDoubleClicked="Explorer_FileDoubleClicked"
+                               FileSelected="Explorer_FileSelected" />
+
+
+        <Border Grid.Row="1" Grid.RowSpan="2" Background="{DynamicResource WorkspaceBackgroundTransparent}"
+                Padding="15"
+                Margin="-25,0,-25,-15"
+                BorderThickness="0,0.55,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True"
+                BorderBrush="{DynamicResource BorderColor}" />
+
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MaxWidth="250" MinWidth="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                       Margin="0,0,8,0" Text="{x:Static ui:DialogsText.FileName}">
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                       Margin="0,0,8,0" Text="{x:Static ui:DialogsText.FileType}">
+            </TextBlock>
+
+
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="TbFileName" VerticalAlignment="Center" KeyUp="TbFileName_OnKeyUp" />
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CbFileType" VerticalAlignment="Center"
+                      SelectionChanged="CbFileType_SelectionChanged">
+            </ComboBox>
+
+        </Grid>
+
+
+        <Border Grid.Row="2" Padding="15" Margin="-15,0,-15,-15"
+                SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{DynamicResource PrimaryButton}" x:Name="BtnOpen" Focusable="True"
+                        KeyboardNavigation.IsTabStop="True" Click="BtnOpen_Click" MinWidth="75" Margin="8,0,0,0"
+                        Content="{x:Static ui:DialogsText.Open}" />
+                <Button Style="{DynamicResource NormalButton}" x:Name="BtnCancel" Focusable="True"
+                        KeyboardNavigation.IsTabStop="True" Click="BtnCancel_Click" MinWidth="75" Margin="8,0,0,0"
+                        Content="{x:Static ui:GenericText.Cancel}" />
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</windows:SecondaryWindow>

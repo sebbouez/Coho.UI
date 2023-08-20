@@ -31,6 +31,12 @@ public class OmnibarSearchResult
         set;
     }
 
+    internal object LinkedOriginalObject
+    {
+        get;
+        set;
+    }
+
     internal RibbonTabItem? CommandRibbonTab
     {
         get;

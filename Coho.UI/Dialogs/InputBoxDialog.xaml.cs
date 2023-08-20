@@ -15,19 +15,20 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using Coho.UI.Windows;
 
 namespace Coho.UI.Dialogs;
 
-public partial class InputBoxDialog : SecondaryWindow
+internal partial class InputBoxDialog : SecondaryWindow
 {
-    public InputBoxDialog()
+    internal InputBoxDialog()
     {
         InitializeComponent();
         ContentRendered += OnContentRendered;
         Loaded += OnLoaded;
     }
 
-    public string Value
+    internal string Value
     {
         get;
         set;
@@ -38,7 +39,7 @@ public partial class InputBoxDialog : SecondaryWindow
         InvalidateVisual();
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object? sender, RoutedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Value))
         {
@@ -48,20 +49,20 @@ public partial class InputBoxDialog : SecondaryWindow
         TbInput.Focus();
     }
 
-    private void BtnOk_Click(object sender, RoutedEventArgs e)
+    private void BtnOk_Click(object? sender, RoutedEventArgs e)
     {
         Value = TbInput.Text;
         DialogResult = true;
         Close();
     }
 
-    private void BtnCancel_Click(object sender, RoutedEventArgs e)
+    private void BtnCancel_Click(object? sender, RoutedEventArgs e)
     {
         DialogResult = false;
         Close();
     }
 
-    private void TbInput_KeyDown(object sender, KeyEventArgs e)
+    private void TbInput_KeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {

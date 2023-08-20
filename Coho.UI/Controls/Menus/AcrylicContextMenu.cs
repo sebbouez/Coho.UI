@@ -16,7 +16,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
-using Coho.UI.Controls.Ribbon;
 
 namespace Coho.UI.Controls.Menus;
 
@@ -26,7 +25,7 @@ public class AcrylicContextMenu : ContextMenu
     {
         base.OnOpened(e);
 
-        if (InternalRibbonSettings.IsWindows11)
+        if (InternalFrameworkSettings.IsWindows11)
         {
             HwndSource? hwnd = (HwndSource?) PresentationSource.FromVisual(this);
             if (hwnd != null)

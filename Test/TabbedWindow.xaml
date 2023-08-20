@@ -1,0 +1,22 @@
+﻿<windows:TabbedApplicationWindow x:Class="Test.TabbedWindow"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:local="clr-namespace:Test"
+                         xmlns:windows="clr-namespace:Coho.UI.Windows;assembly=Coho.UI"
+                         mc:Ignorable="d"
+                         TextOptions.TextRenderingMode="ClearType"
+                         TextOptions.TextFormattingMode="Ideal"
+                         SnapsToDevicePixels="True"
+                         UseLayoutRounding="True"
+                         FontFamily="{DynamicResource AppFont}"
+                         FontSize="{DynamicResource AppFontSize}"
+                         EnableMica="True"
+                         Background="Transparent"
+                         WindowStartupLocation="CenterScreen"
+                         Title="TabbedWindow" Height="450" Width="800">
+    <Grid>
+      <TextBlock>NOT READY YET.</TextBlock>
+    </Grid>
+</windows:TabbedApplicationWindow>

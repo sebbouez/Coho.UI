@@ -24,13 +24,13 @@ namespace Coho.UI.Controls.Buttons;
 public class MasterAccentSplitButton : Button
 {
     public static readonly DependencyProperty DropDownContentProperty =
-        DependencyProperty.Register("DropDownContent", typeof(object), typeof(MasterAccentSplitButton), null);
+        DependencyProperty.Register(nameof(DropDownContent), typeof(object), typeof(MasterAccentSplitButton), null);
 
     public static readonly DependencyProperty IconProperty =
-        DependencyProperty.RegisterAttached("Icon", typeof(Brush), typeof(MasterAccentSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Icon), typeof(Brush), typeof(MasterAccentSplitButton), new FrameworkPropertyMetadata(Brushes.Transparent, FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty TextProperty =
-        DependencyProperty.RegisterAttached("Text", typeof(string), typeof(MasterAccentSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
+        DependencyProperty.RegisterAttached(nameof(Text), typeof(string), typeof(MasterAccentSplitButton), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     private Button? _buttonPart;
     private DropDownPopup? _dropDownPopup;

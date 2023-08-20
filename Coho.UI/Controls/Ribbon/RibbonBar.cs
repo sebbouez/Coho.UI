@@ -30,6 +30,7 @@ using Coho.UI.CommandManaging;
 using Coho.UI.Controls.Common;
 using Coho.UI.Controls.Menus;
 using Coho.UI.Controls.Omnibar;
+using Coho.UI.Interfaces;
 using Coho.UI.Tools;
 using Button = System.Windows.Controls.Button;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
@@ -40,7 +41,7 @@ namespace Coho.UI.Controls.Ribbon;
 /// Represents a RibbonBar control that mimics the Microsoft Sun Valley design.
 /// </summary>
 [ContentProperty("Items")]
-public sealed class RibbonBar : ContentControl
+public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
 {
     public static readonly DependencyProperty EnableAnimationsProperty =
         DependencyProperty.RegisterAttached(nameof(EnableAnimations), typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -150,7 +151,7 @@ public sealed class RibbonBar : ContentControl
     }
 
     /// <summary>
-    /// Gets the list of commands that are available in the Quick Actions Toolbar area.
+    /// Gets the list of commands that are available in the Quick Access Toolbar area.
     /// </summary>
     /// <remarks>
     /// You should set all the commands in the <see cref="Window.Loaded"/> event.
@@ -435,7 +436,7 @@ public sealed class RibbonBar : ContentControl
 
     private void RibbonBar_Loaded(object sender, RoutedEventArgs e)
     {
-        InternalRibbonSettings.CurrentRibbon = this;
+        InternalFrameworkSettings.CurrentMainBarControl = this;
 
         BuildStandardItemsContextMenu();
         BuildQatItemsContextMenu();
@@ -466,7 +467,7 @@ public sealed class RibbonBar : ContentControl
         _ribbonOptionsButton = (ToggleButton) Template.FindName("RibbonOptionsToggleButton", this);
         _ribbonOptionsButton.Click += _ribbonOptionsButton_Click;
 
-        Border qatHolder = (Border) Template.FindName("qatToolbarHolder", this);
+        Border qatHolder = (Border) Template.FindName("QatToolbarHolder", this);
         _qatToolbar = (RibbonQuickAccessToolbar) qatHolder.Child;
         _qatToolbar.AttachParentRibbon(this);
 
@@ -559,7 +560,7 @@ public sealed class RibbonBar : ContentControl
         _qatToolbar!.AddCmd(cmd);
     }
 
-    internal ContextMenu GetItemContextMenu(IRibbonCommand cmd)
+    ContextMenu IApplicationMainBarControl.GetItemContextMenu(IRibbonCommand cmd)
     {
         if (cmd.IsInQAT)
         {
@@ -569,7 +570,7 @@ public sealed class RibbonBar : ContentControl
         return _standardButtonsContextMenu!;
     }
 
-    internal bool HandleKeyboardNavigation(Keys key)
+    bool IApplicationMainBarControl.HandleKeyboardNavigation(Keys key)
     {
         if (key.ToString().Equals("NumPad0", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -631,10 +632,10 @@ public sealed class RibbonBar : ContentControl
             }
         }
 
-        if (InternalRibbonSettings.KeyboardNavigationUIIndicator != null
-            && InternalRibbonSettings.KeyboardNavigationUIIndicator.ShowTips)
+        if (InternalFrameworkSettings.KeyboardNavigationUIIndicator != null
+            && InternalFrameworkSettings.KeyboardNavigationUIIndicator.ShowTips)
         {
-            InternalRibbonSettings.KeyboardNavigationUIIndicator.ShowTips = false;
+            InternalFrameworkSettings.KeyboardNavigationUIIndicator.ShowTips = false;
         }
 
         if (mustAnimate)

@@ -13,9 +13,8 @@
 // *********************************************************
 
 using System.Windows;
-using Coho.UI.Dialogs;
 
-namespace Coho.UI;
+namespace Coho.UI.Dialogs;
 
 public static class ThemedInputBox
 {

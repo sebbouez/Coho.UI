@@ -1,19 +1,14 @@
 ﻿<Application x:Class="Test.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Test"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             StartupUri="MainWindow.xaml">
+             StartupUri="StartupWindow.xaml">
     <Application.Resources>
 
         <ResourceDictionary>
 
             <FontFamily x:Key="AppFont">Segoe UI Variable Display,Segoe UI</FontFamily>
-
-
             <system:Double x:Key="AppFontSize">14</system:Double>
-
-
             <Color x:Key="ChromeBorderActiveColor">#038387</Color>
 
             <LinearGradientBrush x:Key="AccentButtonBorderColor" StartPoint="0,0.9" EndPoint="0,1">
@@ -26,7 +21,6 @@
             <SolidColorBrush x:Key="IconsAccentColor" Color="#038387" />
             <SolidColorBrush x:Key="AccentColorDark" Color="#026163" />
             <SolidColorBrush x:Key="AccentColorDarker" Color="#024D4F" />
-
 
             <ResourceDictionary.MergedDictionaries>
 

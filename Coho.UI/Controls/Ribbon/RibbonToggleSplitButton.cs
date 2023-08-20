@@ -272,7 +272,7 @@ public sealed class RibbonToggleSplitButton : ToggleButton, IRibbonCommandWithCh
     private void RibbonToggleSplitButton_Loaded(object sender, RoutedEventArgs e)
     {
         ApplyTemplate();
-        ContextMenu = InternalRibbonSettings.CurrentRibbon!.GetItemContextMenu(this);
+        ContextMenu = InternalFrameworkSettings.CurrentMainBarControl!.GetItemContextMenu(this);
 
         _dropDownPopup = (DropDownPopup?) Template.FindName("DropDownPopupPart", this);
         _grid = (Grid) Template.FindName("gridMain", this);

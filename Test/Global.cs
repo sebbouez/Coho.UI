@@ -9,7 +9,7 @@ namespace Test
     internal static class Global
     {
 
-        internal static MainWindow AppWindow { get; set; }
+        internal static RibbonWindow AppWindow { get; set; }
 
     }
 }

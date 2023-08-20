@@ -1,34 +1,36 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <Color x:Key="ChromeBorderDefaultColor">#aaa</Color>
 
-    <SolidColorBrush x:Key="SubMenuBackground" Color="#fff"/>
-    <SolidColorBrush x:Key="InfoBackground" Color="#E6F2FA"/>
-    <SolidColorBrush x:Key="MenuBackground" Color="#fff"/>
+    <SolidColorBrush x:Key="SubMenuBackground" Color="#fff" />
+    <SolidColorBrush x:Key="InfoBackground" Color="#E6F2FA" />
+    <SolidColorBrush x:Key="MenuBackground" Color="#fff" />
     <Color x:Key="ShadowColor">#ddd</Color>
-    
-    <SolidColorBrush x:Key="WindowBorder" Color="#bbb"/>
-    <SolidColorBrush x:Key="WorkspaceBackground" Color="#ffffff"/>
-    <SolidColorBrush x:Key="Workspace2Background" Color="#f4f4f4"/>
-    <SolidColorBrush x:Key="Workspace3Background" Color="#f4f4f4"/>
-    <SolidColorBrush x:Key="Workspace4Background" Color="#fafafa"/>
-          
-            
-            
-    <SolidColorBrush x:Key="RibbonBackground" Color="#fff"/>
-    <SolidColorBrush x:Key="DefaultForeground" Color="#323232"/>
-    <SolidColorBrush x:Key="AltForeground" Color="#888"/>
-    <SolidColorBrush x:Key="BorderColor" Color="#D1D1D1"/>
-    <SolidColorBrush x:Key="HoverColor" Color="#efefef"/>
-    <SolidColorBrush x:Key="MenuItemHoverColor" Color="#12555555"/>
-    <SolidColorBrush x:Key="ActiveColor" Color="#ddd"/>
+
+    <Color x:Key="SpacialStateColor">#861B2D</Color>
+
+    <SolidColorBrush x:Key="WindowBorder" Color="#bbb" />
+    <SolidColorBrush x:Key="WorkspaceBackground" Color="#ffffff" />
+    <SolidColorBrush x:Key="WorkspaceBackgroundTransparent" Color="#99ffffff" />
+    <SolidColorBrush x:Key="Workspace2Background" Color="#f4f4f4" />
+    <SolidColorBrush x:Key="Workspace3Background" Color="#f4f4f4" />
+    <SolidColorBrush x:Key="Workspace4Background" Color="#fafafa" />
+
+
+    <SolidColorBrush x:Key="RibbonBackground" Color="#fff" />
+    <SolidColorBrush x:Key="DefaultForeground" Color="#323232" />
+    <SolidColorBrush x:Key="AltForeground" Color="#888" />
+    <SolidColorBrush x:Key="BorderColor" Color="#D1D1D1" />
+    <SolidColorBrush x:Key="HoverColor" Color="#efefef" />
+    <SolidColorBrush x:Key="MenuItemHoverColor" Color="#12555555" />
+    <SolidColorBrush x:Key="ActiveColor" Color="#ddd" />
 
 
     <LinearGradientBrush x:Key="ButtonBorderColor" StartPoint="0,0.90" EndPoint="0,1">
-        <GradientStop Color="#D1D1D1" Offset="0"/>
-        <GradientStop Color="#a4a4a4" Offset="1"/>
+        <GradientStop Color="#D1D1D1" Offset="0" />
+        <GradientStop Color="#a4a4a4" Offset="1" />
     </LinearGradientBrush>
-    
-    
+
+
 </ResourceDictionary>
