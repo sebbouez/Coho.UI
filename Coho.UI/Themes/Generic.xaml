@@ -61,6 +61,9 @@
         </Setter>
     </Style>
 
+    
+    
+    
 
     <ControlTemplate TargetType="common:DropDownPopup" x:Key="DropDownPopupTemplate">
         <Popup x:Name="InnerPopup"
@@ -69,7 +72,7 @@
                StaysOpen="false"
                VerticalOffset="1"
                PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
-            <Border x:Name="DropDownBorder" Padding="2" Margin="16" CornerRadius="6" BorderThickness="1"
+            <Border x:Name="DropDownBorder" Padding="2" Margin="16" CornerRadius="8" BorderThickness="1"
                     BorderBrush="{DynamicResource WindowBorder}" Background="{DynamicResource SubMenuBackground}">
                 <Border.Effect>
                     <DropShadowEffect Color="{DynamicResource ShadowColor}" Opacity="0.6" Direction="-90"
