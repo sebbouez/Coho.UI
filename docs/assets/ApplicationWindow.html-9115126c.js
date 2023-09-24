@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6119cdde","path":"/windows/ApplicationWindow.html","title":"ApplicationWindow","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"windows/ApplicationWindow.md"}');export{t as data};

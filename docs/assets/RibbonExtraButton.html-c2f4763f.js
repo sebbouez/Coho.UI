@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6d080da6","path":"/controls/RibbonExtraButton.html","title":"The RibbonExtraButton control","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"controls/RibbonExtraButton.md"}');export{t as data};

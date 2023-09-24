@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-4fc0787a","path":"/windows/SecondaryWindow.html","title":"SecondaryWindow","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"windows/SecondaryWindow.md"}');export{e as data};
