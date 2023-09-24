@@ -40,16 +40,6 @@ public class SecondaryWindow : FluentWindow
 
     public SecondaryWindow()
     {
-        WindowChrome.SetWindowChrome(this,
-            new WindowChrome
-            {
-                CaptionHeight = 40,
-                ResizeBorderThickness = new Thickness(6),
-                CornerRadius = new CornerRadius(0),
-                GlassFrameThickness = new Thickness(-1),
-                UseAeroCaptionButtons = true
-            });
-
         CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow,
             OnCanResizeWindow));

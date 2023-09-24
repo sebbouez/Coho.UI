@@ -1,6 +1,7 @@
 ﻿// *********************************************************
 // 
-// Coho.UI MenuBarQuickAccessToolbar.cs
+// Coho.UI
+// MenuBarQuickAccessToolbar.cs
 // Copyright (c) Sébastien Bouez. All rights reserved.
 // THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 // INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -12,6 +13,7 @@
 // 
 // *********************************************************
 
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -26,9 +28,9 @@ using System.Windows.Shapes;
 using Coho.UI.CommandManaging;
 using Coho.UI.Controls.Common;
 using Coho.UI.Controls.Ribbon;
+using Coho.UI.Dialogs;
 using Coho.UI.Tools;
 using CommandManager = Coho.UI.CommandManaging.CommandManager;
-using RibbonButton = Coho.UI.Controls.Ribbon.RibbonButton;
 
 namespace Coho.UI.Controls.Menus;
 
@@ -107,7 +109,7 @@ public sealed class MenuBarQuickAccessToolbar : ToolBar
         MenuItem mi2 = new()
         {
             Header = RibbonText.ToggleQATLabels,
-            Icon =  Brushes.Transparent,
+            Icon = Brushes.Transparent,
             DataContext = _parentMenuBar
         };
         Binding showQATLabelsIsCheckedBinding = new(nameof(RibbonBar.ShowQATLabels))
@@ -128,7 +130,7 @@ public sealed class MenuBarQuickAccessToolbar : ToolBar
         MenuItem mi3 = new()
         {
             Header = RibbonText.CustomizeQATCommands,
-            Icon =  (Brush) FindResource("IconSettings")
+            Icon = (Brush) FindResource("IconSettings")
         };
         mi3.Click += Mi3_Click;
         st.Children.Add(mi3);
@@ -140,41 +142,41 @@ public sealed class MenuBarQuickAccessToolbar : ToolBar
 
     private void Mi3_Click(object sender, RoutedEventArgs e)
     {
-        //     CustomizeQatDialog dlg = new();
-        //     ObservableCollection<RibbonCommandItemModel> items = new();
-        //
-        //     foreach (FrameworkElement item in Items)
-        //     {
-        //         if (item is IRibbonCommand i2)
-        //         {
-        //             items.Add(new RibbonCommandItemModel
-        //             {
-        //                 Label = i2.Text,
-        //                 Icon = i2.Icon,
-        //                 Hash = item.Tag?.ToString()!
-        //             });
-        //         }
-        //     }
-        //
-        //     dlg.Items = items;
-        //     dlg.AvailableItems = CommandManager.GetCommands().Where(x =>
-        //         x.CommandRibbonButton.GetType() != typeof(OrphanRibbonCommand)
-        //     ).OrderBy(x => x.CommandFullName);
-        //
-        //
-        //     if (dlg.ShowDialog()!.Value)
-        //     {
-        //         _parentRibbon!.QatCommands.Clear();
-        //
-        //         foreach (RibbonCommandItemModel item in dlg.Items)
-        //         {
-        //             _parentRibbon.QatCommands.Add(item.Hash);
-        //         }
-        //
-        //         Refresh();
-        //     }
-        //
-        //     _ribbonOptionsDropDown!.ClosePopup();
+        CustomizeQatDialog dlg = new();
+        ObservableCollection<CommandItemModel> items = new();
+
+        foreach (FrameworkElement item in Items)
+        {
+            if (item is IRibbonCommand i2)
+            {
+                items.Add(new CommandItemModel
+                {
+                    Label = i2.Text,
+                    Icon = i2.Icon,
+                    Hash = item.Tag?.ToString()!
+                });
+            }
+        }
+
+        dlg.Items = items;
+        dlg.AvailableItems = CommandManager.GetCommands().Where(x =>
+            x.CommandRibbonButton?.GetType() != typeof(OrphanRibbonCommand)
+        ).OrderBy(x => x.CommandFullName);
+
+
+        if (dlg.ShowDialog()!.Value)
+        {
+            _parentMenuBar!.QatCommands.Clear();
+
+            foreach (CommandItemModel item in dlg.Items)
+            {
+                _parentMenuBar.QatCommands.Add(item.Hash);
+            }
+
+            Refresh();
+        }
+
+        _ribbonOptionsDropDown!.ClosePopup();
     }
 
     private void Mi2_Click(object sender, RoutedEventArgs e)
@@ -297,7 +299,7 @@ public sealed class MenuBarQuickAccessToolbar : ToolBar
             newBtn.DataContext = e.NewValue;
         };
 
-        ((IRibbonCommand) newBtn).OnClick += delegate(object sender, RoutedEventArgs args)
+        ((IRibbonCommand) newBtn).OnClick += delegate
         {
             ((MenuItem) command.LinkedOriginalObject).RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
         };
@@ -332,16 +334,6 @@ public sealed class MenuBarQuickAccessToolbar : ToolBar
 
         _ = Items.Add(newBtn);
     }
-
-    // private void SubItemOnLayoutUpdated(UIElement uiElement)
-    // {
-    //     ToolBarOverflowPanel? parentToolbarOverflowPanel = WpfTools.GetClosestParent<ToolBarOverflowPanel>(uiElement);
-    //
-    //     if (uiElement is IRibbonCommand c1)
-    //     {
-    //         c1.IsOverflown = parentToolbarOverflowPanel != null;
-    //     }
-    // }
 
     private void RibbonQuickActionsToolbar_Loaded(object sender, RoutedEventArgs e)
     {

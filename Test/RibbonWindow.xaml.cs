@@ -1,10 +1,13 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using Coho.UI;
 using Coho.UI.CommandManaging;
 using Coho.UI.Dialogs;
+using Coho.UI.Tasks;
 using Coho.UI.Tools;
 using Coho.UI.Windows;
+using Test.Tasks;
 
 namespace Test;
 
@@ -50,10 +53,10 @@ public partial class RibbonWindow : ApplicationWindow
         {
             case MessageBoxResult.Yes:
                 // Yes button was clicked
-            break;
+                break;
             case MessageBoxResult.No:
                 // No button was clicked
-            break;
+                break;
             case MessageBoxResult.Cancel:
                 // Cancel button was clicked
                 break;
@@ -77,13 +80,20 @@ public partial class RibbonWindow : ApplicationWindow
 
     private void CheckBox_Checked(object sender, RoutedEventArgs e)
     {
-        ApplyAccentToChrome = (sender as CheckBox).IsChecked.Value;
+        ApplyAccentToChrome = ((CheckBox) sender).IsChecked!.Value;
     }
-
-
 
     private void CheckBox_Click(object sender, RoutedEventArgs e)
     {
-        IsSpecialState = ((CheckBox)sender).IsChecked.Value;
+        IsSpecialState = ((CheckBox) sender).IsChecked!.Value;
+    }
+
+    private void Button_Click_2(object sender, RoutedEventArgs e)
+    {
+        List<TaskRunnerBase> tasksToRun = new();
+        tasksToRun.Add(new DummyTask1()); // this task will run correctly
+        tasksToRun.Add(new DummyTask2()); // this task will fail
+
+        ThemedMultiTaskDialog.Show("Running complex tasks", "Some message to explain what's going on when the process is started...", this, tasksToRun);
     }
 }

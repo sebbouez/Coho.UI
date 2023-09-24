@@ -49,9 +49,6 @@ public static class UIController
         _isInitialized = true;
         _theme = initialTheme;
 
-        //_customThemedResourceNames.Add("/Coho.UI;component/Themes/Generic.xaml", null);
-        //_customThemedResourceNames.Add("/Coho.UI;component/Themes/Icons.xaml", null);
-
         InternalManageTheme();
     }
 

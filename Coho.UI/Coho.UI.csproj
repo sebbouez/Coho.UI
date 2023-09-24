@@ -12,10 +12,10 @@
         <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageTags>Sun Valley; Fluent Design; UI; Business</PackageTags>
-        <Version>2.0.0-alpha1</Version>
+        <Version>2.0.0-alpha3</Version>
         <Description>Sun valley UI components for WPF.
 Includes Ribbon and other controls used in PageFabric application.</Description>
-        <PackageReleaseNotes>Starting V2 Branch</PackageReleaseNotes>
+        <PackageReleaseNotes>Fixed invisible menus in Windows 10</PackageReleaseNotes>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </PropertyGroup>
 
@@ -42,12 +42,21 @@ Includes Ribbon and other controls used in PageFabric application.</Description>
 
     <ItemGroup>
         <None Include="docs\README.md" Pack="true" PackagePath="\" />
-
-
-
     </ItemGroup>
 
 
+
+    
+    <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+        <ItemGroup>
+            <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('PrivateAssets', 'All'))"/>
+        </ItemGroup>
+
+        <ItemGroup>
+            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+        </ItemGroup>
+    </Target>
+    
 
 
 </Project>

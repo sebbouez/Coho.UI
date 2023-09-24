@@ -43,6 +43,8 @@ internal partial class FolderExplorer : UserControl
     private readonly object? _dummyNode = null;
     private CancellationTokenSource _cancelSource = new();
 
+    private ObservableCollection<FolderExplorerItem> _pathItems = new ObservableCollection<FolderExplorerItem>();
+
     public FolderExplorer()
     {
         InitializeComponent();
@@ -94,11 +96,30 @@ internal partial class FolderExplorer : UserControl
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         _ = RebuildDrivesAsync();
+        PathItems.ItemsSource = _pathItems;
     }
 
     internal event EventHandler<string>? FileDoubleClicked;
 
     internal event EventHandler<string>? FileSelected;
+
+    private void RefreshPathItems(string path)
+    {
+        _pathItems.Clear();
+
+        string[] allPaths = path.Split("\\", StringSplitOptions.RemoveEmptyEntries);
+        string currentPath = string.Empty;
+
+        foreach (string item in allPaths)
+        {
+            currentPath = string.Concat(currentPath, string.IsNullOrEmpty(currentPath) ? "" : "\\", item);
+
+            _pathItems.Add(new FolderExplorerItem(currentPath, FolderExplorerItemType.Directory)
+            {
+                Name = item
+            });
+        }
+    }
 
     private void LvItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
@@ -132,16 +153,6 @@ internal partial class FolderExplorer : UserControl
 
     internal async Task ExploreDirectory(string path)
     {
-        //
-        // if (path.ToLowerInvariant() == RootPath.ToLowerInvariant())
-        // {
-        //     BtnBack.IsEnabled = false;
-        // }
-        // else
-        // {
-        BtnBack.IsEnabled = true;
-        // }
-
         List<string> allFiles = new();
         List<string> allDirectories = new();
 
@@ -222,6 +233,7 @@ internal partial class FolderExplorer : UserControl
             }
         }).ContinueWith(r =>
         {
+            RefreshPathItems(path);
             LvItems.ItemsSource = files;
 
             CollectionView view = (CollectionView) CollectionViewSource.GetDefaultView(LvItems.ItemsSource);
@@ -249,7 +261,7 @@ internal partial class FolderExplorer : UserControl
                 {
                     BitmapSource thumbnail = GetSource(item);
                     thumbnail.Freeze();
-                    Dispatcher.Invoke(() =>
+                    Dispatcher.BeginInvoke(() =>
                     {
                         item.Thumbnail = thumbnail;
                     }, DispatcherPriority.ApplicationIdle);
@@ -454,5 +466,11 @@ internal partial class FolderExplorer : UserControl
         {
             SystemSounds.Beep.Play();
         }
+    }
+
+    private void BtnFolderPath_Click(object sender, RoutedEventArgs e)
+    {
+        FolderExplorerItem item = (FolderExplorerItem) ((FrameworkElement) sender).DataContext;
+        _ = ExploreDirectory(item.FullPath);
     }
 }

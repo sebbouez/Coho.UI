@@ -58,6 +58,10 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
     public static readonly DependencyProperty ShowQATProperty =
         DependencyProperty.RegisterAttached(nameof(ShowQAT), typeof(bool), typeof(RibbonBar), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    public static readonly DependencyProperty ShowQATLabelsProperty =
+        DependencyProperty.RegisterAttached(nameof(ShowQATLabels), typeof(bool), typeof(RibbonBar),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+    
     private readonly DropDownPopup _ribbonOptionsDropDown = new();
 
     private StackPanel? _extraButtonsStackPanel;
@@ -194,8 +198,14 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
     /// </remarks>
     public bool ShowQATLabels
     {
-        get;
-        set;
+        get
+        {
+            return (bool) GetValue(ShowQATLabelsProperty);
+        }
+        set
+        {
+            SetValue(ShowQATLabelsProperty, value);
+        }
     }
 
     /// <summary>
@@ -203,7 +213,7 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
     /// </summary>
     public event RoutedEventHandler? FileButtonClicked;
 
-    private void _ribbonOptionsButton_Click(object sender, RoutedEventArgs e)
+    private void RibbonOptionsButton_Click(object sender, RoutedEventArgs e)
     {
         bool ischecked = ((ToggleButton) sender).IsChecked!.Value;
 
@@ -465,7 +475,7 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
         _tabIndicatorParent = (Border) Template.FindName("tabIndicatorHolder", this);
 
         _ribbonOptionsButton = (ToggleButton) Template.FindName("RibbonOptionsToggleButton", this);
-        _ribbonOptionsButton.Click += _ribbonOptionsButton_Click;
+        _ribbonOptionsButton.Click += RibbonOptionsButton_Click;
 
         Border qatHolder = (Border) Template.FindName("QatToolbarHolder", this);
         _qatToolbar = (RibbonQuickAccessToolbar) qatHolder.Child;
@@ -517,7 +527,7 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
         AnimIndicatorPosition();
     }
 
-    private void VisualyUnSelectAllTabs()
+    private void VisuallyUnSelectAllTabs()
     {
         foreach (RibbonTabItem item in Items)
         {
@@ -610,7 +620,7 @@ public sealed class RibbonBar : ContentControl, IApplicationMainBarControl
 
         bool mustAnimate = !tabItem.IsSelected;
 
-        VisualyUnSelectAllTabs();
+        VisuallyUnSelectAllTabs();
 
         LastTab = SelectedItem;
         SelectedItem = tabItem;

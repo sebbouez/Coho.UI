@@ -1,8 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:menus="clr-namespace:Coho.UI.Controls.Menus"
-                    xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
-                    xmlns:textResources="clr-namespace:Coho.UI">
+                    xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework">
 
 
     <Style TargetType="{x:Type ContextMenu}" x:Key="LegacyContextMenuStyle">
@@ -94,7 +93,7 @@
 
 
                                                 <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
-                                                <Popup AllowsTransparency="True"
+                                                <Popup Grid.Column="0" AllowsTransparency="True"
                                                        PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                                                        HorizontalOffset="5" VerticalOffset="-3"
                                                        IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
@@ -325,7 +324,7 @@
 
 
                             <!-- The Popup is the body of the menu which expands down or across depending on the level of the item -->
-                            <menus:AcrylicSubMenu AllowsTransparency="True"
+                            <menus:AcrylicSubMenu Grid.Column="0" AllowsTransparency="True"
                                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
                                                   HorizontalOffset="5" VerticalOffset="-3"
                                                   IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
@@ -491,7 +490,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
 
-                        <Trigger Property="ComponentModel:DesignerProperties.IsInDesignMode" Value="True">
+                        <Trigger Property="componentModel:DesignerProperties.IsInDesignMode" Value="True">
                             <Setter TargetName="MainGrid" Property="Background" Value="White"></Setter>
                         </Trigger>
 

@@ -14,8 +14,10 @@
 // *********************************************************
 
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -24,6 +26,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Coho.UI.CommandManaging;
 using Coho.UI.Controls.Common;
+using Coho.UI.Dialogs;
 using Coho.UI.Tools;
 
 namespace Coho.UI.Controls.Ribbon;
@@ -62,21 +65,50 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
         StackPanel st = new();
         MenuItem mi1 = new()
         {
-            Header = RibbonText.ToggleQAT
+            Header = RibbonText.ToggleQAT,
+            Icon = new Rectangle
+            {
+                Fill = Brushes.Transparent,
+                Width = 16,
+                Height = 16
+            },
+            DataContext = _parentRibbon,
+            IsCheckable = true
         };
+        Binding showQATIsCheckedBinding = new(nameof(RibbonBar.ShowQAT))
+        {
+            Mode = BindingMode.OneWay,
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+        };
+        mi1.SetBinding(MenuItem.IsCheckedProperty, showQATIsCheckedBinding);
         mi1.Click += Mi1_Click;
         st.Children.Add(mi1);
 
         MenuItem mi2 = new()
         {
-            Header = RibbonText.ToggleQATLabels
+            Header = RibbonText.ToggleQATLabels,
+            Icon = Brushes.Transparent,
+            DataContext = _parentRibbon
         };
+        Binding showQATLabelsIsCheckedBinding = new(nameof(RibbonBar.ShowQATLabels))
+        {
+            Mode = BindingMode.OneWay,
+            UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+        };
+        mi2.SetBinding(MenuItem.IsCheckedProperty, showQATLabelsIsCheckedBinding);
         mi2.Click += Mi2_Click;
         st.Children.Add(mi2);
 
+        Separator sep = new()
+        {
+            Style = (Style) FindResource(MenuItem.SeparatorStyleKey)
+        };
+        st.Children.Add(sep);
+
         MenuItem mi3 = new()
         {
-            Header = RibbonText.CustomizeQATCommands
+            Header = RibbonText.CustomizeQATCommands,
+            Icon = (Brush) FindResource("IconSettings")
         };
         mi3.Click += Mi3_Click;
         st.Children.Add(mi3);
@@ -101,42 +133,37 @@ public sealed class RibbonQuickAccessToolbar : ToolBar
 
     private void Mi3_Click(object sender, RoutedEventArgs e)
     {
-        // todo
-        //CustomizeQatDialog dlg = new();
-        //ObservableCollection<RibbonCommandItemModel> items = new();
+        CustomizeQatDialog dlg = new();
+        ObservableCollection<CommandItemModel> items = new();
 
-        //foreach (FrameworkElement item in Items)
-        //{
-        //    if (item is IRibbonCommand i2)
-        //    {
-        //        items.Add(new RibbonCommandItemModel()
-        //        {
-        //            Label = i2.Text,
-        //            Hash = item.Tag.ToString()
-        //        });
-        //    }
-        //}
+        foreach (FrameworkElement item in Items)
+        {
+            if (item is IRibbonCommand i2)
+            {
+                items.Add(new CommandItemModel()
+                {
+                    Label = i2.Text,
+                    Icon = i2.Icon,
+                    Hash = item.Tag.ToString()
+                });
+            }
+        }
 
-        //dlg.Items = items;
-        //dlg.AvailableItems = CommandManager.GetCommands().Where(x => x.CommandRibbonButton.GetType() != typeof(OrphanRibbonCommand)
-        //                                                      //&& x.CommandRibbonButton.GetType() != typeof(RibbonDropDownButton)
-        //                                                      ).OrderBy(x => x.CommandFullName);
+        dlg.Items = items;
+        dlg.AvailableItems = CommandManager.GetCommands().Where(x => x.CommandRibbonButton?.GetType() != typeof(OrphanRibbonCommand)
+        ).OrderBy(x => x.CommandFullName);
 
-        //var tt = from a in dlg.AvailableItems
-        //         select a.CommandHash;
+        if (dlg.ShowDialog()!.Value)
+        {
+            _parentRibbon!.QatCommands.Clear();
 
-        //dlg.Owner = AppState.AppWindow;
+            foreach (CommandItemModel item in dlg.Items)
+            {
+                _parentRibbon.QatCommands.Add(item.Hash);
+            }
 
-        //if (dlg.ShowDialog().Value)
-        //{
-        //    UserState.UserSettings.QuickActionsToolbar.Clear();
-
-        //    foreach (RibbonCommandItemModel item in dlg.Items)
-        //    {
-        //        UserState.UserSettings.QuickActionsToolbar.Add(item.Hash);
-        //    }
-        //    Refresh();
-        //}
+            Refresh();
+        }
     }
 
     private void RibbonOptionsDropDown_PopupVisibilityChanged(object? sender, bool e)

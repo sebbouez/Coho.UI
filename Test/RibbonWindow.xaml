@@ -147,6 +147,10 @@
                     <Button Style="{DynamicResource NormalButton}" VerticalAlignment="Center" Margin="8,0"
                             Click="Button_Click_1">
                         Normal button
+                    </Button>  
+                    <Button Style="{DynamicResource NormalButton}" VerticalAlignment="Center" Margin="8,0"
+                            Click="Button_Click_2">
+                        Normal button
                     </Button>
 
                     <buttons:MasterAccentSplitButton Text="Create new" Icon="{DynamicResource IconTickWhite}"

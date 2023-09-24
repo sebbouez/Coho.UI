@@ -7,6 +7,7 @@
              xmlns:buttons="clr-namespace:Coho.UI.Controls.Buttons"
              xmlns:converters="clr-namespace:Coho.UI.Converters"
              xmlns:loadingRing="clr-namespace:Coho.UI.Controls.LoadingRing"
+             xmlns:ui="clr-namespace:Coho.UI"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" x:ClassModifier="internal">
 
@@ -62,34 +63,42 @@
         <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" BorderThickness="0.55" CornerRadius="6"
                 BorderBrush="{DynamicResource BorderColor}" Background="{DynamicResource WorkspaceBackground}">
 
-            <StackPanel Orientation="Horizontal" Margin="2">
-                <Button x:Name="BtnBack" ToolTip="back" MinWidth="0" Padding="5" Click="BtnBack_Click"
-                        IsEnabled="False"
-                        Style="{DynamicResource EmptyButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{DynamicResource ExplorerArrowBack}" Width="14" Height="14" Margin="4" />
-                    </StackPanel>
-                </Button>
-
-                <Button x:Name="BtnForward" ToolTip="back" MinWidth="0" Padding="5" Click="BtnBack_Click"
-                        IsEnabled="False"
-                        Style="{DynamicResource EmptyButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{DynamicResource ExplorerArrowForward}" Width="14" Height="14" Margin="4" />
-                    </StackPanel>
-                </Button>
+            <DockPanel Margin="2" LastChildFill="True">
 
                 <Button x:Name="BtnUp" ToolTip="back" MinWidth="0" Padding="5" Click="BtnUp_OnClick"
                         Style="{DynamicResource EmptyButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{DynamicResource ExplorerArrowUp}" Width="14" Height="14" Margin="4" />
+                    <StackPanel Orientation="Horizontal" Margin="4">
+                        <Rectangle Fill="{DynamicResource IconFolderLevelUp}" Width="16" Height="16" Margin="0,0,4,0" />
+                        <TextBlock Text="{x:Static ui:DialogsText.FolderParentLevel}" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Button>
-            </StackPanel>
+
+                <Rectangle Width="0.55" Fill="{DynamicResource BorderColor}" Margin="2,-2" />
+
+
+                <Border>
+                    <ItemsControl x:Name="PathItems">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:FolderExplorerItem}">
+                                <Button Style="{DynamicResource FolderExplorerPathButton}"
+                                        Content="{Binding Name}" Click="BtnFolderPath_Click" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+
+            </DockPanel>
+
         </Border>
 
 
-        <Border Grid.Row="2" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}" CornerRadius="6" Margin="0,0,8,0"
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="{DynamicResource BorderColor}" CornerRadius="6"
+                Margin="0,0,8,0"
                 Visibility="{Binding ShowNavigationPane, Converter={StaticResource BoolToVisibilityConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:FolderExplorer}} }"
                 Background="{DynamicResource WorkspaceBackgroundTransparent}" BorderThickness="0.55">
 

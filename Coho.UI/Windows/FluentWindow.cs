@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Shell;
 using Coho.UI.Controls;
 using Coho.UI.Tools;
 
@@ -34,8 +35,42 @@ public abstract class FluentWindow : Window
         StateChanged += OnStateChanged;
         Activated += OnActivated;
         Deactivated += OnDeactivated;
+        Loaded += OnLoaded;
 
         UIController.ThemeChanged += UIControllerOnThemeChanged;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        SetWindowChrome();
+    }
+
+    protected void SetWindowChrome()
+    {
+        if (ResizeMode == ResizeMode.NoResize)
+        {
+            WindowChrome.SetWindowChrome(this,
+                new WindowChrome
+                {
+                    CaptionHeight = 40,
+                    ResizeBorderThickness = new Thickness(0),
+                    CornerRadius = new CornerRadius(0),
+                    GlassFrameThickness = new Thickness(-1),
+                    UseAeroCaptionButtons = true
+                });
+        }
+        else
+        {
+            WindowChrome.SetWindowChrome(this,
+                new WindowChrome
+                {
+                    CaptionHeight = 40,
+                    ResizeBorderThickness = new Thickness(6),
+                    CornerRadius = new CornerRadius(0),
+                    GlassFrameThickness = new Thickness(-1),
+                    UseAeroCaptionButtons = true
+                });
+        }
     }
 
     private void UIControllerOnThemeChanged(object? sender, EventArgs e)

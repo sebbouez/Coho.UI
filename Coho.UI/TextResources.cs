@@ -77,6 +77,46 @@ public static class GenericText
         set;
     } = "No";
     
+    
+    public static string Add
+    {
+        get;
+        set;
+    } = "Add";
+    
+    public static string Remove
+    {
+        get;
+        set;
+    } = "Remove";  
+    
+    
+    public static string AllCommands
+    {
+        get;
+        set;
+    } = "All commands";
+    
+    
+    public static string SelectedCommands
+    {
+        get;
+        set;
+    } = "Selected commands";
+    
+    
+    public static string WorkInProgress
+    {
+        get;
+        set;
+    } = "Work in progress, please wait..."; 
+    
+    public static string ErrorOccured
+    {
+        get;
+        set;
+    } = "An error occured";
+    
 
 
 }
@@ -178,4 +218,11 @@ public static class DialogsText
         get;
         set;
     } = "File type";
+    
+    
+    public static string FolderParentLevel
+    {
+        get;
+        set;
+    } = "Parent";
 }

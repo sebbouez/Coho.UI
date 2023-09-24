@@ -137,6 +137,9 @@ public class ApplicationWindow : FluentWindow
     public static readonly DependencyProperty MasterMessageProperty =
         DependencyProperty.RegisterAttached(nameof(MasterMessage), typeof(string), typeof(ApplicationWindow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
+    /// <summary>
+    /// Gets or sets the state that indicates the special state of the application
+    /// </summary>
     public override bool IsSpecialState
     {
         get
@@ -165,6 +168,9 @@ public class ApplicationWindow : FluentWindow
         }
     }
 
+    /// <summary>
+    /// Gets or sets the message to display in red at the top center of the window
+    /// </summary>
     public string? MasterMessage
     {
         get

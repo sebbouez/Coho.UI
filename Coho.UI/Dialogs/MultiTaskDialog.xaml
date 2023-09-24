@@ -1,0 +1,57 @@
+﻿<windows:SecondaryWindow x:Class="Coho.UI.Dialogs.MultiTaskDialog"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:windows="clr-namespace:Coho.UI.Windows"
+                         xmlns:textResources="clr-namespace:Coho.UI"
+                         WindowStartupLocation="CenterOwner"
+                         ShowInTaskbar="False"
+                         HideCloseButton="True"
+                         ResizeMode="NoResize"
+                         Background="{DynamicResource WorkspaceBackground}"
+                         Focusable="True"
+                         KeyboardNavigation.TabNavigation="Cycle"
+                         KeyboardNavigation.IsTabStop="True"
+                         KeyboardNavigation.ControlTabNavigation="Cycle"
+                         Title="MultiTaskDialog" Height="450" Width="500" x:ClassModifier="internal">
+
+    <Grid Margin="25,15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="60" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Top">
+            <TextBlock Text="placeholder" x:Name="TbTitle" FontSize="16" FontWeight="SemiBold"
+                       VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,0,15" />
+            <TextBlock Text="placeholder" x:Name="TbMessage" VerticalAlignment="Center" TextWrapping="Wrap"
+                       Margin="0,0,0,15" />
+
+            <Border x:Name="BorderStatus" MinHeight="100" Margin="0,15" Visibility="Collapsed">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Margin="0,0,0,10" x:Name="TbWorkInProgress" Visibility="Collapsed"
+                               Text="{x:Static textResources:GenericText.WorkInProgress}" />
+                    <TextBlock x:Name="TbProgress" Margin="0,0,0,5" FontWeight="SemiBold" TextWrapping="Wrap">Pending</TextBlock>
+                    <TextBlock x:Name="TbProgressDescription" Margin="0,0,0,10" TextWrapping="Wrap">Pending</TextBlock>
+                    <ProgressBar x:Name="TaskProgressBar" Height="4" BorderThickness="0"
+                                 Foreground="{DynamicResource AccentColor}"
+                                 Background="{DynamicResource Workspace2Background}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+
+        <Border Grid.Row="1" Background="{DynamicResource Workspace2Background}" Padding="15" Margin="-25,0,-25,-15"
+                BorderThickness="0,0.55,0,0" SnapsToDevicePixels="True" UseLayoutRounding="True"
+                BorderBrush="{DynamicResource BorderColor}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <Button Style="{DynamicResource PrimaryButton}" x:Name="BtnOk" Focusable="True"
+                        KeyboardNavigation.IsTabStop="True" Click="BtnOk_Click" MinWidth="75" Margin="8,0,0,0"
+                        Content="{x:Static textResources:GenericText.Ok}" />
+                <Button Style="{DynamicResource NormalButton}" x:Name="BtnCancel" Focusable="True"
+                        KeyboardNavigation.IsTabStop="True" Click="BtnCancel_Click" MinWidth="75" Margin="8,0,0,0"
+                        Content="{x:Static textResources:GenericText.Cancel}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</windows:SecondaryWindow>

@@ -36,23 +36,53 @@
         </Setter>
     </Style>
 
+    <Style x:Key="FolderExplorerPathButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="Container" Padding="{TemplateBinding Padding}"
+                            CornerRadius="4" Background="{TemplateBinding Background}">
+                        <StackPanel Orientation="Horizontal">
+                            <ContentPresenter x:Name="ContentPresenter" VerticalAlignment="Center" Margin="0,0,4,0" />
+                            <Rectangle Width="8" Height="8" Fill="{DynamicResource IconChevronRight}"  VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource HoverColor}" TargetName="Container" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ActiveColor}" TargetName="Container" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style TargetType="{x:Type buttons:FolderExplorerShortcutButton}">
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="MinWidth" Value="40"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type buttons:FolderExplorerShortcutButton}">
                     <Border x:Name="Container"
-                            Margin="0, 0, 0, 0" 
+                            Margin="0, 0, 0, 0"
                             ToolTipService.ShowOnDisabled="True"
                             MinWidth="{TemplateBinding MinWidth}"
                             UseLayoutRounding="True"
-                            SnapsToDevicePixels="True" 
-                            Background="Transparent" 
+                            SnapsToDevicePixels="True"
+                            Background="Transparent"
                             BorderThickness="0.55"
                             BorderBrush="Transparent"
                             Padding="24,6">
@@ -63,11 +93,13 @@
                                        UseLayoutRounding="True"
                                        SnapsToDevicePixels="True"
                                        Fill="{TemplateBinding Icon}" Width="16" Height="16" />
-                            <TextBlock x:Name="label" VerticalAlignment="Center" Margin="8,0,0,0" Text="{TemplateBinding Text}"></TextBlock>
+                            <TextBlock x:Name="label" VerticalAlignment="Center" Margin="8,0,0,0"
+                                       Text="{TemplateBinding Text}">
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
-                        
+
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Container" Value="{DynamicResource HoverColor}" />
                             <Setter Property="BorderBrush" TargetName="Container" Value="{DynamicResource HoverColor}" />
@@ -76,7 +108,7 @@
                             <Setter Property="Background" TargetName="Container" Value="{DynamicResource ActiveColor}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="Container" Value="0.5"/>
+                            <Setter Property="Opacity" TargetName="Container" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -127,7 +159,8 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource WorkspaceBackground}" TargetName="Container" />
+                            <Setter Property="Background" Value="{DynamicResource WorkspaceBackground}"
+                                    TargetName="Container" />
                             <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" TargetName="Container" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
