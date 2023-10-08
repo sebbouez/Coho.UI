@@ -20,6 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using Coho.UI.CommandManaging;
+using Coho.UI.Controls.Omnibar;
 using Coho.UI.Controls.Ribbon;
 using Coho.UI.Interfaces;
 using Coho.UI.Tools;
@@ -178,5 +179,6 @@ public sealed class MenuBar : ItemsControl, IApplicationMainBarControl
         }
 
         CommandManager.RebuildCommandsCache(this);
+        OmnibarSearchService.RegisterOmnibarSearchService(new MenuBarOmnibarSearchService());
     }
 }

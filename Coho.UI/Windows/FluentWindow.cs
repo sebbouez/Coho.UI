@@ -89,7 +89,15 @@ public abstract class FluentWindow : Window
 
     protected void OnSourceInitializedBase(Window sender)
     {
-        HwndSource? windowHandleSource = HwndSource.FromHwnd(new WindowInteropHelper(sender).Handle);
+        if (!sender.IsVisible)
+        {
+            return;
+        }
+
+        var interopHelper = new WindowInteropHelper(sender);
+        interopHelper.EnsureHandle();
+
+        HwndSource? windowHandleSource = HwndSource.FromHwnd(interopHelper.Handle);
         if (windowHandleSource == null)
         {
             return;

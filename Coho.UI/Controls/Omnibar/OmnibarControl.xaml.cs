@@ -109,7 +109,7 @@ public partial class OmnibarControl : UserControl
                 break;
 
             case OmnibarSearchResult.EOmnibarCommandType.RibbonCommand:
-                selectedSearchResult.CommandRibbonButton?.RaiseClick();
+                HandleCommandClick(selectedSearchResult);
                 break;
         }
 
@@ -117,6 +117,18 @@ public partial class OmnibarControl : UserControl
         TbOmniBar.Text = string.Empty;
         TbPlaceholderText.Visibility = Visibility.Visible;
         PopupOmnibarResults.IsOpen = false;
+    }
+
+    private void HandleCommandClick(OmnibarSearchResult selectedSearchResult)
+    {
+        if (selectedSearchResult.CommandRibbonButton != null)
+        {
+            selectedSearchResult.CommandRibbonButton.RaiseClick();
+        }
+        else if (selectedSearchResult.LinkedOriginalObject is MenuItem menuItem)
+        {
+            menuItem.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+        }
     }
 
     private void ListOmnibarFilesResults_PreviewKeyDown(object sender, KeyEventArgs e)

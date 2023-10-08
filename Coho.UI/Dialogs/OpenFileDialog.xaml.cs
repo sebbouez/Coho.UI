@@ -43,7 +43,7 @@ internal partial class OpenFileDialog : SecondaryWindow
     {
         get;
         set;
-    } = new ThemedSpecialDialogOptions();
+    } = new();
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -62,7 +62,7 @@ internal partial class OpenFileDialog : SecondaryWindow
     private void BuildFileTypesCombo()
     {
         CbFileType.IsEnabled = false;
-        foreach (KeyValuePair<string, string> keyValuePair in Options.FileTypes!)
+        foreach (KeyValuePair<string, string> keyValuePair in Options.FileTypes)
         {
             CbFileType.Items.Add(new ComboBoxItem
             {
@@ -144,7 +144,7 @@ internal partial class OpenFileDialog : SecondaryWindow
             return false;
         }
 
-        return Options.FileTypes!.Values.Any(x => x.Split(';', StringSplitOptions.RemoveEmptyEntries).Any(y => y.Trim('*').Equals(fi.Extension, StringComparison.InvariantCulture)));
+        return Options.FileTypes.Values.Any(x => x.Split(';', StringSplitOptions.RemoveEmptyEntries).Any(y => y.Trim('*').Equals(fi.Extension, StringComparison.InvariantCulture)));
     }
 
     private void TbFileName_OnKeyUp(object sender, KeyEventArgs e)

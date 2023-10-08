@@ -99,9 +99,7 @@ public static class UIController
                 resourcesToRemove.Add(Application.Current.Resources.MergedDictionaries[i]);
             }
 
-            _customThemedResourceNames.TryGetValue(Application.Current.Resources.MergedDictionaries[i].Source.OriginalString, out ThemeScheme? dt);
-
-            if (dt != null && dt != Theme)
+            if (_customThemedResourceNames.ContainsKey(Application.Current.Resources.MergedDictionaries[i].Source.OriginalString))
             {
                 resourcesToRemove.Add(Application.Current.Resources.MergedDictionaries[i]);
             }
@@ -112,6 +110,11 @@ public static class UIController
             Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
         }
 
+        Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
+        {
+            Source = new Uri(string.Format(CultureInfo.InvariantCulture, "/Coho.UI;component/Themes/{0}.xaml", baseThemeName), UriKind.RelativeOrAbsolute)
+        });
+
         foreach (KeyValuePair<string, ThemeScheme?> themedResource in _customThemedResourceNames.Where(x =>
                      x.Value == null || x.Value.Equals(Theme)))
         {
@@ -120,10 +123,5 @@ public static class UIController
                 Source = new Uri(themedResource.Key, UriKind.RelativeOrAbsolute)
             });
         }
-
-        Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary
-        {
-            Source = new Uri(string.Format(CultureInfo.InvariantCulture, "/Coho.UI;component/Themes/{0}.xaml", baseThemeName), UriKind.RelativeOrAbsolute)
-        });
     }
 }

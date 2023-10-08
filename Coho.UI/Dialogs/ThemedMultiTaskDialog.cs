@@ -21,8 +21,6 @@ namespace Coho.UI.Dialogs;
 
 public static class ThemedMultiTaskDialog
 {
-
-
     public static void Show(string title, string message, List<TaskRunnerBase> tasksToRun)
     {
         Show(title, message, Application.Current.MainWindow!, tasksToRun);
